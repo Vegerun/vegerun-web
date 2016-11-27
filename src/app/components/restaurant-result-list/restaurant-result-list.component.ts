@@ -9,6 +9,6 @@ import { RestaurantSearchResult } from '../../vegerun-client';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RestaurantResultList {
-    @Input() restaurants: RestaurantSearchResult[];
-    @Output() onRestaurantSelected = new EventEmitter<RestaurantSearchResult>();
+    @Input() results: RestaurantSearchResult[];
+    @Output() onResultSelected = new EventEmitter<RestaurantSearchResult>();
 }

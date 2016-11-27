@@ -9,10 +9,10 @@ import { RestaurantSearchItemResult } from '../../vegerun-client';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RestaurantResult {
-    @Input() restaurant: RestaurantSearchItemResult;
+    @Input() result: RestaurantSearchItemResult;
 
     get categories(): string {
-        return this.restaurant.restaurant.categories
+        return this.result.restaurant.categories
             .map(c => c.name)
             .join(', ');
     }
