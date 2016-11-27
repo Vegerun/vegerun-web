@@ -34,3 +34,4 @@ ts-node
 /**/*.css.shim.ts
 dll/
 yarn.lock
+yarn-error.log

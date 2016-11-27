@@ -1,8 +1,30 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { views } from './app-nav-views';
 import { MOBILE } from './services/constants';
+
+const views: Object[] = [
+  {
+    name: 'Dashboard',
+    icon: 'home',
+    link: ['']
+  },
+  {
+    name: 'Lazy',
+    icon: 'file_download',
+    link: ['lazy']
+  },
+    {
+    name: 'Sync',
+    icon: 'done',
+    link: ['sync']
+  },
+  {
+    name: 'Bad Link',
+    icon: 'error',
+    link: ['wronglink']
+  }
+];
 
 @Component({
   selector: 'my-app',

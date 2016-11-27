@@ -1,6 +1,6 @@
 {
   "name": "vegerun-web",
-  "version": "1.14.0",
+  "version": "0.0.1",
   "description": "Vegerun Web 2.0",
   "scripts": {
     "postinstall": "npm run sass && npm run build:dll",
@@ -85,16 +85,16 @@
     "universal:watch": "npm run build:universal && npm-run-all -p -r watch:universal server:universal"
   },
   "dependencies": {
-    "@angular/common": "2.1.0",
-    "@angular/compiler": "2.1.0",
-    "@angular/compiler-cli": "2.1.0",
-    "@angular/core": "2.1.0",
-    "@angular/forms": "2.1.0",
-    "@angular/http": "2.1.0",
+    "@angular/common": "2.2.3",
+    "@angular/compiler": "2.2.3",
+    "@angular/compiler-cli": "2.2.3",
+    "@angular/core": "2.2.3",
+    "@angular/forms": "2.2.3",
+    "@angular/http": "2.2.3",
     "@angular/material": "2.0.0-alpha.10",
-    "@angular/platform-browser": "2.1.0",
-    "@angular/platform-browser-dynamic": "2.1.0",
-    "@angular/platform-server": "2.1.0",
+    "@angular/platform-browser": "2.2.3",
+    "@angular/platform-browser-dynamic": "2.2.3",
+    "@angular/platform-server": "2.2.3",
     "@angular/router": "3.1.0",
     "@angular/tsc-wrapped": "0.3.0",
     "@angularclass/hmr": "1.2.2",
@@ -181,10 +181,5 @@
     "webpack-dev-middleware": "~1.8.1",
     "webpack-dev-server": "2.1.0-beta.11",
     "webpack-merge": "~0.17.0"
-  },
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/qdouble/angular-webpack2-starter/issues"
-  },
-  "homepage": "https://github.com/qdouble/angular-webpack2-starter#readme"
+  }
 }
