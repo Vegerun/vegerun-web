@@ -1,0 +1,17 @@
+@import '../../styles/mixins';
+
+.location-search-component {
+    form {
+        .form-group.postcode-form-group {
+            md-input {
+                width: 100%;
+            }
+        }
+
+        .form-group.submit-form-group {
+            button {
+                @include center-block();
+            }
+        }
+    }
+}

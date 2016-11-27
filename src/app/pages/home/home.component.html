@@ -1,0 +1,16 @@
+<div class="home-component">
+    <section class="main-section">
+        <div class="content">
+            <div class="title-container">
+                <h1>Takeaways with a difference</h1>
+                <h3>Eat good. Feel good.</h3>
+            </div>
+            <div class="search-container">
+                <app-location-search
+                    [initialPostcode]="previousPostcode"
+                    (onLocationFound)="navigateToRestaurants($event)"
+                    (onLocationMissing)="locationMissing($event)"></app-location-search>
+            </div>
+        </div>
+    </section>
+</div>

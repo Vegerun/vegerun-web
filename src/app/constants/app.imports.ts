@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { useLogMonitor } from '@ngrx/store-log-monitor';
 
-import { routes } from './app.routing';
+import { APP_ROUTES } from './app.routes';
 import { rootReducer } from '../reducers';
 import { StoreDevToolsModule } from '../features/store-devtools.module';
 import { UserEffects } from '../user/user.effects';
@@ -26,13 +26,12 @@ if (ENV === 'development' && !AOT &&
 ]);
 
 export const APP_IMPORTS = [
-  EffectsModule.run(UserEffects),
-  MaterialModule.forRoot(),
-  ReactiveFormsModule,
-  RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-  RouterStoreModule.connectRouter(),
-  StoreModule.provideStore(rootReducer),
-  STORE_DEV_TOOLS_IMPORTS,
-  StoreDevToolsModule
+    EffectsModule.run(UserEffects),
+    MaterialModule.forRoot(),
+    ReactiveFormsModule,
+    RouterModule.forRoot(APP_ROUTES, { preloadingStrategy: PreloadAllModules }),
+    RouterStoreModule.connectRouter(),
+    StoreModule.provideStore(rootReducer),
+    STORE_DEV_TOOLS_IMPORTS,
+    StoreDevToolsModule
 ];
-

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { VegerunClient } from './vegerun-client';
+
+import { Logger } from './services/logger';
 
 import { MOBILE } from './services/constants';
 
@@ -29,7 +30,7 @@ const views: Object[] = [
 ];
 
 @Component({
-    selector: 'my-app',
+    selector: 'app-root',
     styleUrls: ['./app.component.css'],
     templateUrl: './app.component.html'
 })
@@ -37,14 +38,15 @@ export class AppComponent {
     showMonitor = (ENV === 'development' && !AOT &&
         ['monitor', 'both'].includes(STORE_DEV_TOOLS) // set in constants.js file in project root
     );
-    mobile = MOBILE;
+    mobile = !MOBILE;
     sideNavMode = MOBILE ? 'over' : 'side';
     views = views;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private vegerunClient: VegerunClient
+        private vegerunClient: VegerunClient,
+        private logger: Logger
     )
     {
         vegerunClient.apiV1LocationsGetByPostcodeGet('EC2A2EX')
@@ -60,14 +62,10 @@ export class AppComponent {
     }
 
     activateEvent(event) {
-        if (ENV === 'development') {
-            console.log('Activate Event:', event);
-        }
+        this.logger.debug('Activate Event:', event);
     }
 
     deactivateEvent(event) {
-        if (ENV === 'development') {
-            console.log('Deactivate Event', event);
-        }
+        this.logger.debug('Deactivate Event:', event);
     }
 }

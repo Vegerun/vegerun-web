@@ -13,7 +13,8 @@
   <md-toolbar color="primary">
     <button md-icon-button (click)="sidenav.toggle()">
       <md-icon>menu</md-icon>
-    </button> Angular Starter App
+    </button>
+    <a class="brand" routerLink="/">Vegerun</a>
   </md-toolbar>
 <md-card id="my-page-card">
   <router-outlet (activate)="activateEvent($event)" (deactivate)="deactivateEvent($event)"></router-outlet>

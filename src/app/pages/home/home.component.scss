@@ -1,0 +1,19 @@
+@import '../../styles/mixins';
+
+.home-component {
+    section {
+        &.main-section {
+            .content {
+                .title-container {
+                    text-align: center;
+                }
+
+                .search-container {
+                    @include center-block();
+                    max-width: 200px;
+                    margin-top: 30px;
+                }
+            }
+        }
+    }
+}

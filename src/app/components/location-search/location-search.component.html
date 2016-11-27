@@ -1,0 +1,10 @@
+<div class="location-search-component">
+    <form [formGroup]="form">
+        <div class="form-group postcode-form-group">
+            <md-input name="postcode" formControlName="postcode" placeholder="Enter your postcode"></md-input>
+        </div>
+        <div class="form-group submit-form-group">
+            <button md-button color="primary" (click)="search()">Search!</button>
+        </div>
+    </form>
+</div>
