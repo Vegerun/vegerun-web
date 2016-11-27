@@ -7,10 +7,10 @@ import { LocationSearchModeResolver } from '../../services/location-search-mode.
 import { LocationSearchMode } from '../../services/models/location-search-mode';
 
 @Component({
-  selector: 'app-location-search',
-  templateUrl: './location-search.component.html',
-  styleUrls: ['./location-search.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-location-search',
+    templateUrl: './location-search.component.html',
+    styleUrls: ['./location-search.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationSearchComponent implements OnInit {
     @Input() initialPostcode: string;

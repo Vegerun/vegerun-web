@@ -1,0 +1,12 @@
+<div class="restaurant-result-component">
+    <md-card>
+        <img md-card-image [src]="restaurant.restaurant.images.searchImageUrl" />
+        <md-card-title>{{ restaurant.restaurant.name }}</md-card-title>
+        <md-card-content>
+            <p>
+                <span *ngIf="categories">{{ categories }}</span>
+                <i *ngIf="!categories">(Uncategorised)</i>
+            </p>
+        </md-card-content>
+    </md-card>
+</div>

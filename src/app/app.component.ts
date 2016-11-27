@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VegerunClient } from './vegerun-client';
 
 import { Logger } from './services/logger';
 
@@ -35,8 +34,11 @@ const views: Object[] = [
     templateUrl: './app.component.html'
 })
 export class AppComponent {
-    showMonitor = (ENV === 'development' && !AOT &&
-        ['monitor', 'both'].includes(STORE_DEV_TOOLS) // set in constants.js file in project root
+    showMonitor = (
+        ENV === 'development' &&
+        !AOT &&
+        ['monitor', 'both'].includes(STORE_DEV_TOOLS) &&
+        false
     );
     mobile = !MOBILE;
     sideNavMode = MOBILE ? 'over' : 'side';
@@ -45,21 +47,8 @@ export class AppComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private vegerunClient: VegerunClient,
         private logger: Logger
-    )
-    {
-        vegerunClient.apiV1LocationsGetByPostcodeGet('EC2A2EX')
-            .flatMap(location => vegerunClient.apiV1RestaurantsSearchSearchPost({
-                latitude: location.position.latitude,
-                longitude: location.position.longitude,
-                townId: location.town.id,
-                postcode: location.normalizedPostcode
-            }))
-            .subscribe(results => {
-                console.log('got results!' + results);
-            });
-    }
+    ) { }
 
     activateEvent(event) {
         this.logger.debug('Activate Event:', event);

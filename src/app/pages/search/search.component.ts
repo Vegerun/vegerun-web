@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { LocationResult } from '../../vegerun-client';
+import { VegerunClient, LocationResult, RestaurantSearchResult, RestaurantResult } from '../../vegerun-client';
 
 @Component({
     selector: 'app-search',
@@ -12,12 +12,30 @@ import { LocationResult } from '../../vegerun-client';
 export class SearchComponent implements OnInit {
 
     private location$: Observable<LocationResult>;
+    private restaurantSearchResult$: Observable<RestaurantSearchResult>;
+    private restaurantsInRange$: Observable<RestaurantResult[]>;
     
     constructor(
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private vegerunClient: VegerunClient
     ) { }
 
     ngOnInit() {
         this.location$ = this.route.data.map((data: { location: LocationResult }) => data.location);
+
+        this.restaurantSearchResult$ = this.location$
+            .flatMap(location => this.vegerunClient.apiV1RestaurantsSearchSearchPost({
+                latitude: location.position.latitude,
+                longitude: location.position.longitude,
+                townId: location.town.id,
+                postcode: location.normalizedPostcode
+            }));
+        
+        this.restaurantsInRange$ = this.restaurantSearchResult$
+            .map(result => [
+                ...result.availableRestaurants,
+                ...result.unavailableRestaurants,
+                ...result.comingSoonRestaurants
+            ]);
     }
 }
