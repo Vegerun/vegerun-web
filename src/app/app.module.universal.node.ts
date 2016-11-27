@@ -10,10 +10,10 @@ import { NgModule } from '@angular/core';
 
 import { UniversalModule } from 'angular2-universal';
 
-import { APP_DECLARATIONS } from './app.declarations';
-import { APP_ENTRY_COMPONENTS } from './app.entry-components';
-import { APP_IMPORTS } from './app.imports';
-import { APP_PROVIDERS } from './app.providers';
+import { APP_DECLARATIONS } from './constants/app.declarations';
+import { APP_ENTRY_COMPONENTS } from './constants/app.entry-components';
+import { APP_IMPORTS } from './constants/app.imports';
+import { APP_PROVIDERS } from './constants/app.providers';
 
 import { AppComponent } from './app.component';
 

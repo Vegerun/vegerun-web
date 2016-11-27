@@ -9,7 +9,6 @@ import { AppState } from '../reducers';
 import { UserService } from './user.service';
 
 @Injectable()
-
 export class UserEffects {
   constructor(
     private actions$: Actions,
