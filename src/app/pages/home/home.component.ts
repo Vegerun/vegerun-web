@@ -19,7 +19,7 @@ export class HomeComponent {
     navigateToRestaurants(location: LocationResult) {
         this.router.navigate([
             '/search',
-            location.town.name.toLowerCase(),
+            location.town.slug,
             location.normalizedPostcode
         ]);
     }

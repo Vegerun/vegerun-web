@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { VegerunClient, LocationResult, RestaurantSearchResult, RestaurantSearchItemResult } from '../../vegerun-client';
 
+import { NavigationCommandsResolver } from '../../services/navigation-commands.resolver';
+
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
@@ -18,7 +20,8 @@ export class SearchComponent implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private vegerunClient: VegerunClient
+        private vegerunClient: VegerunClient,
+        private navigationCommandsResolver: NavigationCommandsResolver
     ) { }
 
     ngOnInit() {
@@ -42,12 +45,9 @@ export class SearchComponent implements OnInit {
 
     navigateToRestaurant(restaurantResult: RestaurantSearchItemResult) {
         this.location$.subscribe(location => {
-            this.router.navigate([
-                '/search',
-                location.town.name.toLowerCase(),
-                location.normalizedPostcode,
-                restaurantResult.restaurant.slug
-            ]);
+            let navigationCommands = this.navigationCommandsResolver
+                .resolveOrderNavigationCommands(location, restaurantResult.restaurant); 
+            this.router.navigate(navigationCommands);
         });
     }
 }

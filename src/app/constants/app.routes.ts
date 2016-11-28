@@ -6,6 +6,7 @@ import { DashboardComponent } from '../features/dashboard.component';
 import { HomeComponent } from '../pages/home/home.component';
 import { ErrorNotFoundComponent } from '../pages/error-not-found/error-not-found.component';
 import { SearchComponent } from '../pages/search/search.component';
+import { OrderComponent } from '../pages/order/order.component';
 
 import { LocationResolve } from '../resolves/location.resolve';
 
@@ -16,7 +17,14 @@ export const APP_ROUTES: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'search/:townName/:postcode',
+        path: 'search/:townSlug/:postcode',
+        component: SearchComponent,
+        resolve: {
+            location: LocationResolve
+        }
+    },
+    {
+        path: 'search/:townSlug/:postcode/:restaurantSlug',
         component: SearchComponent,
         resolve: {
             location: LocationResolve

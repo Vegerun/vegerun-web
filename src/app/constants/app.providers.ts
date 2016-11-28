@@ -4,6 +4,7 @@ import { API_BASE_URL, VegerunClient } from '../vegerun-client';
 import { Logger } from '../services/logger';
 import { HostingEnvironment } from '../services/hosting-environment';
 import { LocationSearchModeResolver } from '../services/location-search-mode.resolver';
+import { NavigationCommandsResolver } from '../services/navigation-commands.resolver';
 
 import { LocationResolve } from '../resolves/location.resolve';
 
@@ -17,6 +18,7 @@ export const APP_PROVIDERS: Provider[] = [
     Logger,
     HostingEnvironment,
     LocationSearchModeResolver,
+    NavigationCommandsResolver,
 
     LocationResolve,
 
