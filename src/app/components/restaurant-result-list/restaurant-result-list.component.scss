@@ -1,5 +1,9 @@
 .restaurant-result-list-component {
     .restaurant-result-container {
         padding: 10px;
+
+        app-restaurant-result {
+            cursor: pointer;
+        }
     }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { VegerunClient, LocationResult, RestaurantSearchResult, RestaurantResult } from '../../vegerun-client';
+import { VegerunClient, LocationResult, RestaurantSearchResult, RestaurantSearchItemResult } from '../../vegerun-client';
 
 @Component({
     selector: 'app-search',
@@ -13,9 +13,10 @@ export class SearchComponent implements OnInit {
 
     private location$: Observable<LocationResult>;
     private result$: Observable<RestaurantSearchResult>;
-    private resultsInRange$: Observable<RestaurantResult[]>;
+    private resultsInRange$: Observable<RestaurantSearchItemResult[]>;
     
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
         private vegerunClient: VegerunClient
     ) { }
@@ -37,5 +38,16 @@ export class SearchComponent implements OnInit {
                 ...result.unavailableRestaurants,
                 ...result.comingSoonRestaurants
             ]);
+    }
+
+    navigateToRestaurant(restaurantResult: RestaurantSearchItemResult) {
+        this.location$.subscribe(location => {
+            this.router.navigate([
+                '/search',
+                location.town.name.toLowerCase(),
+                location.normalizedPostcode,
+                restaurantResult.restaurant.slug
+            ]);
+        });
     }
 }

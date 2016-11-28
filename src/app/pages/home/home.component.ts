@@ -16,11 +16,11 @@ export class HomeComponent {
         private router: Router
     ) { }
 
-    navigateToRestaurants(locationResult: LocationResult) {
+    navigateToRestaurants(location: LocationResult) {
         this.router.navigate([
             '/search',
-            locationResult.town.name.toLowerCase(),
-            locationResult.normalizedPostcode
+            location.town.name.toLowerCase(),
+            location.normalizedPostcode
         ]);
     }
 

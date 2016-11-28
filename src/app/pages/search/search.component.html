@@ -1,6 +1,8 @@
 <div class="search-component">
     <h2 *ngIf="location$ | async">Outlets in {{ (location$ | async)?.postcode }}</h2>
     <div class="restaurant-result-list-container">
-        <app-restaurant-result-list [results]="resultsInRange$ | async"></app-restaurant-result-list>
+        <app-restaurant-result-list
+            [results]="resultsInRange$ | async"
+            (onResultSelected)="navigateToRestaurant($event)"></app-restaurant-result-list>
     </div>
 </div>
