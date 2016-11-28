@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output, Inject } from '@angular/core';
 
-import { RestaurantSearchItemResult } from '../../vegerun-client';
+import { API_BASE_URL, RestaurantSearchItemResult } from '../../vegerun-client';
 
 @Component({
     selector: 'app-restaurant-result',
@@ -10,6 +10,17 @@ import { RestaurantSearchItemResult } from '../../vegerun-client';
 })
 export class RestaurantResult {
     @Input() result: RestaurantSearchItemResult;
+
+    constructor(@Inject(API_BASE_URL) private baseUrl?: string) { }
+
+    get imageUrl(): string {
+        let { searchImageUrl } = this.result.restaurant.images;
+        if (searchImageUrl.startsWith('/')) {
+            return this.baseUrl + searchImageUrl;
+        } else {
+            return searchImageUrl;
+        }
+    }
 
     get categories(): string {
         return this.result.restaurant.categories
