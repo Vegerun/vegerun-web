@@ -1,19 +1,47 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { OrderState, DEFAULT_ORDER_STATE } from './order.state';
+import { OrderItemResultV2 } from '../../vegerun-2-client';
+
+import { RestOperation } from '../../rest-operation';
+import { OrderState, OrderItemState, OrderItemPersistence, DEFAULT_ORDER_STATE } from './order.state';
 import { ORDER_ACTION_NAMES } from './order.actions';
+import { CreatePayload, CreateCompletedPayload, AddItemPayload } from './order.payloads';
 
 export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFAULT_ORDER_STATE, { type, payload }: Action) => {
+    debugger;
     switch (type) {
+
+        case ORDER_ACTION_NAMES.CREATE: {
+            return Object.assign({}, state, {
+                orderIdLoading: true,
+                restaurantId: (<CreatePayload>payload).restaurantId
+             });
+        }
+
+        case ORDER_ACTION_NAMES.CREATE_COMPLETED: {
+            return Object.assign({}, state, {
+                orderId: (<CreateCompletedPayload>payload).orderId,
+                orderIdLoading: false
+            });
+        }
+
+        case ORDER_ACTION_NAMES.CREATE_FAILED: {
+            return Object.assign({}, DEFAULT_ORDER_STATE);
+        }
+
         case ORDER_ACTION_NAMES.ADD_ITEM: {
-            let itemId = payload.id;
-            let existingItem = getItemById(state, itemId);
+            let { orderItem } = <AddItemPayload>payload;
+            let { itemId } = orderItem;
+            let existingItem = getItemById(state, orderItem.itemId);
             if (existingItem) {
                 return updateItemCount(state, itemId, existingItem.count + 1);
             } else {
-                return {
-                    items: [...state.items, payload]
-                };
+                return Object.assign({}, state, {
+                    orderItems: [...state.orderItems, <OrderItemState>{
+                        data: orderItem,
+                        status: state.orderId ? OrderItemPersistence.Loading : OrderItemPersistence.PreLoading
+                    }]
+                });
             }
         }
             
@@ -21,15 +49,15 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             let { item, assignedId } = payload;
             let existingItem = getItemByObjectReference(state, item);
             if (existingItem) {
-                return {
-                    items: state.items.map(existingItem => {
+                return Object.assign({}, state, {
+                    orderItems: state.orderItems.map(existingItem => {
                         if (item === existingItem) {
                             return Object.assign({}, existingItem, { id: assignedId })
                         } else {
                             return existingItem;
                         }
                     })
-                };
+                });
             } else { // Item has been removed
                 return state;
             }
@@ -39,23 +67,27 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             let { item, err } = payload;
             let existingItem = getItemByObjectReference(state, item);
             if (existingItem) {
-                // add error
                 return {
-                    items: state.items.filter(i => existingItem !== item),
-                    error: err
+                    orderId: state.orderId,
+                    orderIdLoading: false,
+                    restaurantId: state.restaurantId,
+                    orderItems: state.orderItems.filter(i => existingItem !== item)
                 };
             } else { // Item has been removed
                 return state;
             }
         }
 
-        case ORDER_ACTION_NAMES.REMOVE_ITEM:
-            return {
-                items: state.items.filter(i => i.id !== payload)
-            };
+        // case ORDER_ACTION_NAMES.REMOVE_ITEM:
+        //     return {
+        //         orderId: state.orderId,
+        //         orderIdLoading: false,
+        //         restaurantId: state.restaurantId,
+        //         orderItems: state.orderItems.filter(i => i.id !== payload)
+        //     };
 
-        case ORDER_ACTION_NAMES.UPDATE_ITEM_COUNT:
-            return updateItemCount(state, payload.id, payload.count);
+        // case ORDER_ACTION_NAMES.UPDATE_ITEM_COUNT:
+        //     return updateItemCount(state, payload.id, payload.count);
 
         default:
             return state;
@@ -63,21 +95,24 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
 }
 
 function getItemById(state: OrderState, itemId: string): any {
-    return state.items.filter(i => i.id === itemId)[0];
+    return state.orderItems.filter(i => i.data.itemId === itemId)[0];
 }
 
 function getItemByObjectReference(state: OrderState, item: any): any {
-    return state.items.filter(i => i === item)[0];
+    return state.orderItems.filter(i => i === item)[0];
 }
 
 function updateItemCount(state: OrderState, itemId: string, count: Number): OrderState {
-    return {
-        items: state.items.map(item => {
-            if (item.id === itemId) {
-                return Object.assign({}, item, { count });
-            } else {
-                return item;
-            }
-        })
-    };
+    return Object.assign({}, state, {
+        orderItems: state.orderItems
+            .filter(item => (<any>item.data).id) // Select only OrderItemResultV2
+            .map(item => {
+                let { data } = item;
+                if ((<OrderItemResultV2>data).id === itemId) {
+                    return Object.assign({}, item, { count });
+                } else {
+                    return item;
+                }
+            })
+    });
 }

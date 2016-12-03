@@ -1,9 +1,37 @@
-export interface OrderState {
-    items: any[],
+import { OrderItemResultV2, OrderItemCreateV2, OrderItemUpdateV2 } from '../../vegerun-2-client';
 
-    error?: any
+export enum OrderItemPersistence {
+    PreLoading = 0,
+
+    Loading = 1,
+
+    Persisted = 2
+}
+
+export interface OrderItemState {
+    loading: boolean;
+
+    status: OrderItemPersistence;
+
+    data: OrderItemCreateV2 | OrderItemResultV2;
+}
+
+export interface OrderState {
+    orderId: string,
+
+    orderIdLoading: boolean,
+
+    restaurantId: string,
+
+    orderItems: OrderItemState[]
 }
 
 export const DEFAULT_ORDER_STATE: OrderState = {
-    items: []
+    orderId: null,
+
+    orderIdLoading: false,
+
+    restaurantId: null,
+
+    orderItems: []
 }

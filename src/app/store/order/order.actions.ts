@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-import { CustomerMenuItemResultV2 } from '../../vegerun-2-client';
+import { OrderResult } from '../../vegerun-client';
+import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 } from '../../vegerun-2-client';
+
+import { CreatePayload, CreateCompletedPayload, AddItemPayload } from './order.payloads';
 
 const prefix = action => `[Order] ${action}`;
 const status = (parentActionName, status) => `${parentActionName} ${status}`;
 const completed = actionName => status(actionName, 'COMPLETED');
 const failed = actionName => status(actionName, 'FAILED');
 
+const CREATE = prefix('Create');
+const CREATE_COMPLETED = completed(CREATE);
+const CREATE_FAILED = failed(CREATE);
 const ADD_ITEM = prefix('Add Item');
 const ADD_ITEM_COMPLETED = completed(ADD_ITEM);
 const ADD_ITEM_FAILED = failed(ADD_ITEM);
@@ -15,6 +21,10 @@ const REMOVE_ITEM = prefix('Remove Item');
 const UPDATE_ITEM_COUNT = prefix('Update Item Count');
 
 export const ORDER_ACTION_NAMES = {
+    CREATE,
+    CREATE_COMPLETED,
+    CREATE_FAILED,
+
     ADD_ITEM,
     ADD_ITEM_COMPLETED,
     ADD_ITEM_FAILED,
@@ -26,10 +36,45 @@ export const ORDER_ACTION_NAMES = {
 @Injectable()
 export class OrderActions {
 
-    addItem(item: CustomerMenuItemResultV2): Action {
+    create(restaurant: RestaurantResultV2): Action {
+        return {
+            type: CREATE,
+            payload: <CreatePayload>{
+                restaurantId: restaurant.id
+            }
+        };
+    }
+
+    createCompleted(order: OrderResult): Action {
+        return {
+            type: CREATE_COMPLETED,
+            payload: <CreateCompletedPayload>{
+                orderId: order.id
+            }
+        };
+    }
+
+    createFailed(error: any): Action {
+        return {
+            type: CREATE_FAILED,
+            payload: error
+        };
+    }
+
+    addItem(item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
         return {
             type: ORDER_ACTION_NAMES.ADD_ITEM,
-            payload: item
+            payload: <AddItemPayload>{
+                orderItem: {
+                    orderId: null,
+                    itemId: item.id,
+                    options: [],
+                    excludedOptions: [],
+                    instructions: 'Make it vegan ya?',
+                    count: 1
+                },
+                restaurant
+            }
         };
     }
 

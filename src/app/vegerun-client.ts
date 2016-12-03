@@ -176,91 +176,91 @@ export interface IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionAddSectionPost(create: MenuSectionSelectionCreate): Observable<void>;
+    apiV1MenusCompositionAddSectionPost(create: MenuSectionSelectionCreate): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionAddItemPost(create: MenuItemSelectionCreate): Observable<void>;
+    apiV1MenusCompositionAddItemPost(create: MenuItemSelectionCreate): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionAddOptionPost(create: MenuOptionSelectionCreate): Observable<void>;
+    apiV1MenusCompositionAddOptionPost(create: MenuOptionSelectionCreate): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionDeleteSectionByIdPost(id: string): Observable<void>;
+    apiV1MenusCompositionDeleteSectionByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionDeleteItemByIdPost(id: string): Observable<void>;
+    apiV1MenusCompositionDeleteItemByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionDeleteOptionByIdPost(id: string): Observable<void>;
+    apiV1MenusCompositionDeleteOptionByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionOrderSectionsPost(request: MenuOrderRequest): Observable<void>;
+    apiV1MenusCompositionOrderSectionsPost(request: MenuOrderRequest): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionOrderItemsPost(request: MenuOrderRequest): Observable<void>;
+    apiV1MenusCompositionOrderItemsPost(request: MenuOrderRequest): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionOrderOptionsPost(request: MenuOrderRequest): Observable<void>;
+    apiV1MenusCompositionOrderOptionsPost(request: MenuOrderRequest): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionAddFeaturedItemByItemIdPost(itemId: string): Observable<void>;
+    apiV1MenusCompositionAddFeaturedItemByItemIdPost(itemId: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1CompositionRemoveFeaturedItemByItemIdPost(itemId: string): Observable<void>;
+    apiV1MenusCompositionRemoveFeaturedItemByItemIdPost(itemId: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsListByRestaurantIdGet(restaurantId: string): Observable<void>;
+    apiV1MenusItemsListByRestaurantIdGet(restaurantId: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsGetByIdGet(id: string): Observable<void>;
+    apiV1MenusItemsGetByIdGet(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsCreatePost(create: MenuItemCreate): Observable<void>;
+    apiV1MenusItemsCreatePost(create: MenuItemCreate): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsUpdatePost(update: MenuItemUpdate): Observable<void>;
+    apiV1MenusItemsUpdatePost(update: MenuItemUpdate): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsDiscardByIdGet(id: string): Observable<void>;
+    apiV1MenusItemsDiscardByIdGet(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsUploadImagePost(entityId: string, image_ContentType: string, image_ContentDisposition: string, image_Headers: any, image_Length: number, image_Name: string, image_FileName: string): Observable<void>;
+    apiV1MenusItemsUploadImagePost(entityId: string, image_ContentType: string, image_ContentDisposition: string, image_Headers: any, image_Length: number, image_Name: string, image_FileName: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsDeleteImageByIdPost(id: string): Observable<void>;
+    apiV1MenusItemsDeleteImageByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsProposeByIdPost(id: string): Observable<void>;
+    apiV1MenusItemsProposeByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsApproveByIdPost(id: string): Observable<void>;
+    apiV1MenusItemsApproveByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsDeclineByIdPost(id: string): Observable<void>;
+    apiV1MenusItemsDeclineByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    apiV1ItemsConfirmByIdPost(id: string): Observable<void>;
+    apiV1MenusItemsConfirmByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
@@ -296,75 +296,39 @@ export interface IVegerunClient {
     /**
      * @return Success
      */
-    listByRestaurantIdGet(restaurantId: string): Observable<void>;
+    apiV1MenusSectionListByRestaurantIdGet(restaurantId: string): Observable<void>;
     /**
      * @return Success
      */
-    getByIdGet(id: string): Observable<void>;
+    apiV1MenusSectionGetByIdGet(id: string): Observable<void>;
     /**
      * @return Success
      */
-    createPost(create: MenuOptionCreate): Observable<void>;
+    apiV1MenusSectionCreatePost(create: MenuSectionCreate): Observable<void>;
     /**
      * @return Success
      */
-    updatePost(update: MenuOptionUpdate): Observable<void>;
+    apiV1MenusSectionUpdatePost(update: MenuSectionUpdate): Observable<void>;
     /**
      * @return Success
      */
-    discardByIdGet(id: string): Observable<void>;
+    apiV1MenusSectionDiscardByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    proposeByIdPost(id: string): Observable<void>;
+    apiV1MenusSectionProposeByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    approveByIdPost(id: string): Observable<void>;
+    apiV1MenusSectionApproveByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    declineByIdPost(id: string): Observable<void>;
+    apiV1MenusSectionDeclineByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
-    confirmByIdPost(id: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionListByRestaurantIdGet(restaurantId: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionGetByIdGet(id: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionCreatePost(create: MenuSectionCreate): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionUpdatePost(update: MenuSectionUpdate): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionDiscardByIdPost(id: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionProposeByIdPost(id: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionApproveByIdPost(id: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionDeclineByIdPost(id: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    apiV1SectionConfirmByIdPost(id: string): Observable<void>;
+    apiV1MenusSectionConfirmByIdPost(id: string): Observable<void>;
     /**
      * @return Success
      */
@@ -376,7 +340,7 @@ export interface IVegerunClient {
     /**
      * @return Success
      */
-    apiV1OrdersGetByIdGet(id: string): Observable<void>;
+    apiV1OrdersGetByIdGet(id: string): Observable<OrderResult>;
     /**
      * @return Success
      */
@@ -396,7 +360,7 @@ export interface IVegerunClient {
     /**
      * @return Success
      */
-    apiV1OrdersCreatePost(create: OrderCreate): Observable<void>;
+    apiV1OrdersCreatePost(create: OrderCreate): Observable<OrderResult>;
     /**
      * @return Success
      */
@@ -613,26 +577,6 @@ export interface IVegerunClient {
      * @return Success
      */
     apiV1RestaurantsSettingsOrderOrderRateLimitRemoveByRestaurantIdPost(restaurantId: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    getByRestaurantIdGet(restaurantId: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    closeForMinutesByRestaurantIdByClosureMinutesGet(restaurantId: string, closureMinutes: number): Observable<void>;
-    /**
-     * @return Success
-     */
-    closeUntilShiftEndByRestaurantIdGet(restaurantId: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    closeIndefinitelyByRestaurantIdGet(restaurantId: string): Observable<void>;
-    /**
-     * @return Success
-     */
-    removeCurrentByRestaurantIdGet(restaurantId: string): Observable<void>;
     /**
      * @return Success
      */
@@ -2433,8 +2377,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionAddSectionPost(create: MenuSectionSelectionCreate): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/add-section";
+    apiV1MenusCompositionAddSectionPost(create: MenuSectionSelectionCreate): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/add-section";
 
         const content_ = JSON.stringify(create);
         
@@ -2445,11 +2389,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionAddSectionPost(response);
+            return this.processApiV1MenusCompositionAddSectionPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionAddSectionPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionAddSectionPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2458,7 +2402,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionAddSectionPost(response: Response) {
+    private processApiV1MenusCompositionAddSectionPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2473,8 +2417,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionAddItemPost(create: MenuItemSelectionCreate): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/add-item";
+    apiV1MenusCompositionAddItemPost(create: MenuItemSelectionCreate): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/add-item";
 
         const content_ = JSON.stringify(create);
         
@@ -2485,11 +2429,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionAddItemPost(response);
+            return this.processApiV1MenusCompositionAddItemPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionAddItemPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionAddItemPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2498,7 +2442,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionAddItemPost(response: Response) {
+    private processApiV1MenusCompositionAddItemPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2513,8 +2457,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionAddOptionPost(create: MenuOptionSelectionCreate): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/add-option";
+    apiV1MenusCompositionAddOptionPost(create: MenuOptionSelectionCreate): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/add-option";
 
         const content_ = JSON.stringify(create);
         
@@ -2525,11 +2469,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionAddOptionPost(response);
+            return this.processApiV1MenusCompositionAddOptionPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionAddOptionPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionAddOptionPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2538,7 +2482,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionAddOptionPost(response: Response) {
+    private processApiV1MenusCompositionAddOptionPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2553,8 +2497,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionDeleteSectionByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/delete-section/{id}"; 
+    apiV1MenusCompositionDeleteSectionByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/delete-section/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -2568,11 +2512,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionDeleteSectionByIdPost(response);
+            return this.processApiV1MenusCompositionDeleteSectionByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionDeleteSectionByIdPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionDeleteSectionByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2581,7 +2525,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionDeleteSectionByIdPost(response: Response) {
+    private processApiV1MenusCompositionDeleteSectionByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2596,8 +2540,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionDeleteItemByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/delete-item/{id}"; 
+    apiV1MenusCompositionDeleteItemByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/delete-item/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -2611,11 +2555,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionDeleteItemByIdPost(response);
+            return this.processApiV1MenusCompositionDeleteItemByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionDeleteItemByIdPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionDeleteItemByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2624,7 +2568,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionDeleteItemByIdPost(response: Response) {
+    private processApiV1MenusCompositionDeleteItemByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2639,8 +2583,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionDeleteOptionByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/delete-option/{id}"; 
+    apiV1MenusCompositionDeleteOptionByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/delete-option/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -2654,11 +2598,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionDeleteOptionByIdPost(response);
+            return this.processApiV1MenusCompositionDeleteOptionByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionDeleteOptionByIdPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionDeleteOptionByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2667,7 +2611,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionDeleteOptionByIdPost(response: Response) {
+    private processApiV1MenusCompositionDeleteOptionByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2682,8 +2626,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionOrderSectionsPost(request: MenuOrderRequest): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/order-sections";
+    apiV1MenusCompositionOrderSectionsPost(request: MenuOrderRequest): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/order-sections";
 
         const content_ = JSON.stringify(request);
         
@@ -2694,11 +2638,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionOrderSectionsPost(response);
+            return this.processApiV1MenusCompositionOrderSectionsPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionOrderSectionsPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionOrderSectionsPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2707,7 +2651,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionOrderSectionsPost(response: Response) {
+    private processApiV1MenusCompositionOrderSectionsPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2722,8 +2666,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionOrderItemsPost(request: MenuOrderRequest): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/order-items";
+    apiV1MenusCompositionOrderItemsPost(request: MenuOrderRequest): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/order-items";
 
         const content_ = JSON.stringify(request);
         
@@ -2734,11 +2678,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionOrderItemsPost(response);
+            return this.processApiV1MenusCompositionOrderItemsPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionOrderItemsPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionOrderItemsPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2747,7 +2691,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionOrderItemsPost(response: Response) {
+    private processApiV1MenusCompositionOrderItemsPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2762,8 +2706,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionOrderOptionsPost(request: MenuOrderRequest): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/order-options";
+    apiV1MenusCompositionOrderOptionsPost(request: MenuOrderRequest): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/order-options";
 
         const content_ = JSON.stringify(request);
         
@@ -2774,11 +2718,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionOrderOptionsPost(response);
+            return this.processApiV1MenusCompositionOrderOptionsPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionOrderOptionsPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionOrderOptionsPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2787,7 +2731,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionOrderOptionsPost(response: Response) {
+    private processApiV1MenusCompositionOrderOptionsPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2802,8 +2746,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionAddFeaturedItemByItemIdPost(itemId: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/add-featured-item/{itemId}"; 
+    apiV1MenusCompositionAddFeaturedItemByItemIdPost(itemId: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/add-featured-item/{itemId}"; 
         if (itemId === undefined || itemId === null)
             throw new Error("The parameter 'itemId' must be defined.");
         url_ = url_.replace("{itemId}", encodeURIComponent("" + itemId));
@@ -2817,11 +2761,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionAddFeaturedItemByItemIdPost(response);
+            return this.processApiV1MenusCompositionAddFeaturedItemByItemIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionAddFeaturedItemByItemIdPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionAddFeaturedItemByItemIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2830,7 +2774,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionAddFeaturedItemByItemIdPost(response: Response) {
+    private processApiV1MenusCompositionAddFeaturedItemByItemIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2845,8 +2789,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1CompositionRemoveFeaturedItemByItemIdPost(itemId: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/composition/remove-featured-item/{itemId}"; 
+    apiV1MenusCompositionRemoveFeaturedItemByItemIdPost(itemId: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/composition/remove-featured-item/{itemId}"; 
         if (itemId === undefined || itemId === null)
             throw new Error("The parameter 'itemId' must be defined.");
         url_ = url_.replace("{itemId}", encodeURIComponent("" + itemId));
@@ -2860,11 +2804,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1CompositionRemoveFeaturedItemByItemIdPost(response);
+            return this.processApiV1MenusCompositionRemoveFeaturedItemByItemIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1CompositionRemoveFeaturedItemByItemIdPost(response));
+                    return Observable.of(this.processApiV1MenusCompositionRemoveFeaturedItemByItemIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2873,7 +2817,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1CompositionRemoveFeaturedItemByItemIdPost(response: Response) {
+    private processApiV1MenusCompositionRemoveFeaturedItemByItemIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2888,8 +2832,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsListByRestaurantIdGet(restaurantId: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/list/{restaurantId}"; 
+    apiV1MenusItemsListByRestaurantIdGet(restaurantId: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/list/{restaurantId}"; 
         if (restaurantId === undefined || restaurantId === null)
             throw new Error("The parameter 'restaurantId' must be defined.");
         url_ = url_.replace("{restaurantId}", encodeURIComponent("" + restaurantId));
@@ -2903,11 +2847,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsListByRestaurantIdGet(response);
+            return this.processApiV1MenusItemsListByRestaurantIdGet(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsListByRestaurantIdGet(response));
+                    return Observable.of(this.processApiV1MenusItemsListByRestaurantIdGet(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2916,7 +2860,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsListByRestaurantIdGet(response: Response) {
+    private processApiV1MenusItemsListByRestaurantIdGet(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2931,8 +2875,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsGetByIdGet(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/get/{id}"; 
+    apiV1MenusItemsGetByIdGet(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/get/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -2946,11 +2890,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsGetByIdGet(response);
+            return this.processApiV1MenusItemsGetByIdGet(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsGetByIdGet(response));
+                    return Observable.of(this.processApiV1MenusItemsGetByIdGet(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2959,7 +2903,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsGetByIdGet(response: Response) {
+    private processApiV1MenusItemsGetByIdGet(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -2974,8 +2918,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsCreatePost(create: MenuItemCreate): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/create";
+    apiV1MenusItemsCreatePost(create: MenuItemCreate): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/create";
 
         const content_ = JSON.stringify(create);
         
@@ -2986,11 +2930,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsCreatePost(response);
+            return this.processApiV1MenusItemsCreatePost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsCreatePost(response));
+                    return Observable.of(this.processApiV1MenusItemsCreatePost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2999,7 +2943,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsCreatePost(response: Response) {
+    private processApiV1MenusItemsCreatePost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3014,8 +2958,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsUpdatePost(update: MenuItemUpdate): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/update";
+    apiV1MenusItemsUpdatePost(update: MenuItemUpdate): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/update";
 
         const content_ = JSON.stringify(update);
         
@@ -3026,11 +2970,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsUpdatePost(response);
+            return this.processApiV1MenusItemsUpdatePost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsUpdatePost(response));
+                    return Observable.of(this.processApiV1MenusItemsUpdatePost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3039,7 +2983,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsUpdatePost(response: Response) {
+    private processApiV1MenusItemsUpdatePost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3054,8 +2998,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsDiscardByIdGet(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/discard/{id}"; 
+    apiV1MenusItemsDiscardByIdGet(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/discard/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3069,11 +3013,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsDiscardByIdGet(response);
+            return this.processApiV1MenusItemsDiscardByIdGet(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsDiscardByIdGet(response));
+                    return Observable.of(this.processApiV1MenusItemsDiscardByIdGet(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3082,7 +3026,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsDiscardByIdGet(response: Response) {
+    private processApiV1MenusItemsDiscardByIdGet(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3097,8 +3041,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsUploadImagePost(entityId: string, image_ContentType: string, image_ContentDisposition: string, image_Headers: any, image_Length: number, image_Name: string, image_FileName: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/upload-image?"; 
+    apiV1MenusItemsUploadImagePost(entityId: string, image_ContentType: string, image_ContentDisposition: string, image_Headers: any, image_Length: number, image_Name: string, image_FileName: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/upload-image?"; 
         if (entityId !== undefined)
             url_ += "EntityId=" + encodeURIComponent("" + entityId) + "&"; 
         if (image_ContentType !== undefined)
@@ -3123,11 +3067,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsUploadImagePost(response);
+            return this.processApiV1MenusItemsUploadImagePost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsUploadImagePost(response));
+                    return Observable.of(this.processApiV1MenusItemsUploadImagePost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3136,7 +3080,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsUploadImagePost(response: Response) {
+    private processApiV1MenusItemsUploadImagePost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3151,8 +3095,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsDeleteImageByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/delete-image/{id}"; 
+    apiV1MenusItemsDeleteImageByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/delete-image/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3166,11 +3110,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsDeleteImageByIdPost(response);
+            return this.processApiV1MenusItemsDeleteImageByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsDeleteImageByIdPost(response));
+                    return Observable.of(this.processApiV1MenusItemsDeleteImageByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3179,7 +3123,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsDeleteImageByIdPost(response: Response) {
+    private processApiV1MenusItemsDeleteImageByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3194,8 +3138,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsProposeByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/propose/{id}"; 
+    apiV1MenusItemsProposeByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/propose/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3209,11 +3153,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsProposeByIdPost(response);
+            return this.processApiV1MenusItemsProposeByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsProposeByIdPost(response));
+                    return Observable.of(this.processApiV1MenusItemsProposeByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3222,7 +3166,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsProposeByIdPost(response: Response) {
+    private processApiV1MenusItemsProposeByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3237,8 +3181,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsApproveByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/approve/{id}"; 
+    apiV1MenusItemsApproveByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/approve/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3252,11 +3196,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsApproveByIdPost(response);
+            return this.processApiV1MenusItemsApproveByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsApproveByIdPost(response));
+                    return Observable.of(this.processApiV1MenusItemsApproveByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3265,7 +3209,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsApproveByIdPost(response: Response) {
+    private processApiV1MenusItemsApproveByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3280,8 +3224,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsDeclineByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/decline/{id}"; 
+    apiV1MenusItemsDeclineByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/decline/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3295,11 +3239,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsDeclineByIdPost(response);
+            return this.processApiV1MenusItemsDeclineByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsDeclineByIdPost(response));
+                    return Observable.of(this.processApiV1MenusItemsDeclineByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3308,7 +3252,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsDeclineByIdPost(response: Response) {
+    private processApiV1MenusItemsDeclineByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3323,8 +3267,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1ItemsConfirmByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/items/confirm/{id}"; 
+    apiV1MenusItemsConfirmByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/items/confirm/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3338,11 +3282,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1ItemsConfirmByIdPost(response);
+            return this.processApiV1MenusItemsConfirmByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1ItemsConfirmByIdPost(response));
+                    return Observable.of(this.processApiV1MenusItemsConfirmByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3351,7 +3295,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1ItemsConfirmByIdPost(response: Response) {
+    private processApiV1MenusItemsConfirmByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3707,8 +3651,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    listByRestaurantIdGet(restaurantId: string): Observable<void> {
-        let url_ = this.baseUrl + "/list/{restaurantId}"; 
+    apiV1MenusSectionListByRestaurantIdGet(restaurantId: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/list/{restaurantId}"; 
         if (restaurantId === undefined || restaurantId === null)
             throw new Error("The parameter 'restaurantId' must be defined.");
         url_ = url_.replace("{restaurantId}", encodeURIComponent("" + restaurantId));
@@ -3722,11 +3666,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processListByRestaurantIdGet(response);
+            return this.processApiV1MenusSectionListByRestaurantIdGet(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processListByRestaurantIdGet(response));
+                    return Observable.of(this.processApiV1MenusSectionListByRestaurantIdGet(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3735,7 +3679,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processListByRestaurantIdGet(response: Response) {
+    private processApiV1MenusSectionListByRestaurantIdGet(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3750,8 +3694,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    getByIdGet(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/get/{id}"; 
+    apiV1MenusSectionGetByIdGet(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/get/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3765,11 +3709,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processGetByIdGet(response);
+            return this.processApiV1MenusSectionGetByIdGet(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processGetByIdGet(response));
+                    return Observable.of(this.processApiV1MenusSectionGetByIdGet(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3778,7 +3722,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processGetByIdGet(response: Response) {
+    private processApiV1MenusSectionGetByIdGet(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3793,8 +3737,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    createPost(create: MenuOptionCreate): Observable<void> {
-        let url_ = this.baseUrl + "/create";
+    apiV1MenusSectionCreatePost(create: MenuSectionCreate): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/create";
 
         const content_ = JSON.stringify(create);
         
@@ -3805,11 +3749,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processCreatePost(response);
+            return this.processApiV1MenusSectionCreatePost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processCreatePost(response));
+                    return Observable.of(this.processApiV1MenusSectionCreatePost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3818,7 +3762,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processCreatePost(response: Response) {
+    private processApiV1MenusSectionCreatePost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3833,8 +3777,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    updatePost(update: MenuOptionUpdate): Observable<void> {
-        let url_ = this.baseUrl + "/update";
+    apiV1MenusSectionUpdatePost(update: MenuSectionUpdate): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/update";
 
         const content_ = JSON.stringify(update);
         
@@ -3845,11 +3789,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processUpdatePost(response);
+            return this.processApiV1MenusSectionUpdatePost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processUpdatePost(response));
+                    return Observable.of(this.processApiV1MenusSectionUpdatePost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3858,7 +3802,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processUpdatePost(response: Response) {
+    private processApiV1MenusSectionUpdatePost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3873,51 +3817,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    discardByIdGet(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/discard/{id}"; 
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processDiscardByIdGet(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processDiscardByIdGet(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processDiscardByIdGet(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    proposeByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/propose/{id}"; 
+    apiV1MenusSectionDiscardByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/discard/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3931,11 +3832,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processProposeByIdPost(response);
+            return this.processApiV1MenusSectionDiscardByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processProposeByIdPost(response));
+                    return Observable.of(this.processApiV1MenusSectionDiscardByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3944,7 +3845,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processProposeByIdPost(response: Response) {
+    private processApiV1MenusSectionDiscardByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -3959,8 +3860,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    approveByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/approve/{id}"; 
+    apiV1MenusSectionProposeByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/propose/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -3974,11 +3875,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApproveByIdPost(response);
+            return this.processApiV1MenusSectionProposeByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApproveByIdPost(response));
+                    return Observable.of(this.processApiV1MenusSectionProposeByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -3987,7 +3888,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApproveByIdPost(response: Response) {
+    private processApiV1MenusSectionProposeByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -4002,8 +3903,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    declineByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/decline/{id}"; 
+    apiV1MenusSectionApproveByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/approve/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -4017,11 +3918,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processDeclineByIdPost(response);
+            return this.processApiV1MenusSectionApproveByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processDeclineByIdPost(response));
+                    return Observable.of(this.processApiV1MenusSectionApproveByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -4030,7 +3931,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processDeclineByIdPost(response: Response) {
+    private processApiV1MenusSectionApproveByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -4045,8 +3946,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    confirmByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/confirm/{id}"; 
+    apiV1MenusSectionDeclineByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/decline/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -4060,11 +3961,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processConfirmByIdPost(response);
+            return this.processApiV1MenusSectionDeclineByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processConfirmByIdPost(response));
+                    return Observable.of(this.processApiV1MenusSectionDeclineByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -4073,7 +3974,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processConfirmByIdPost(response: Response) {
+    private processApiV1MenusSectionDeclineByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -4088,174 +3989,8 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1SectionListByRestaurantIdGet(restaurantId: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/list/{restaurantId}"; 
-        if (restaurantId === undefined || restaurantId === null)
-            throw new Error("The parameter 'restaurantId' must be defined.");
-        url_ = url_.replace("{restaurantId}", encodeURIComponent("" + restaurantId));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processApiV1SectionListByRestaurantIdGet(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processApiV1SectionListByRestaurantIdGet(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processApiV1SectionListByRestaurantIdGet(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    apiV1SectionGetByIdGet(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/get/{id}"; 
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processApiV1SectionGetByIdGet(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processApiV1SectionGetByIdGet(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processApiV1SectionGetByIdGet(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    apiV1SectionCreatePost(create: MenuSectionCreate): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/create";
-
-        const content_ = JSON.stringify(create);
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processApiV1SectionCreatePost(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processApiV1SectionCreatePost(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processApiV1SectionCreatePost(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    apiV1SectionUpdatePost(update: MenuSectionUpdate): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/update";
-
-        const content_ = JSON.stringify(update);
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processApiV1SectionUpdatePost(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processApiV1SectionUpdatePost(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processApiV1SectionUpdatePost(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    apiV1SectionDiscardByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/discard/{id}"; 
+    apiV1MenusSectionConfirmByIdPost(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v1/menus/section/confirm/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -4269,11 +4004,11 @@ export class VegerunClient implements IVegerunClient {
                 "Content-Type": "application/json; charset=UTF-8"
             })
         }).map((response) => {
-            return this.processApiV1SectionDiscardByIdPost(response);
+            return this.processApiV1MenusSectionConfirmByIdPost(response);
         }).catch((response: any, caught: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processApiV1SectionDiscardByIdPost(response));
+                    return Observable.of(this.processApiV1MenusSectionConfirmByIdPost(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -4282,179 +4017,7 @@ export class VegerunClient implements IVegerunClient {
         });
     }
 
-    private processApiV1SectionDiscardByIdPost(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    apiV1SectionProposeByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/propose/{id}"; 
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processApiV1SectionProposeByIdPost(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processApiV1SectionProposeByIdPost(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processApiV1SectionProposeByIdPost(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    apiV1SectionApproveByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/approve/{id}"; 
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processApiV1SectionApproveByIdPost(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processApiV1SectionApproveByIdPost(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processApiV1SectionApproveByIdPost(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    apiV1SectionDeclineByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/decline/{id}"; 
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processApiV1SectionDeclineByIdPost(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processApiV1SectionDeclineByIdPost(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processApiV1SectionDeclineByIdPost(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    apiV1SectionConfirmByIdPost(id: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/v1/section/confirm/{id}"; 
-        if (id === undefined || id === null)
-            throw new Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processApiV1SectionConfirmByIdPost(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processApiV1SectionConfirmByIdPost(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processApiV1SectionConfirmByIdPost(response: Response) {
+    private processApiV1MenusSectionConfirmByIdPost(response: Response) {
         const data = response.text();
         const status = response.status.toString(); 
 
@@ -4552,7 +4115,7 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1OrdersGetByIdGet(id: string): Observable<void> {
+    apiV1OrdersGetByIdGet(id: string): Observable<OrderResult> {
         let url_ = this.baseUrl + "/api/v1/orders/get/{id}"; 
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -4573,10 +4136,10 @@ export class VegerunClient implements IVegerunClient {
                 try {
                     return Observable.of(this.processApiV1OrdersGetByIdGet(response));
                 } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
+                    return <Observable<OrderResult>><any>Observable.throw(e);
                 }
             } else
-                return <Observable<void>><any>Observable.throw(response);
+                return <Observable<OrderResult>><any>Observable.throw(response);
         });
     }
 
@@ -4585,6 +4148,9 @@ export class VegerunClient implements IVegerunClient {
         const status = response.status.toString(); 
 
         if (status === "200") {
+            let result200: OrderResult = null; 
+            result200 = data === "" ? null : <OrderResult>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
         }
         else
         {
@@ -4764,7 +4330,7 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    apiV1OrdersCreatePost(create: OrderCreate): Observable<void> {
+    apiV1OrdersCreatePost(create: OrderCreate): Observable<OrderResult> {
         let url_ = this.baseUrl + "/api/v1/orders/create";
 
         const content_ = JSON.stringify(create);
@@ -4782,10 +4348,10 @@ export class VegerunClient implements IVegerunClient {
                 try {
                     return Observable.of(this.processApiV1OrdersCreatePost(response));
                 } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
+                    return <Observable<OrderResult>><any>Observable.throw(e);
                 }
             } else
-                return <Observable<void>><any>Observable.throw(response);
+                return <Observable<OrderResult>><any>Observable.throw(response);
         });
     }
 
@@ -4794,6 +4360,9 @@ export class VegerunClient implements IVegerunClient {
         const status = response.status.toString(); 
 
         if (status === "200") {
+            let result200: OrderResult = null; 
+            result200 = data === "" ? null : <OrderResult>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
         }
         else
         {
@@ -7115,224 +6684,6 @@ export class VegerunClient implements IVegerunClient {
     /**
      * @return Success
      */
-    getByRestaurantIdGet(restaurantId: string): Observable<void> {
-        let url_ = this.baseUrl + "/get/{restaurantId}"; 
-        if (restaurantId === undefined || restaurantId === null)
-            throw new Error("The parameter 'restaurantId' must be defined.");
-        url_ = url_.replace("{restaurantId}", encodeURIComponent("" + restaurantId));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processGetByRestaurantIdGet(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processGetByRestaurantIdGet(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processGetByRestaurantIdGet(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    closeForMinutesByRestaurantIdByClosureMinutesGet(restaurantId: string, closureMinutes: number): Observable<void> {
-        let url_ = this.baseUrl + "/close-for-minutes/{restaurantId}/{closureMinutes}"; 
-        if (restaurantId === undefined || restaurantId === null)
-            throw new Error("The parameter 'restaurantId' must be defined.");
-        url_ = url_.replace("{restaurantId}", encodeURIComponent("" + restaurantId)); 
-        if (closureMinutes === undefined || closureMinutes === null)
-            throw new Error("The parameter 'closureMinutes' must be defined.");
-        url_ = url_.replace("{closureMinutes}", encodeURIComponent("" + closureMinutes));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processCloseForMinutesByRestaurantIdByClosureMinutesGet(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processCloseForMinutesByRestaurantIdByClosureMinutesGet(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processCloseForMinutesByRestaurantIdByClosureMinutesGet(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    closeUntilShiftEndByRestaurantIdGet(restaurantId: string): Observable<void> {
-        let url_ = this.baseUrl + "/close-until-shift-end/{restaurantId}"; 
-        if (restaurantId === undefined || restaurantId === null)
-            throw new Error("The parameter 'restaurantId' must be defined.");
-        url_ = url_.replace("{restaurantId}", encodeURIComponent("" + restaurantId));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processCloseUntilShiftEndByRestaurantIdGet(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processCloseUntilShiftEndByRestaurantIdGet(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processCloseUntilShiftEndByRestaurantIdGet(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    closeIndefinitelyByRestaurantIdGet(restaurantId: string): Observable<void> {
-        let url_ = this.baseUrl + "/close-indefinitely/{restaurantId}"; 
-        if (restaurantId === undefined || restaurantId === null)
-            throw new Error("The parameter 'restaurantId' must be defined.");
-        url_ = url_.replace("{restaurantId}", encodeURIComponent("" + restaurantId));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processCloseIndefinitelyByRestaurantIdGet(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processCloseIndefinitelyByRestaurantIdGet(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processCloseIndefinitelyByRestaurantIdGet(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
-    removeCurrentByRestaurantIdGet(restaurantId: string): Observable<void> {
-        let url_ = this.baseUrl + "/remove-current/{restaurantId}"; 
-        if (restaurantId === undefined || restaurantId === null)
-            throw new Error("The parameter 'restaurantId' must be defined.");
-        url_ = url_.replace("{restaurantId}", encodeURIComponent("" + restaurantId));
-
-        const content_ = "";
-        
-        return this.http.request(url_, {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8"
-            })
-        }).map((response) => {
-            return this.processRemoveCurrentByRestaurantIdGet(response);
-        }).catch((response: any, caught: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processRemoveCurrentByRestaurantIdGet(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    private processRemoveCurrentByRestaurantIdGet(response: Response) {
-        const data = response.text();
-        const status = response.status.toString(); 
-
-        if (status === "200") {
-        }
-        else
-        {
-            throw new Error("error_no_callback_for_the_received_http_status"); 
-        }
-    }
-
-    /**
-     * @return Success
-     */
     apiV1RestaurantsSearchSearchPost(request: RestaurantSearchRequest): Observable<RestaurantSearchResult> {
         let url_ = this.baseUrl + "/api/v1/restaurants/search/search";
 
@@ -8905,33 +8256,6 @@ export interface MenuCreate {
     restaurantId?: string;
 }
 
-export interface MenuOptionCreate {
-    baseComponentId?: string;
-    values?: MenuOptionValueCreate[];
-    name: string;
-    description?: string;
-    minimumSelections?: number;
-    maximumSelections?: number;
-    restaurantId?: string;
-}
-
-export interface MenuOptionValueCreate {
-    optionId?: string;
-    name?: string;
-    price?: number;
-    shortCode?: string;
-    defaultIsSelected?: boolean;
-}
-
-export interface MenuOptionUpdate {
-    values?: MenuOptionValueCreate[];
-    name?: string;
-    description?: string;
-    minimumSelections?: number;
-    maximumSelections?: number;
-    id?: string;
-}
-
 export interface MenuSectionCreate {
     baseComponentId?: string;
     name?: string;
@@ -8954,6 +8278,218 @@ export interface OrderAlertMuteRequest {
     deliveryIntegrationStatus?: OrderAlertMuteRequestDeliveryIntegrationStatus;
 }
 
+export interface OrderResult {
+    friendlyId?: string;
+    expectedDeliveryTime?: Date;
+    userId?: string;
+    value?: number;
+    user?: UserResult;
+    hasError?: boolean;
+    items?: OrderItemResult[];
+    postalAddress?: PostalAddressResult;
+    status?: OrderResultStatus;
+    audits?: OrderAuditResult;
+    targetDelivery?: Date;
+    targetPickUp?: Date;
+    expires?: Date;
+    lastAudit?: Date;
+    restaurant?: RestaurantResult;
+    id?: string;
+    outcome?: OrderResultOutcome;
+    restaurantId?: string;
+    created?: Date;
+}
+
+export interface UserResult {
+    id?: string;
+    email?: string;
+    phoneNumber?: string;
+    userName?: string;
+    displayName?: string;
+    firstName?: string;
+    lastName?: string;
+    roles?: string[];
+    restaurantId?: string;
+}
+
+export interface OrderItemResult {
+    options?: OrderItemOptionResult[];
+    excludedOptions?: OrderItemOptionResult[];
+    id?: string;
+    count?: number;
+    menuItemId?: string;
+    menuItem?: MenuItemResult;
+    orderId?: string;
+}
+
+export interface PostalAddressResult {
+    format?: string;
+    id?: string;
+    company?: string;
+    line1?: string;
+    line2?: string;
+    postcode?: string;
+    latitude?: number;
+    longitude?: number;
+    instructions?: string;
+    nearestLandmark?: string;
+}
+
+export interface OrderAuditResult {
+    placed?: Date;
+    accepted?: Date;
+    rejected?: Date;
+    produced?: Date;
+    pickedUp?: Date;
+    delivered?: Date;
+}
+
+export interface RestaurantResult {
+    minimumOrderValue?: number;
+    maximumOrderValue?: number;
+    manager?: UserResult;
+    menu?: CustomerMenuResult;
+    categories?: RestaurantCategoryResult[];
+    scheduleDeprecated?: RestaurantOpeningWindow[];
+    contactPhoneNumber?: string;
+    town?: PublicTownResult;
+    deliveries?: PublicRestaurantDeliveryRangeSettingsResult;
+    schedule?: PublicRestaurantScheduleSettingsResult;
+    isPreview?: boolean;
+    id?: string;
+    name?: string;
+    branch?: string;
+    description?: string;
+    defaultContactPhoneNumber?: string;
+    slug?: string;
+    veganType?: RestaurantResultVeganType;
+    timeZoneId?: string;
+    status?: RestaurantResultStatus;
+    postalAddressId?: string;
+    postalAddress?: PostalAddressResult;
+    townId?: string;
+    images?: RestaurantImagesResult;
+}
+
+export interface OrderItemOptionResult {
+    id?: string;
+    orderItemId?: string;
+    menuOptionId?: string;
+    menuOption?: MenuOptionResult;
+    menuOptionValueId?: string;
+    menuOptionValue?: MenuOptionValueResult;
+}
+
+export interface MenuItemResult {
+    name?: string;
+    description?: string;
+    price?: number;
+    imageUrl?: string;
+    isEnabled?: boolean;
+    shortCode?: string;
+    id?: string;
+    restaurantId?: string;
+}
+
+export interface CustomerMenuResult {
+    id?: string;
+    restaurantId?: string;
+    sections?: CustomerMenuSectionResult[];
+    featuredSection?: CustomerMenuSectionResult;
+}
+
+export interface RestaurantCategoryResult {
+    id?: string;
+    name?: string;
+    restaurantId?: string;
+}
+
+export interface RestaurantOpeningWindow {
+    opens?: Date;
+    closes?: Date;
+}
+
+export interface PublicRestaurantDeliveryRangeSettingsResult {
+    deliveryRadiusMiles?: number;
+    deliveryPostcodes?: string[];
+}
+
+export interface PublicRestaurantScheduleSettingsResult {
+    opens?: Date;
+    closes?: Date;
+    readonly hasValidSchedule?: boolean;
+}
+
+export interface RestaurantImagesResult {
+    id?: string;
+    logoImageUrl?: string;
+    searchImageUrl?: string;
+    featuredImageUrl?: string;
+    locationImageUrl?: string;
+}
+
+export interface MenuOptionResult {
+    values?: MenuOptionValueResult[];
+    name?: string;
+    description?: string;
+    minimumSelections?: number;
+    maximumSelections?: number;
+    id?: string;
+    restaurantId?: string;
+    discarded?: Date;
+    discardedBy?: UserResult;
+    discardedById?: string;
+    confirmed?: Date;
+    confirmedBy?: UserResult;
+    confirmedById?: string;
+}
+
+export interface MenuOptionValueResult {
+    id?: string;
+    optionId?: string;
+    name?: string;
+    price?: number;
+    shortCode?: string;
+    defaultIsSelected?: boolean;
+}
+
+export interface CustomerMenuSectionResult {
+    name?: string;
+    description?: string;
+    slug?: string;
+    isEnabled?: boolean;
+    menuId?: string;
+    items?: CustomerMenuItemResult[];
+    id?: string;
+    restaurantId?: string;
+    order?: number;
+}
+
+export interface CustomerMenuItemResult {
+    name?: string;
+    description?: string;
+    price?: number;
+    imageUrl?: string;
+    isEnabled?: boolean;
+    isFeatured?: boolean;
+    options?: CustomerMenuOptionResult[];
+    id?: string;
+    restaurantId?: string;
+    order?: number;
+}
+
+export interface CustomerMenuOptionResult {
+    name?: string;
+    description?: string;
+    minimumSelections?: number;
+    maximumSelections?: number;
+    isEnabled?: boolean;
+    values?: MenuOptionValueResult[];
+    id?: string;
+    restaurantId?: string;
+    order?: number;
+}
+
 export interface OrderResultV2 {
     id?: string;
     timestamp?: Date;
@@ -8963,15 +8499,15 @@ export interface OrderResultV2 {
     value?: number;
     outcome?: OrderResultV2Outcome;
     restaurantId?: string;
-    restaurant?: RestaurantResultV2;
+    restaurant?: RestaurantResultV1_1;
     customerId?: string;
     customer?: CustomerOrderResult;
-    items?: OrderItemResultV2[];
+    items?: OrderItemResultV1_1[];
     audits?: OrderAuditResult;
     delivery?: DeliveryResult;
 }
 
-export interface RestaurantResultV2 {
+export interface RestaurantResultV1_1 {
     id?: string;
     name?: string;
     branch?: string;
@@ -8991,21 +8527,12 @@ export interface CustomerOrderResult {
     address?: PostalAddressResult;
 }
 
-export interface OrderItemResultV2 {
+export interface OrderItemResultV1_1 {
     name?: string;
     count?: number;
     price?: number;
     options?: string[];
     excludedOptions?: string[];
-}
-
-export interface OrderAuditResult {
-    placed?: Date;
-    accepted?: Date;
-    rejected?: Date;
-    produced?: Date;
-    pickedUp?: Date;
-    delivered?: Date;
 }
 
 export interface DeliveryResult {
@@ -9029,19 +8556,6 @@ export interface DeliveryResult {
     dispatchment?: DeliveryDispatchmentResult;
     customerArrival?: DeliveryCustomerArrivalResult;
     completion?: DeliveryCompletionResult;
-}
-
-export interface PostalAddressResult {
-    format?: string;
-    id?: string;
-    company?: string;
-    line1?: string;
-    line2?: string;
-    postcode?: string;
-    latitude?: number;
-    longitude?: number;
-    instructions?: string;
-    nearestLandmark?: string;
 }
 
 export interface DeliveryOrderResult {
@@ -9298,128 +8812,6 @@ export interface RestaurantSearchItemResult {
     hasPreviewAccess?: boolean;
 }
 
-export interface RestaurantResult {
-    minimumOrderValue?: number;
-    maximumOrderValue?: number;
-    manager?: UserResult;
-    menu?: CustomerMenuResult;
-    categories?: RestaurantCategoryResult[];
-    scheduleDeprecated?: RestaurantOpeningWindow[];
-    contactPhoneNumber?: string;
-    town?: PublicTownResult;
-    deliveries?: PublicRestaurantDeliveryRangeSettingsResult;
-    schedule?: PublicRestaurantScheduleSettingsResult;
-    isPreview?: boolean;
-    id?: string;
-    name?: string;
-    branch?: string;
-    description?: string;
-    defaultContactPhoneNumber?: string;
-    slug?: string;
-    veganType?: RestaurantResultVeganType;
-    timeZoneId?: string;
-    status?: RestaurantResultStatus;
-    postalAddressId?: string;
-    postalAddress?: PostalAddressResult;
-    townId?: string;
-    images?: RestaurantImagesResult;
-}
-
-export interface UserResult {
-    id?: string;
-    email?: string;
-    phoneNumber?: string;
-    userName?: string;
-    displayName?: string;
-    firstName?: string;
-    lastName?: string;
-    roles?: string[];
-    restaurantId?: string;
-}
-
-export interface CustomerMenuResult {
-    id?: string;
-    restaurantId?: string;
-    sections?: CustomerMenuSectionResult[];
-    featuredSection?: CustomerMenuSectionResult;
-}
-
-export interface RestaurantCategoryResult {
-    id?: string;
-    name?: string;
-    restaurantId?: string;
-}
-
-export interface RestaurantOpeningWindow {
-    opens?: Date;
-    closes?: Date;
-}
-
-export interface PublicRestaurantDeliveryRangeSettingsResult {
-    deliveryRadiusMiles?: number;
-    deliveryPostcodes?: string[];
-}
-
-export interface PublicRestaurantScheduleSettingsResult {
-    opens?: Date;
-    closes?: Date;
-    readonly hasValidSchedule?: boolean;
-}
-
-export interface RestaurantImagesResult {
-    id?: string;
-    logoImageUrl?: string;
-    searchImageUrl?: string;
-    featuredImageUrl?: string;
-    locationImageUrl?: string;
-}
-
-export interface CustomerMenuSectionResult {
-    name?: string;
-    description?: string;
-    slug?: string;
-    isEnabled?: boolean;
-    menuId?: string;
-    items?: CustomerMenuItemResult[];
-    id?: string;
-    restaurantId?: string;
-    order?: number;
-}
-
-export interface CustomerMenuItemResult {
-    name?: string;
-    description?: string;
-    price?: number;
-    imageUrl?: string;
-    isEnabled?: boolean;
-    isFeatured?: boolean;
-    options?: CustomerMenuOptionResult[];
-    id?: string;
-    restaurantId?: string;
-    order?: number;
-}
-
-export interface CustomerMenuOptionResult {
-    name?: string;
-    description?: string;
-    minimumSelections?: number;
-    maximumSelections?: number;
-    isEnabled?: boolean;
-    values?: MenuOptionValueResult[];
-    id?: string;
-    restaurantId?: string;
-    order?: number;
-}
-
-export interface MenuOptionValueResult {
-    id?: string;
-    optionId?: string;
-    name?: string;
-    price?: number;
-    shortCode?: string;
-    defaultIsSelected?: boolean;
-}
-
 export interface RestaurantSearchItemRequest {
     restaurantId?: string;
     postcode?: string;
@@ -9543,275 +8935,297 @@ export interface TownSuburbUpdate {
 }
 
 export enum LocationResultStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
+    Success = <any>"Success", 
+    PostcodeNotFound = <any>"PostcodeNotFound", 
+    TownNotFound = <any>"TownNotFound", 
 }
 
 export enum LocationClosureUpdateClosureType {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
+    Unknown = <any>"Unknown", 
+    Busy = <any>"Busy", 
+    Unavailable = <any>"Unavailable", 
+    TechnicalDifficulties = <any>"TechnicalDifficulties", 
+    Custom = <any>"Custom", 
 }
 
 export enum LocationShiftCreateShiftType {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    Unknown = <any>"Unknown", 
+    Breakfast = <any>"Breakfast", 
+    Lunch = <any>"Lunch", 
+    Dinner = <any>"Dinner", 
 }
 
 export enum TimeWindowCreateDayOfWeek {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
+    Sunday = <any>"Sunday", 
+    Monday = <any>"Monday", 
+    Tuesday = <any>"Tuesday", 
+    Wednesday = <any>"Wednesday", 
+    Thursday = <any>"Thursday", 
+    Friday = <any>"Friday", 
+    Saturday = <any>"Saturday", 
 }
 
 export enum LocationShiftUpdateShiftType {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    Unknown = <any>"Unknown", 
+    Breakfast = <any>"Breakfast", 
+    Lunch = <any>"Lunch", 
+    Dinner = <any>"Dinner", 
 }
 
 export enum TimeWindowUpdateDayOfWeek {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
+    Sunday = <any>"Sunday", 
+    Monday = <any>"Monday", 
+    Tuesday = <any>"Tuesday", 
+    Wednesday = <any>"Wednesday", 
+    Thursday = <any>"Thursday", 
+    Friday = <any>"Friday", 
+    Saturday = <any>"Saturday", 
 }
 
 export enum OrderAlertMuteRequestOrderStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
-    _7 = 7, 
-    _8 = 8, 
+    Unknown = <any>"Unknown", 
+    Draft = <any>"Draft", 
+    Placed = <any>"Placed", 
+    Expired = <any>"Expired", 
+    Declined = <any>"Declined", 
+    Accepted = <any>"Accepted", 
+    Produced = <any>"Produced", 
+    PickedUp = <any>"PickedUp", 
+    Delivered = <any>"Delivered", 
 }
 
 export enum OrderAlertMuteRequestDeliveryStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
-    _7 = 7, 
+    None = <any>"None", 
+    Unassigned = <any>"Unassigned", 
+    Integrating = <any>"Integrating", 
+    Allocated = <any>"Allocated", 
+    Waiting = <any>"Waiting", 
+    Dispatched = <any>"Dispatched", 
+    Arrived = <any>"Arrived", 
+    Completed = <any>"Completed", 
 }
 
 export enum OrderAlertMuteRequestDeliveryIntegrationStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    None = <any>"None", 
+    Assigned = <any>"Assigned", 
+    Succeeded = <any>"Succeeded", 
+    Failed = <any>"Failed", 
 }
 
-export enum OrderResultV2Status {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
-    _7 = 7, 
-    _8 = 8, 
+export enum OrderResultStatus {
+    Unknown = <any>"Unknown", 
+    Draft = <any>"Draft", 
+    Placed = <any>"Placed", 
+    Expired = <any>"Expired", 
+    Declined = <any>"Declined", 
+    Accepted = <any>"Accepted", 
+    Produced = <any>"Produced", 
+    PickedUp = <any>"PickedUp", 
+    Delivered = <any>"Delivered", 
 }
 
-export enum OrderResultV2Outcome {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
-}
-
-export enum DeliveryResultStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
-    _7 = 7, 
-}
-
-export enum DeliveryResultIntegrationStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-}
-
-export enum DeliveryResultDeliveryMode {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-}
-
-export enum DeliveryOrderResultStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
-    _7 = 7, 
-    _8 = 8, 
-}
-
-export enum DeliveryOrderResultOutcome {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
-}
-
-export enum DeliveryIntegrationResultStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-}
-
-export enum OrderRejectionRequestReasonV2 {
-    _0 = 0, 
-    _1 = 1, 
-}
-
-export enum RestaurantCreateVeganType {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-}
-
-export enum RestaurantCreateStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-}
-
-export enum RestaurantUpdateVeganType {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-}
-
-export enum RestaurantUpdateStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-}
-
-export enum RestaurantHeartbeatModeUpdateHeartbeatMode {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-}
-
-export enum RestaurantOrderRateLimitSelectionLevel {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-}
-
-export enum RestaurantSearchItemResultRestaurantAvailabilityStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _3 = 3, 
-    _5 = 5, 
-    _11 = 11, 
-    _19 = 19, 
-    _35 = 35, 
-    _67 = 67, 
-    _131 = 131, 
-    _259 = 259, 
-    _547 = 547, 
-    _579 = 579, 
-    _1059 = 1059, 
+export enum OrderResultOutcome {
+    None = <any>"None", 
+    Complete = <any>"Complete", 
+    Declined = <any>"Declined", 
+    Expired = <any>"Expired", 
+    ManuallyDismissed = <any>"ManuallyDismissed", 
+    AutoDismissed = <any>"AutoDismissed", 
+    Failed = <any>"Failed", 
 }
 
 export enum RestaurantResultVeganType {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    Unknown = <any>"Unknown", 
+    Vegan = <any>"Vegan", 
+    Vegetarian = <any>"Vegetarian", 
+    VeganOptions = <any>"VeganOptions", 
 }
 
 export enum RestaurantResultStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
+    Unknown = <any>"Unknown", 
+    Enabled = <any>"Enabled", 
+    Disabled = <any>"Disabled", 
+    ComingSoon = <any>"ComingSoon", 
+    Preview = <any>"Preview", 
+    Test = <any>"Test", 
+}
+
+export enum OrderResultV2Status {
+    Unknown = <any>"Unknown", 
+    Draft = <any>"Draft", 
+    Placed = <any>"Placed", 
+    Expired = <any>"Expired", 
+    Declined = <any>"Declined", 
+    Accepted = <any>"Accepted", 
+    Produced = <any>"Produced", 
+    PickedUp = <any>"PickedUp", 
+    Delivered = <any>"Delivered", 
+}
+
+export enum OrderResultV2Outcome {
+    None = <any>"None", 
+    Complete = <any>"Complete", 
+    Declined = <any>"Declined", 
+    Expired = <any>"Expired", 
+    ManuallyDismissed = <any>"ManuallyDismissed", 
+    AutoDismissed = <any>"AutoDismissed", 
+    Failed = <any>"Failed", 
+}
+
+export enum DeliveryResultStatus {
+    None = <any>"None", 
+    Unassigned = <any>"Unassigned", 
+    Integrating = <any>"Integrating", 
+    Allocated = <any>"Allocated", 
+    Waiting = <any>"Waiting", 
+    Dispatched = <any>"Dispatched", 
+    Arrived = <any>"Arrived", 
+    Completed = <any>"Completed", 
+}
+
+export enum DeliveryResultIntegrationStatus {
+    None = <any>"None", 
+    Assigned = <any>"Assigned", 
+    Succeeded = <any>"Succeeded", 
+    Failed = <any>"Failed", 
+}
+
+export enum DeliveryResultDeliveryMode {
+    Unknown = <any>"Unknown", 
+    Restaurant = <any>"Restaurant", 
+    DeliveryService = <any>"DeliveryService", 
+}
+
+export enum DeliveryOrderResultStatus {
+    Unknown = <any>"Unknown", 
+    Draft = <any>"Draft", 
+    Placed = <any>"Placed", 
+    Expired = <any>"Expired", 
+    Declined = <any>"Declined", 
+    Accepted = <any>"Accepted", 
+    Produced = <any>"Produced", 
+    PickedUp = <any>"PickedUp", 
+    Delivered = <any>"Delivered", 
+}
+
+export enum DeliveryOrderResultOutcome {
+    None = <any>"None", 
+    Complete = <any>"Complete", 
+    Declined = <any>"Declined", 
+    Expired = <any>"Expired", 
+    ManuallyDismissed = <any>"ManuallyDismissed", 
+    AutoDismissed = <any>"AutoDismissed", 
+    Failed = <any>"Failed", 
+}
+
+export enum DeliveryIntegrationResultStatus {
+    None = <any>"None", 
+    Assigned = <any>"Assigned", 
+    Succeeded = <any>"Succeeded", 
+    Failed = <any>"Failed", 
+}
+
+export enum OrderRejectionRequestReasonV2 {
+    Unknown = <any>"Unknown", 
+    Expired = <any>"Expired", 
+}
+
+export enum RestaurantCreateVeganType {
+    Unknown = <any>"Unknown", 
+    Vegan = <any>"Vegan", 
+    Vegetarian = <any>"Vegetarian", 
+    VeganOptions = <any>"VeganOptions", 
+}
+
+export enum RestaurantCreateStatus {
+    Unknown = <any>"Unknown", 
+    Enabled = <any>"Enabled", 
+    Disabled = <any>"Disabled", 
+    ComingSoon = <any>"ComingSoon", 
+    Preview = <any>"Preview", 
+    Test = <any>"Test", 
+}
+
+export enum RestaurantUpdateVeganType {
+    Unknown = <any>"Unknown", 
+    Vegan = <any>"Vegan", 
+    Vegetarian = <any>"Vegetarian", 
+    VeganOptions = <any>"VeganOptions", 
+}
+
+export enum RestaurantUpdateStatus {
+    Unknown = <any>"Unknown", 
+    Enabled = <any>"Enabled", 
+    Disabled = <any>"Disabled", 
+    ComingSoon = <any>"ComingSoon", 
+    Preview = <any>"Preview", 
+    Test = <any>"Test", 
+}
+
+export enum RestaurantHeartbeatModeUpdateHeartbeatMode {
+    Unknown = <any>"Unknown", 
+    Natural = <any>"Natural", 
+    ForceAlive = <any>"ForceAlive", 
+    ForceDead = <any>"ForceDead", 
+}
+
+export enum RestaurantOrderRateLimitSelectionLevel {
+    Unknown = <any>"Unknown", 
+    Low = <any>"Low", 
+    Medium = <any>"Medium", 
+    High = <any>"High", 
+}
+
+export enum RestaurantSearchItemResultRestaurantAvailabilityStatus {
+    Unknown = <any>"Unknown", 
+    Known = <any>"Known", 
+    Unavailable = <any>"Unavailable", 
+    Available = <any>"Available", 
+    Disabled = <any>"Disabled", 
+    NoMenuFound = <any>"NoMenuFound", 
+    Closed = <any>"Closed", 
+    ContactFailed = <any>"ContactFailed", 
+    OrderRateLimitExceeded = <any>"OrderRateLimitExceeded", 
+    ComingSoon = <any>"ComingSoon", 
+    OutsideHours = <any>"OutsideHours", 
+    NoHeartbeatFound = <any>"NoHeartbeatFound", 
+    ImposedClosure = <any>"ImposedClosure", 
 }
 
 export enum RestaurantDeliverySettingsUpdateDeliveryServiceUsage {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    Unknown = <any>"Unknown", 
+    AlwaysUseService = <any>"AlwaysUseService", 
+    NeverUseService = <any>"NeverUseService", 
+    SelectPerOrder = <any>"SelectPerOrder", 
 }
 
 export enum RestaurantDeliverySettingsUpdateTypicalPreparationSpeed {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
+    Unknown = <any>"Unknown", 
+    Instant = <any>"Instant", 
+    Fast = <any>"Fast", 
+    Medium = <any>"Medium", 
+    Slow = <any>"Slow", 
 }
 
 export enum RestaurantScheduleSettingsUpdateHeartbeatMode {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    Unknown = <any>"Unknown", 
+    Natural = <any>"Natural", 
+    ForceAlive = <any>"ForceAlive", 
+    ForceDead = <any>"ForceDead", 
 }
 
 export enum RestaurantDayScheduleUpdateDayOfWeek {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
+    Sunday = <any>"Sunday", 
+    Monday = <any>"Monday", 
+    Tuesday = <any>"Tuesday", 
+    Wednesday = <any>"Wednesday", 
+    Thursday = <any>"Thursday", 
+    Friday = <any>"Friday", 
+    Saturday = <any>"Saturday", 
 }
 
 export enum TownUpdateStatus {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
+    Unknown = <any>"Unknown", 
+    Enabled = <any>"Enabled", 
+    Disabled = <any>"Disabled", 
 }

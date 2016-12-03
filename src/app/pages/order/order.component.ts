@@ -33,6 +33,6 @@ export class OrderComponent implements OnInit {
     }
 
     selectItem(item: CustomerMenuItemResultV2) {
-        this.store.dispatch(this.orderActions.addItem(item));
+        this.restaurant$.subscribe(r => this.store.dispatch(this.orderActions.addItem(item, r)));
     }
 }
