@@ -5,24 +5,25 @@ import { Store, StoreModule, combineReducers } from '@ngrx/store';
 import { routerReducer, RouterState } from '@ngrx/router-store';
 
 import { orderReducer, OrderState, OrderActions } from './order';
+import { errorReducer, ErrorState, ErrorActions } from './error';
 
 export interface AppState {
     router: RouterState,
-    order: OrderState 
+    order: OrderState,
+    error: ErrorState
 }
-
-const composeStore = compose(combineReducers)({
-    router: routerReducer,
-    order: orderReducer
-});
 
 @NgModule({
     imports: [
-        StoreModule.provideStore(composeStore),
-
+        StoreModule.provideStore(compose(combineReducers)({
+            router: routerReducer,
+            order: orderReducer,
+            error: errorReducer
+        }))
     ],
     providers: [
-        OrderActions
+        OrderActions,
+        ErrorActions
     ]
 })
 export class AppStoreModule { }

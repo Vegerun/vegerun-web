@@ -14,4 +14,8 @@ export class Logger {
             console.log(message, ...optionalParams);
         }
     }
+
+    error(message, ...optionalParams) {
+        console.error(message, ...optionalParams);
+    }
 }

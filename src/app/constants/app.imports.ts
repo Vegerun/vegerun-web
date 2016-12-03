@@ -1,6 +1,7 @@
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { MaterialModule } from '@angular/material';
+import { EffectsModule } from '@ngrx/effects';
 
 //import { EffectsModule } from '@ngrx/effects';
 //import { RouterStoreModule } from '@ngrx/router-store';
@@ -9,6 +10,7 @@ import { MaterialModule } from '@angular/material';
 import { useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { APP_ROUTES } from './app.routes';
+import { APP_EFFECTS } from '../effects';
 //import { rootReducer } from '../reducers';
 //import { StoreDevToolsModule } from '../features/store-devtools.module';
 //import { UserEffects } from '../user/user.effects';
@@ -42,5 +44,6 @@ export const APP_IMPORTS = [
     ReactiveFormsModule,
     MaterialModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES, { preloadingStrategy: PreloadAllModules }),
-    AppStoreModule
+    AppStoreModule,
+    APP_EFFECTS.map(effect => EffectsModule.run(effect))
 ];

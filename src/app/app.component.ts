@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
+import { AppState } from './store'
 import { Logger } from './services/logger';
 
 import { MOBILE } from './services/constants';
@@ -33,7 +35,7 @@ const views: Object[] = [
     styleUrls: ['./app.component.css'],
     templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     showMonitor = (
         ENV === 'development' &&
         !AOT &&
@@ -47,8 +49,19 @@ export class AppComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private logger: Logger
+        private logger: Logger,
+        private store: Store<AppState>
     ) { }
+
+    ngOnInit() {
+        this.store
+            .select(s => s.error.lastError)
+            .filter(e => e)
+            .subscribe(error => {
+                this.logger.error(error);
+                alert(error);
+            });
+    }
 
     activateEvent(event) {
         this.logger.debug('Activate Event:', event);

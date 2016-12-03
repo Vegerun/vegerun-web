@@ -5,7 +5,9 @@ import { Store } from '@ngrx/store';
 
 import { RestaurantResultV2, CustomerMenuResultV2, CustomerMenuItemResultV2 } from '../../vegerun-2-client';
 
+import { AppState } from '../../store';
 import { OrderActions } from '../../store/order';
+
 import { OrderComponentData } from './order.component.data';
 
 @Component({
@@ -20,7 +22,7 @@ export class OrderComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private store: Store<any>,
+        private store: Store<AppState>,
         private orderActions: OrderActions
     ) { }
 
@@ -31,7 +33,6 @@ export class OrderComponent implements OnInit {
     }
 
     selectItem(item: CustomerMenuItemResultV2) {
-        debugger;
         this.store.dispatch(this.orderActions.addItem(item));
     }
 }
