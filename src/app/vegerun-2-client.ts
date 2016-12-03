@@ -20,6 +20,22 @@ export interface IVegerun2Client {
     /**
      * @return Success
      */
+    apiV2OrdersItemsByIdGet(id: string): Observable<OrderItemResultV2>;
+    /**
+     * @return Success
+     */
+    apiV2OrdersItemsByIdDelete(id: string): Observable<void>;
+    /**
+     * @return Success
+     */
+    apiV2OrdersItemsPut(create: OrderItemCreateV2): Observable<OrderItemResultV2>;
+    /**
+     * @return Success
+     */
+    apiV2OrdersItemsPost(update: OrderItemUpdateV2): Observable<OrderItemResultV2>;
+    /**
+     * @return Success
+     */
     apiV2RestaurantsByIdGet(id: string): Observable<RestaurantResultV2>;
     /**
      * @return Success
@@ -76,6 +92,181 @@ export class Vegerun2Client implements IVegerun2Client {
         if (status === "200") {
             let result200: CustomerMenuResultV2 = null; 
             result200 = data === "" ? null : <CustomerMenuResultV2>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
+        }
+        else
+        {
+            throw new Error("error_no_callback_for_the_received_http_status"); 
+        }
+    }
+
+    /**
+     * @return Success
+     */
+    apiV2OrdersItemsByIdGet(id: string): Observable<OrderItemResultV2> {
+        let url_ = this.baseUrl + "/api/v2/orders/items/{id}"; 
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+
+        const content_ = "";
+        
+        return this.http.request(url_, {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processApiV2OrdersItemsByIdGet(response);
+        }).catch((response: any, caught: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processApiV2OrdersItemsByIdGet(response));
+                } catch (e) {
+                    return <Observable<OrderItemResultV2>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<OrderItemResultV2>><any>Observable.throw(response);
+        });
+    }
+
+    private processApiV2OrdersItemsByIdGet(response: Response) {
+        const data = response.text();
+        const status = response.status.toString(); 
+
+        if (status === "200") {
+            let result200: OrderItemResultV2 = null; 
+            result200 = data === "" ? null : <OrderItemResultV2>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
+        }
+        else
+        {
+            throw new Error("error_no_callback_for_the_received_http_status"); 
+        }
+    }
+
+    /**
+     * @return Success
+     */
+    apiV2OrdersItemsByIdDelete(id: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/v2/orders/items/{id}"; 
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+
+        const content_ = "";
+        
+        return this.http.request(url_, {
+            body: content_,
+            method: "delete",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processApiV2OrdersItemsByIdDelete(response);
+        }).catch((response: any, caught: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processApiV2OrdersItemsByIdDelete(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    private processApiV2OrdersItemsByIdDelete(response: Response) {
+        const data = response.text();
+        const status = response.status.toString(); 
+
+        if (status === "200") {
+        }
+        else
+        {
+            throw new Error("error_no_callback_for_the_received_http_status"); 
+        }
+    }
+
+    /**
+     * @return Success
+     */
+    apiV2OrdersItemsPut(create: OrderItemCreateV2): Observable<OrderItemResultV2> {
+        let url_ = this.baseUrl + "/api/v2/orders/items";
+
+        const content_ = JSON.stringify(create);
+        
+        return this.http.request(url_, {
+            body: content_,
+            method: "put",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processApiV2OrdersItemsPut(response);
+        }).catch((response: any, caught: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processApiV2OrdersItemsPut(response));
+                } catch (e) {
+                    return <Observable<OrderItemResultV2>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<OrderItemResultV2>><any>Observable.throw(response);
+        });
+    }
+
+    private processApiV2OrdersItemsPut(response: Response) {
+        const data = response.text();
+        const status = response.status.toString(); 
+
+        if (status === "200") {
+            let result200: OrderItemResultV2 = null; 
+            result200 = data === "" ? null : <OrderItemResultV2>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
+        }
+        else
+        {
+            throw new Error("error_no_callback_for_the_received_http_status"); 
+        }
+    }
+
+    /**
+     * @return Success
+     */
+    apiV2OrdersItemsPost(update: OrderItemUpdateV2): Observable<OrderItemResultV2> {
+        let url_ = this.baseUrl + "/api/v2/orders/items";
+
+        const content_ = JSON.stringify(update);
+        
+        return this.http.request(url_, {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processApiV2OrdersItemsPost(response);
+        }).catch((response: any, caught: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processApiV2OrdersItemsPost(response));
+                } catch (e) {
+                    return <Observable<OrderItemResultV2>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<OrderItemResultV2>><any>Observable.throw(response);
+        });
+    }
+
+    private processApiV2OrdersItemsPost(response: Response) {
+        const data = response.text();
+        const status = response.status.toString(); 
+
+        if (status === "200") {
+            let result200: OrderItemResultV2 = null; 
+            result200 = data === "" ? null : <OrderItemResultV2>JSON.parse(data, this.jsonParseReviver);
             return result200; 
         }
         else
@@ -218,6 +409,42 @@ export interface MenuOptionValueResult {
     price?: number;
     shortCode?: string;
     defaultIsSelected?: boolean;
+}
+
+export interface OrderItemResultV2 {
+    id?: string;
+    count?: number;
+    instructions?: string;
+    itemId?: string;
+    options?: OrderItemOptionResultV2[];
+    excludedOptions?: OrderItemOptionResultV2[];
+}
+
+export interface OrderItemOptionResultV2 {
+    optionId?: string;
+    selectionId?: string;
+}
+
+export interface OrderItemCreateV2 {
+    count?: number;
+    instructions?: string;
+    itemId?: string;
+    orderId?: string;
+    options?: OrderItemOptionCreateV2[];
+    excludedOptions?: OrderItemOptionCreateV2[];
+}
+
+export interface OrderItemOptionCreateV2 {
+    optionId?: string;
+    selectionId?: string;
+}
+
+export interface OrderItemUpdateV2 {
+    id?: string;
+    count?: number;
+    instructions?: string;
+    options?: OrderItemOptionCreateV2[];
+    excludedOptions?: OrderItemOptionCreateV2[];
 }
 
 export interface RestaurantResultV2 {
