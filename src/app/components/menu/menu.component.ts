@@ -10,5 +10,5 @@ import { CustomerMenuResultV2, CustomerMenuItemResultV2 } from '../../vegerun-2-
 })
 export class MenuComponent {
     @Input() menu: CustomerMenuResultV2;
-    @Output() onMenuItemSelected = new EventEmitter<CustomerMenuItemResultV2>();
+    @Output() onItemSelected = new EventEmitter<CustomerMenuItemResultV2>();
 }

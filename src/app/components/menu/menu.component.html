@@ -1,12 +1,10 @@
-<div class="menu-component">
+<div class="app-menu-component">
     <div class="menu-section" *ngIf="menu.featuredItems.length">
         <h3>Top Picks</h3>
-        <app-menu-item-list [menuItems]="menu.featuredItems"></app-menu-item-list>
+        <app-menu-item-list [items]="menu.featuredItems" (onItemSelected)="onItemSelected.emit($event)"></app-menu-item-list>
     </div>
     <div class="menu-section" *ngFor="let section of menu.sections">
         <h3>{{ section.name }}</h3>
-        <app-menu-item-list [menuItems]="menu.items"></app-menu-item-list>
+        <app-menu-item-list [items]="section.items" (onItemSelected)="onItemSelected.emit($event)"></app-menu-item-list>
     </div>
-
-    <pre>{{ menu | json }}</pre>
 </div>

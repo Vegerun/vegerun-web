@@ -1,0 +1,26 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.app-menu-item-list {
+    .item-col {
+        margin-bottom: 15px;
+
+        md-card.item {
+            &.enabled {
+                cursor: pointer;
+            }
+
+            md-card-content {
+                p {
+                    // TODO: Use em/rem units to declare number of lines 
+                    height: 50px;
+                }
+            }
+
+            &:not(.enabled) {
+                color: $mutedGrayColor;
+                text-decoration: line-through;
+            }
+        }
+    }
+}

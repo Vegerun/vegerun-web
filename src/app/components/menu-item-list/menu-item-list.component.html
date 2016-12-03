@@ -1,0 +1,14 @@
+<div class="app-menu-item-list">
+    <div class="row">
+        <div class="col-md-6 item-col" *ngFor="let item of items">
+            <div class="box">
+                <md-card class="item" [ngClass]="{ 'enabled': item.isEnabled }" (click)="selectItem(item)">
+                    <md-card-title>{{ item.name }}</md-card-title>
+                    <md-card-content>
+                        <p>{{ item.description }}</p>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+    </div>
+</div>

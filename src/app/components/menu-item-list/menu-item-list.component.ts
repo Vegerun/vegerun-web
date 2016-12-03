@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 import { CustomerMenuItemResultV2 } from '../../vegerun-2-client';
 
@@ -9,5 +9,12 @@ import { CustomerMenuItemResultV2 } from '../../vegerun-2-client';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuItemListComponent {
-    @Input() menuItems: CustomerMenuItemResultV2[];
+    @Input() items: CustomerMenuItemResultV2[];
+    @Output() onItemSelected = new EventEmitter<CustomerMenuItemResultV2>();
+
+    selectItem(item: CustomerMenuItemResultV2) {
+        if (item.isEnabled) {
+            this.onItemSelected.emit(item);
+        }
+    }
 }
