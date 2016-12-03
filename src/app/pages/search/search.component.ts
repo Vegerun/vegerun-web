@@ -6,6 +6,9 @@ import { VegerunClient, LocationResult, RestaurantSearchResult, RestaurantSearch
 
 import { NavigationCommandsResolver } from '../../services/navigation-commands.resolver';
 
+import { SearchComponentData } from './search.component.data'
+
+
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
@@ -25,7 +28,7 @@ export class SearchComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.location$ = this.route.data.map((data: { location: LocationResult }) => data.location);
+        this.location$ = this.route.data.map((data: { search: SearchComponentData }) => data.search.location);
 
         this.result$ = this.location$
             .flatMap(location => this.vegerunClient.apiV1RestaurantsSearchSearchPost({

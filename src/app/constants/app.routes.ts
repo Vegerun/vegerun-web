@@ -5,10 +5,8 @@ import { DashboardComponent } from '../features/dashboard.component';
 
 import { HomeComponent } from '../pages/home/home.component';
 import { ErrorNotFoundComponent } from '../pages/error-not-found/error-not-found.component';
-import { SearchComponent } from '../pages/search/search.component';
-import { OrderComponent } from '../pages/order/order.component';
-
-import { LocationResolve } from '../resolves/location.resolve';
+import { SearchComponent, SearchComponentResolve } from '../pages/search';
+import { OrderComponent, OrderComponentResolve } from '../pages/order';
 
 export const APP_ROUTES: Routes = [
     {
@@ -20,14 +18,14 @@ export const APP_ROUTES: Routes = [
         path: 'search/:townSlug/:postcode',
         component: SearchComponent,
         resolve: {
-            location: LocationResolve
+            search: SearchComponentResolve
         }
     },
     {
         path: 'search/:townSlug/:postcode/:restaurantSlug',
-        component: SearchComponent,
+        component: OrderComponent,
         resolve: {
-            location: LocationResolve
+            order: OrderComponentResolve
         }
     },
     {
