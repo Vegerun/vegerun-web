@@ -3,8 +3,8 @@ import { Store, Action } from '@ngrx/store';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 
-import { VegerunClient, OrderResultV2 } from '../vegerun-client';
-import { Vegerun2Client, CustomerMenuItemResultV2, OrderItemResultV2, OrderItemCreateV2 } from '../vegerun-2-client';
+import { VegerunClient, OrderResultV2 } from '../_lib/vegerun/_swagger-gen/v1';
+import { Vegerun2Client, CustomerMenuItemResultV2, OrderItemResultV2, OrderItemCreateV2 } from '../_lib/vegerun/_swagger-gen/v2';
 
 import { AppState } from '../store';
 import { OrderState, OrderItemState, OrderItemAdditionStatus } from '../store/order';

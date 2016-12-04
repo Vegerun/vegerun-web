@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-import { OrderResult } from '../../vegerun-client';
-import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 , OrderItemResultV2} from '../../vegerun-2-client';
+import { OrderResult } from '../../_lib/vegerun/_swagger-gen/v1';
+import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 , OrderItemResultV2} from '../../_lib/vegerun/_swagger-gen/v2';
+
+import { OrderState } from './order.state';
 
 import {
     CreatePayload, CreateCompletedPayload,
@@ -66,7 +68,7 @@ export class OrderActions {
         };
     }
 
-    addItem(item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
+    addItem(orderState: OrderState, item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
         return {
             type: ORDER_ACTION_NAMES.ADD_ITEM,
             payload: <AddItemPayload>{

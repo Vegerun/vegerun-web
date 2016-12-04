@@ -1,4 +1,4 @@
-import { OrderItemResultV2, OrderItemCreateV2, OrderItemUpdateV2 } from '../../vegerun-2-client';
+import { OrderItemResultV2, OrderItemCreateV2, OrderItemUpdateV2 } from '../../_lib/vegerun/_swagger-gen/v2';
 
 export enum OrderItemAdditionStatus {
     Added = 0,

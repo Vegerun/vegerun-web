@@ -1,9 +1,7 @@
 import * as _ from 'lodash';
 
-import { OrderItemCreateV2, OrderItemResultV2, OrderItemOptionCreateV2, OrderItemOptionResultV2 } from '../app/vegerun-2-client';
-
-export declare type OrderItem = OrderItemCreateV2 | OrderItemResultV2;
-export declare type OrderItemOption = OrderItemOptionCreateV2 | OrderItemOptionResultV2;
+import { OrderItem } from './models/order-item.model';
+import { OrderItemOption } from './models/order-item-option.model';
 
 export class OrderItemComparer {
 

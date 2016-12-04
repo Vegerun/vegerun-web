@@ -1,8 +1,8 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { OrderItemResultV2, OrderItemCreateV2 } from '../../vegerun-2-client';
+import { OrderItemResultV2, OrderItemCreateV2 } from '../../_lib/vegerun/_swagger-gen/v2';
+import { OrderItemComparer, OrderItem } from '../../_lib/vegerun/orders';
 
-import { OrderItemComparer, OrderItem } from '../../../helpers/order-item.comparer';
 import '../../../extensions/array.extensions';
 
 import { OrderState, OrderItemState, OrderItemAdditionStatus, OrderItemDeletionStatus, DEFAULT_ORDER_STATE } from './order.state';
@@ -35,7 +35,6 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
         }
 
         case ORDER_ACTION_NAMES.ADD_ITEM: {
-            debugger;
             let { orderItem } = <AddItemPayload>payload;
             let orderItemStateMatch = findOrderItemState(state, orderItem);
             if (orderItemStateMatch) {

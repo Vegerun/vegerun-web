@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { VegerunClient, LocationResult, RestaurantSearchResult, RestaurantSearchItemResult } from '../../vegerun-client';
+import { VegerunClient, LocationResult, RestaurantSearchResult, RestaurantSearchItemResult } from '../../_lib/vegerun/_swagger-gen/v1';
 
 import { NavigationCommandsResolver } from '../../services/navigation-commands.resolver';
 

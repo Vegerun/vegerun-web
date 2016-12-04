@@ -1,5 +1,5 @@
-import { OrderResult } from '../../vegerun-client';
-import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2, OrderItemResultV2 } from '../../vegerun-2-client';
+import { OrderResult } from '../../_lib/vegerun/_swagger-gen/v1';
+import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2, OrderItemResultV2 } from '../../_lib/vegerun/_swagger-gen/v2';
 
 export interface CreatePayload {
     restaurantId: string;

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, FormControl, Validators, ValidatorFn } from '@angular/forms';
 
-import { VegerunClient, LocationResult, LocationResultStatus } from '../../vegerun-client';
+import { VegerunClient, LocationResult, LocationResultStatus } from '../../_lib/vegerun/_swagger-gen/v1';
 
 import { LocationSearchModeResolver } from '../../services/location-search-mode.resolver';
 import { LocationSearchMode } from '../../services/models/location-search-mode';

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { RestaurantResultV2, CustomerMenuResultV2, CustomerMenuItemResultV2 } from '../../vegerun-2-client';
+import { RestaurantResultV2, CustomerMenuResultV2, CustomerMenuItemResultV2 } from '../../_lib/vegerun/_swagger-gen/v2';
 
 import { AppState } from '../../store';
 import { OrderActions } from '../../store/order';
@@ -33,6 +33,15 @@ export class OrderComponent implements OnInit {
     }
 
     selectItem(item: CustomerMenuItemResultV2) {
-        this.restaurant$.subscribe(r => this.store.dispatch(this.orderActions.addItem(item, r)));
+        this.restaurant$.subscribe(r => this.store.dispatch(this.orderActions.addItem(null, item, r)));
+        // Observable
+        //     .combineLatest([
+        //         this.restaurant$,
+        //         this.store.select(o => o.order)
+        //     ])
+        //     .first()
+        //     .subscribe(([restaurant, orderState]) => {
+        //         this.store.dispatch(this.orderActions.addItem(orderState, item, restaurant));
+        //     });
     }
 }

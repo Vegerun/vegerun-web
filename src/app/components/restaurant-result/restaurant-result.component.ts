@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output, Inject } from '@angular/core';
 
-import { API_BASE_URL, RestaurantSearchItemResult } from '../../vegerun-client';
+import { API_BASE_URL, RestaurantSearchItemResult } from '../../_lib/vegerun/_swagger-gen/v1';
 
 @Component({
     selector: 'app-restaurant-result',

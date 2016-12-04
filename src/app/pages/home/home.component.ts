@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LocationResult } from '../../vegerun-client';
+import { LocationResult } from '../../_lib/vegerun/_swagger-gen/v1';
 
 @Component({
     selector: 'app-home',

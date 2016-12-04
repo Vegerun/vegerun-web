@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { LocationResult, RestaurantResult } from '../vegerun-client';
+import { LocationResult, RestaurantResult } from '../_lib/vegerun/_swagger-gen/v1';
 
 @Injectable()
 export class NavigationCommandsResolver {
