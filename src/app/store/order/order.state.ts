@@ -23,13 +23,13 @@ export interface OrderItemState {
 }
 
 export interface OrderState {
-    orderId: string,
+    orderId: string;
 
-    orderIdLoading: boolean,
+    orderIdLoading: boolean;
 
-    restaurantId: string,
+    restaurantId: string;
 
-    orderItems: OrderItemState[]
+    orderItems: OrderItemState[];
 }
 
 export const DEFAULT_ORDER_STATE: OrderState = {

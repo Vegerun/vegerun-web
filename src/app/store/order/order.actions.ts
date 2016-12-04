@@ -3,13 +3,13 @@ import { Action } from '@ngrx/store';
 
 import { OrderItemFactory, OrderItemComparer } from '../../_lib/vegerun/orders';
 import { OrderResult } from '../../_lib/vegerun/_swagger-gen/v1';
-import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 , OrderItemResultV2} from '../../_lib/vegerun/_swagger-gen/v2';
+import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 , OrderItemResultV2, OrderItemUpdateV2 } from '../../_lib/vegerun/_swagger-gen/v2';
 
-import { OrderState } from './order.state';
+import { OrderState, OrderItemState } from './order.state';
 
 import {
     CreatePayload, CreateCompletedPayload,
-    AddItemPayload, LoadItemPayload, LoadItemCompletedPayload
+    AddItemPayload, UpdateItemPayload, LoadItemPayload, LoadItemCompletedPayload
 } from './order.payloads';
 
 const prefix = action => `[Order] ${action}`;
@@ -21,10 +21,13 @@ const CREATE = prefix('Create');
 const CREATE_COMPLETED = completed(CREATE);
 const CREATE_FAILED = failed(CREATE);
 const ADD_ITEM = prefix('Add Item');
+const UPDATE_ITEM = prefix('Update Item');
 const LOAD_ITEM = prefix('Load Item');
 const LOAD_ITEM_COMPLETED = completed(LOAD_ITEM);
 const LOAD_ITEM_FAILED = failed(LOAD_ITEM);
 const REMOVE_ITEM = prefix('Remove Item');
+
+
 const UPDATE_ITEM_COUNT = prefix('Update Item Count');
 
 export const ORDER_ACTION_NAMES = {
@@ -33,6 +36,7 @@ export const ORDER_ACTION_NAMES = {
     CREATE_FAILED,
 
     ADD_ITEM,
+    UPDATE_ITEM,
     LOAD_ITEM,
     LOAD_ITEM_COMPLETED,
     LOAD_ITEM_FAILED,
@@ -74,14 +78,22 @@ export class OrderActions {
         };
     }
 
-    addItem(orderState: OrderState, item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
-        return {
-            type: ORDER_ACTION_NAMES.ADD_ITEM,
-            payload: <AddItemPayload>{
-                orderItem: this.orderItemFactory.createOrderItem(item),
-                restaurant
-            }
-        };
+    addItem(state: OrderState, item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
+        let orderItem = this.orderItemFactory.createOrderItem(item);
+        let orderItemStateMatch = this.findOrderItemState(state, orderItem);
+        if (orderItemStateMatch) {
+            return this._updateItem(orderItemStateMatch, <OrderItemUpdateV2>{
+                count: orderItemStateMatch.orderItemState.data.count + 1
+            });
+        } else {
+            return {
+                type: ORDER_ACTION_NAMES.ADD_ITEM,
+                payload: <AddItemPayload>{
+                    orderItem: orderItem,
+                    restaurant
+                }
+            };
+        }
     }
 
     loadItem(orderItem: OrderItemCreateV2, orderId: string): Action {
@@ -111,7 +123,7 @@ export class OrderActions {
                 error
             }
         };
-    } 
+    }
 
     removeItem(item: any /* OrderItem */): Action {
         return {
@@ -132,13 +144,41 @@ export class OrderActions {
         }
     }
 
+    private findOrderItemState(state: OrderState, orderItem: OrderItemCreateV2 | OrderItemResultV2): OrderItemStateMatch {
+        let index = state.orderItems.findIndex(ois => this.orderItemComparer.areEqual(ois.data, orderItem));
+        if (index > -1) {
+            return {
+                index,
+                orderItemState: state.orderItems[index]
+            }
+        } else {
+            return null;
+        }
+    }
+
     private updateItemCount(item: any, magnitude: Number): Action {
         return {
-            type: ORDER_ACTION_NAMES.UPDATE_ITEM_COUNT,
+            type: UPDATE_ITEM_COUNT,
             payload: {
                 id: item.id,
                 count: item.count + magnitude
             }
         }
     }
+
+    private _updateItem(orderItemStateMatch: OrderItemStateMatch, update: any): Action {
+        return {
+            type: UPDATE_ITEM,
+            payload: <UpdateItemPayload>{
+                orderItem: Object.assign({}, orderItemStateMatch.orderItemState.data, update),
+                index: orderItemStateMatch.index
+            }
+        };
+    }
+}
+
+interface OrderItemStateMatch {
+    index: number;
+
+    orderItemState: OrderItemState;
 }

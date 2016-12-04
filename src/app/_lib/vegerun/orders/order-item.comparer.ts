@@ -7,6 +7,10 @@ import { OrderItemOption } from './models/order-item-option.model';
 Injectable()
 export class OrderItemComparer {
 
+    public areEqual(a: OrderItem, b: OrderItem): boolean {
+        return OrderItemComparer.areEqual(a, b);
+    }
+
     public static areEqual(a: OrderItem, b: OrderItem): boolean {
         if (a.itemId !== b.itemId) {
             return false;

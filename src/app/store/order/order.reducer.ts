@@ -10,7 +10,7 @@ import { ORDER_ACTION_NAMES } from './order.actions';
 
 import {
     CreatePayload, CreateCompletedPayload,
-    AddItemPayload, LoadItemPayload, LoadItemCompletedPayload
+    AddItemPayload, UpdateItemPayload, LoadItemPayload, LoadItemCompletedPayload
 } from './order.payloads';
 
 export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFAULT_ORDER_STATE, { type, payload }: Action) => {
@@ -36,12 +36,18 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
 
         case ORDER_ACTION_NAMES.ADD_ITEM: {
             let { orderItem } = <AddItemPayload>payload;
-            let orderItemStateMatch = findOrderItemState(state, orderItem);
-            if (orderItemStateMatch) {
-                return updateItemCount(state, orderItemStateMatch, orderItemStateMatch.orderItemState.data.count + 1)
-            } else {
-                return addItem(state, orderItem);
-            }
+            return Object.assign({}, state, <OrderState>{
+                orderItems: [...state.orderItems, <OrderItemState>{
+                    data: orderItem,
+                    additionStatus: OrderItemAdditionStatus.Added,
+                    deletionStatus: OrderItemDeletionStatus.None
+                }]
+            });
+        }
+
+        case ORDER_ACTION_NAMES.UPDATE_ITEM: {
+            let { orderItem, index } = <UpdateItemPayload>payload;
+            debugger;
         }
 
         case ORDER_ACTION_NAMES.LOAD_ITEM: {
