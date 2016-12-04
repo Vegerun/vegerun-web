@@ -73,7 +73,6 @@ export class OrderEffects {
             let data = Object.assign({}, payload.orderItem, {
                 orderId: payload.orderId
             });
-            debugger;
 
             return this.vegerun2Client
                 .apiV2OrdersItemsPut(data)
@@ -87,6 +86,6 @@ export class OrderEffects {
             ORDER_ACTION_NAMES.LOAD_ITEM_FAILED
         )
         .map(e => {
-            debugger;
+            return {};
         });
 }

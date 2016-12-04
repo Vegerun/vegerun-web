@@ -46,7 +46,7 @@ export class LocationSearchComponent implements OnInit {
         if (this.form.valid) {
             this.vegerunClient.apiV1LocationsGetByPostcodeGet(this.form.value['postcode'])
                 .subscribe(locationResult => {
-                    if (locationResult.status === LocationResultStatus.Success) {
+                    if (locationResult.status === LocationResultStatus._0) {
                         this.onLocationFound.emit(locationResult);
                     } else {
                         this.onLocationMissing.emit(locationResult);

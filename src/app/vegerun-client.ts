@@ -8935,297 +8935,297 @@ export interface TownSuburbUpdate {
 }
 
 export enum LocationResultStatus {
-    Success = <any>"Success", 
-    PostcodeNotFound = <any>"PostcodeNotFound", 
-    TownNotFound = <any>"TownNotFound", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
 }
 
 export enum LocationClosureUpdateClosureType {
-    Unknown = <any>"Unknown", 
-    Busy = <any>"Busy", 
-    Unavailable = <any>"Unavailable", 
-    TechnicalDifficulties = <any>"TechnicalDifficulties", 
-    Custom = <any>"Custom", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
 }
 
 export enum LocationShiftCreateShiftType {
-    Unknown = <any>"Unknown", 
-    Breakfast = <any>"Breakfast", 
-    Lunch = <any>"Lunch", 
-    Dinner = <any>"Dinner", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum TimeWindowCreateDayOfWeek {
-    Sunday = <any>"Sunday", 
-    Monday = <any>"Monday", 
-    Tuesday = <any>"Tuesday", 
-    Wednesday = <any>"Wednesday", 
-    Thursday = <any>"Thursday", 
-    Friday = <any>"Friday", 
-    Saturday = <any>"Saturday", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
 }
 
 export enum LocationShiftUpdateShiftType {
-    Unknown = <any>"Unknown", 
-    Breakfast = <any>"Breakfast", 
-    Lunch = <any>"Lunch", 
-    Dinner = <any>"Dinner", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum TimeWindowUpdateDayOfWeek {
-    Sunday = <any>"Sunday", 
-    Monday = <any>"Monday", 
-    Tuesday = <any>"Tuesday", 
-    Wednesday = <any>"Wednesday", 
-    Thursday = <any>"Thursday", 
-    Friday = <any>"Friday", 
-    Saturday = <any>"Saturday", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
 }
 
 export enum OrderAlertMuteRequestOrderStatus {
-    Unknown = <any>"Unknown", 
-    Draft = <any>"Draft", 
-    Placed = <any>"Placed", 
-    Expired = <any>"Expired", 
-    Declined = <any>"Declined", 
-    Accepted = <any>"Accepted", 
-    Produced = <any>"Produced", 
-    PickedUp = <any>"PickedUp", 
-    Delivered = <any>"Delivered", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
+    _7 = 7, 
+    _8 = 8, 
 }
 
 export enum OrderAlertMuteRequestDeliveryStatus {
-    None = <any>"None", 
-    Unassigned = <any>"Unassigned", 
-    Integrating = <any>"Integrating", 
-    Allocated = <any>"Allocated", 
-    Waiting = <any>"Waiting", 
-    Dispatched = <any>"Dispatched", 
-    Arrived = <any>"Arrived", 
-    Completed = <any>"Completed", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
+    _7 = 7, 
 }
 
 export enum OrderAlertMuteRequestDeliveryIntegrationStatus {
-    None = <any>"None", 
-    Assigned = <any>"Assigned", 
-    Succeeded = <any>"Succeeded", 
-    Failed = <any>"Failed", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum OrderResultStatus {
-    Unknown = <any>"Unknown", 
-    Draft = <any>"Draft", 
-    Placed = <any>"Placed", 
-    Expired = <any>"Expired", 
-    Declined = <any>"Declined", 
-    Accepted = <any>"Accepted", 
-    Produced = <any>"Produced", 
-    PickedUp = <any>"PickedUp", 
-    Delivered = <any>"Delivered", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
+    _7 = 7, 
+    _8 = 8, 
 }
 
 export enum OrderResultOutcome {
-    None = <any>"None", 
-    Complete = <any>"Complete", 
-    Declined = <any>"Declined", 
-    Expired = <any>"Expired", 
-    ManuallyDismissed = <any>"ManuallyDismissed", 
-    AutoDismissed = <any>"AutoDismissed", 
-    Failed = <any>"Failed", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
 }
 
 export enum RestaurantResultVeganType {
-    Unknown = <any>"Unknown", 
-    Vegan = <any>"Vegan", 
-    Vegetarian = <any>"Vegetarian", 
-    VeganOptions = <any>"VeganOptions", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum RestaurantResultStatus {
-    Unknown = <any>"Unknown", 
-    Enabled = <any>"Enabled", 
-    Disabled = <any>"Disabled", 
-    ComingSoon = <any>"ComingSoon", 
-    Preview = <any>"Preview", 
-    Test = <any>"Test", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
 }
 
 export enum OrderResultV2Status {
-    Unknown = <any>"Unknown", 
-    Draft = <any>"Draft", 
-    Placed = <any>"Placed", 
-    Expired = <any>"Expired", 
-    Declined = <any>"Declined", 
-    Accepted = <any>"Accepted", 
-    Produced = <any>"Produced", 
-    PickedUp = <any>"PickedUp", 
-    Delivered = <any>"Delivered", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
+    _7 = 7, 
+    _8 = 8, 
 }
 
 export enum OrderResultV2Outcome {
-    None = <any>"None", 
-    Complete = <any>"Complete", 
-    Declined = <any>"Declined", 
-    Expired = <any>"Expired", 
-    ManuallyDismissed = <any>"ManuallyDismissed", 
-    AutoDismissed = <any>"AutoDismissed", 
-    Failed = <any>"Failed", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
 }
 
 export enum DeliveryResultStatus {
-    None = <any>"None", 
-    Unassigned = <any>"Unassigned", 
-    Integrating = <any>"Integrating", 
-    Allocated = <any>"Allocated", 
-    Waiting = <any>"Waiting", 
-    Dispatched = <any>"Dispatched", 
-    Arrived = <any>"Arrived", 
-    Completed = <any>"Completed", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
+    _7 = 7, 
 }
 
 export enum DeliveryResultIntegrationStatus {
-    None = <any>"None", 
-    Assigned = <any>"Assigned", 
-    Succeeded = <any>"Succeeded", 
-    Failed = <any>"Failed", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum DeliveryResultDeliveryMode {
-    Unknown = <any>"Unknown", 
-    Restaurant = <any>"Restaurant", 
-    DeliveryService = <any>"DeliveryService", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
 }
 
 export enum DeliveryOrderResultStatus {
-    Unknown = <any>"Unknown", 
-    Draft = <any>"Draft", 
-    Placed = <any>"Placed", 
-    Expired = <any>"Expired", 
-    Declined = <any>"Declined", 
-    Accepted = <any>"Accepted", 
-    Produced = <any>"Produced", 
-    PickedUp = <any>"PickedUp", 
-    Delivered = <any>"Delivered", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
+    _7 = 7, 
+    _8 = 8, 
 }
 
 export enum DeliveryOrderResultOutcome {
-    None = <any>"None", 
-    Complete = <any>"Complete", 
-    Declined = <any>"Declined", 
-    Expired = <any>"Expired", 
-    ManuallyDismissed = <any>"ManuallyDismissed", 
-    AutoDismissed = <any>"AutoDismissed", 
-    Failed = <any>"Failed", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
 }
 
 export enum DeliveryIntegrationResultStatus {
-    None = <any>"None", 
-    Assigned = <any>"Assigned", 
-    Succeeded = <any>"Succeeded", 
-    Failed = <any>"Failed", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum OrderRejectionRequestReasonV2 {
-    Unknown = <any>"Unknown", 
-    Expired = <any>"Expired", 
+    _0 = 0, 
+    _1 = 1, 
 }
 
 export enum RestaurantCreateVeganType {
-    Unknown = <any>"Unknown", 
-    Vegan = <any>"Vegan", 
-    Vegetarian = <any>"Vegetarian", 
-    VeganOptions = <any>"VeganOptions", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum RestaurantCreateStatus {
-    Unknown = <any>"Unknown", 
-    Enabled = <any>"Enabled", 
-    Disabled = <any>"Disabled", 
-    ComingSoon = <any>"ComingSoon", 
-    Preview = <any>"Preview", 
-    Test = <any>"Test", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
 }
 
 export enum RestaurantUpdateVeganType {
-    Unknown = <any>"Unknown", 
-    Vegan = <any>"Vegan", 
-    Vegetarian = <any>"Vegetarian", 
-    VeganOptions = <any>"VeganOptions", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum RestaurantUpdateStatus {
-    Unknown = <any>"Unknown", 
-    Enabled = <any>"Enabled", 
-    Disabled = <any>"Disabled", 
-    ComingSoon = <any>"ComingSoon", 
-    Preview = <any>"Preview", 
-    Test = <any>"Test", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
 }
 
 export enum RestaurantHeartbeatModeUpdateHeartbeatMode {
-    Unknown = <any>"Unknown", 
-    Natural = <any>"Natural", 
-    ForceAlive = <any>"ForceAlive", 
-    ForceDead = <any>"ForceDead", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum RestaurantOrderRateLimitSelectionLevel {
-    Unknown = <any>"Unknown", 
-    Low = <any>"Low", 
-    Medium = <any>"Medium", 
-    High = <any>"High", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum RestaurantSearchItemResultRestaurantAvailabilityStatus {
-    Unknown = <any>"Unknown", 
-    Known = <any>"Known", 
-    Unavailable = <any>"Unavailable", 
-    Available = <any>"Available", 
-    Disabled = <any>"Disabled", 
-    NoMenuFound = <any>"NoMenuFound", 
-    Closed = <any>"Closed", 
-    ContactFailed = <any>"ContactFailed", 
-    OrderRateLimitExceeded = <any>"OrderRateLimitExceeded", 
-    ComingSoon = <any>"ComingSoon", 
-    OutsideHours = <any>"OutsideHours", 
-    NoHeartbeatFound = <any>"NoHeartbeatFound", 
-    ImposedClosure = <any>"ImposedClosure", 
+    _0 = 0, 
+    _1 = 1, 
+    _3 = 3, 
+    _5 = 5, 
+    _11 = 11, 
+    _19 = 19, 
+    _35 = 35, 
+    _67 = 67, 
+    _131 = 131, 
+    _259 = 259, 
+    _547 = 547, 
+    _579 = 579, 
+    _1059 = 1059, 
 }
 
 export enum RestaurantDeliverySettingsUpdateDeliveryServiceUsage {
-    Unknown = <any>"Unknown", 
-    AlwaysUseService = <any>"AlwaysUseService", 
-    NeverUseService = <any>"NeverUseService", 
-    SelectPerOrder = <any>"SelectPerOrder", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum RestaurantDeliverySettingsUpdateTypicalPreparationSpeed {
-    Unknown = <any>"Unknown", 
-    Instant = <any>"Instant", 
-    Fast = <any>"Fast", 
-    Medium = <any>"Medium", 
-    Slow = <any>"Slow", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
 }
 
 export enum RestaurantScheduleSettingsUpdateHeartbeatMode {
-    Unknown = <any>"Unknown", 
-    Natural = <any>"Natural", 
-    ForceAlive = <any>"ForceAlive", 
-    ForceDead = <any>"ForceDead", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 export enum RestaurantDayScheduleUpdateDayOfWeek {
-    Sunday = <any>"Sunday", 
-    Monday = <any>"Monday", 
-    Tuesday = <any>"Tuesday", 
-    Wednesday = <any>"Wednesday", 
-    Thursday = <any>"Thursday", 
-    Friday = <any>"Friday", 
-    Saturday = <any>"Saturday", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+    _6 = 6, 
 }
 
 export enum TownUpdateStatus {
-    Unknown = <any>"Unknown", 
-    Enabled = <any>"Enabled", 
-    Disabled = <any>"Disabled", 
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
 }

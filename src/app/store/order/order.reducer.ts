@@ -2,6 +2,8 @@ import { ActionReducer, Action } from '@ngrx/store';
 
 import { OrderItemResultV2 } from '../../vegerun-2-client';
 
+import '../../../extensions/array.extensions';
+
 import { RestOperation } from '../../rest-operation';
 import { OrderState, OrderItemState, OrderItemPersistence, DEFAULT_ORDER_STATE } from './order.state';
 import { ORDER_ACTION_NAMES } from './order.actions';
@@ -48,20 +50,16 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             let { orderItem } = <LoadItemPayload>payload;
             let { orderId } = state;
             return Object.assign({}, state, {
-                orderItems: state.orderItems.map(ois => {
-                    if (ois.data === orderItem) {
-                        return <OrderItemState>{
-                            data: Object.assign({}, ois.data, {
-                                orderId
-                            }),
-                            status: OrderItemPersistence.Loading
-                        };
-                    } else {
-                        return ois;
-                    }
-                })
+                orderItems: state.orderItems.filterMap(
+                    ois => ois.data === orderItem,
+                    ois => (<OrderItemState>{
+                        data: Object.assign({}, ois.data, {
+                            orderId
+                        }),
+                        status: OrderItemPersistence.Loading
+                    })
+                )
             })
-            
         }
             
         case ORDER_ACTION_NAMES.LOAD_ITEM_COMPLETED: {
