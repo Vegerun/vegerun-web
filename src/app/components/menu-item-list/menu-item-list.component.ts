@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
-import { CustomerMenuItemResultV2 } from '../../vegerun-2-client';
+import { CustomerMenuItemResultV2 } from '../../_lib/vegerun/_swagger-gen/v2';
 
 @Component({
     selector: 'app-menu-item-list',

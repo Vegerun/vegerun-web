@@ -33,15 +33,15 @@ export class OrderComponent implements OnInit {
     }
 
     selectItem(item: CustomerMenuItemResultV2) {
-        this.restaurant$.subscribe(r => this.store.dispatch(this.orderActions.addItem(null, item, r)));
-        // Observable
-        //     .combineLatest([
-        //         this.restaurant$,
-        //         this.store.select(o => o.order)
-        //     ])
-        //     .first()
-        //     .subscribe(([restaurant, orderState]) => {
-        //         this.store.dispatch(this.orderActions.addItem(orderState, item, restaurant));
-        //     });
+        // this.restaurant$.subscribe(r => this.store.dispatch(this.orderActions.addItem(null, item, r)));
+        Observable
+            .combineLatest([
+                this.restaurant$,
+                this.store.select(o => o.order)
+            ])
+            .first()
+            .subscribe(([restaurant, orderState]) => {
+                this.store.dispatch(this.orderActions.addItem(orderState, item, restaurant));
+            });
     }
 }

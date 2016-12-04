@@ -1,8 +1,10 @@
+import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
 import { OrderItem } from './models/order-item.model';
 import { OrderItemOption } from './models/order-item-option.model';
 
+Injectable()
 export class OrderItemComparer {
 
     public static areEqual(a: OrderItem, b: OrderItem): boolean {

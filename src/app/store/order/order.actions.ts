@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
+import { OrderItemFactory, OrderItemComparer } from '../../_lib/vegerun/orders';
 import { OrderResult } from '../../_lib/vegerun/_swagger-gen/v1';
 import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 , OrderItemResultV2} from '../../_lib/vegerun/_swagger-gen/v2';
 
@@ -43,6 +44,11 @@ export const ORDER_ACTION_NAMES = {
 @Injectable()
 export class OrderActions {
 
+    constructor(
+        private orderItemFactory: OrderItemFactory,
+        private orderItemComparer: OrderItemComparer
+    ) { }
+
     create(restaurant: RestaurantResultV2): Action {
         return {
             type: CREATE,
@@ -72,14 +78,7 @@ export class OrderActions {
         return {
             type: ORDER_ACTION_NAMES.ADD_ITEM,
             payload: <AddItemPayload>{
-                orderItem: {
-                    orderId: null,
-                    itemId: item.id,
-                    options: [],
-                    excludedOptions: [],
-                    instructions: 'Make it vegan ya?',
-                    count: 1
-                },
+                orderItem: this.orderItemFactory.createOrderItem(item),
                 restaurant
             }
         };
