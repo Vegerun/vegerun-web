@@ -4,12 +4,15 @@ import { Action } from '@ngrx/store';
 import { OrderResult } from '../../vegerun-client';
 import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 , OrderItemResultV2} from '../../vegerun-2-client';
 
-import { CreatePayload, CreateCompletedPayload, AddItemPayload } from './order.payloads';
+import {
+    CreatePayload, CreateCompletedPayload,
+    AddItemPayload, LoadItemPayload, LoadItemCompletedPayload
+} from './order.payloads';
 
 const prefix = action => `[Order] ${action}`;
-const status = (parentActionName, status) => `${parentActionName} ${status}`;
-const completed = actionName => status(actionName, 'COMPLETED');
-const failed = actionName => status(actionName, 'FAILED');
+const status = (parentActionName, status) => `${parentActionName} - ${status}`;
+const completed = actionName => status(actionName, 'Completed');
+const failed = actionName => status(actionName, 'Failed');
 
 const CREATE = prefix('Create');
 const CREATE_COMPLETED = completed(CREATE);
@@ -80,10 +83,10 @@ export class OrderActions {
         };
     }
 
-    loadItem(orderItem: OrderItemCreateV2, orderId: string) {
+    loadItem(orderItem: OrderItemCreateV2, orderId: string): Action {
         return {
             type: LOAD_ITEM,
-            payload: {
+            payload: <LoadItemPayload>{
                 orderItem,
                 orderId
             }
@@ -93,7 +96,7 @@ export class OrderActions {
     loadItemCompleted(orderItem: OrderItemResultV2): Action {
         return {
             type: LOAD_ITEM_COMPLETED,
-            payload: {
+            payload: <LoadItemCompletedPayload>{
                 orderItem
             }
         };

@@ -2,7 +2,7 @@ interface Array<T> {
     filterMap(predFunc: (T) => boolean | any, mapFunc: (T) => T): Array<T>
 }
 
-Array.prototype.filterMap = (predFunc, mapFunc) => {
+Array.prototype.filterMap = function filterMap(predFunc, mapFunc) {
     return Array.prototype.map.call(this, value => {
         let match = false;
         if (typeof predFunc === 'function') {

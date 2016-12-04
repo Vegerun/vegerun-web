@@ -1,5 +1,5 @@
 import { OrderResult } from '../../vegerun-client';
-import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 } from '../../vegerun-2-client';
+import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2, OrderItemResultV2 } from '../../vegerun-2-client';
 
 export interface CreatePayload {
     restaurantId: string;
@@ -17,4 +17,8 @@ export interface AddItemPayload {
 export interface LoadItemPayload {
     orderItem: OrderItemCreateV2;
     orderId: string;
+}
+
+export interface LoadItemCompletedPayload {
+    orderItem: OrderItemResultV2;
 }

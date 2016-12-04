@@ -7,7 +7,7 @@ import { VegerunClient, OrderResultV2 } from '../vegerun-client';
 import { Vegerun2Client, CustomerMenuItemResultV2, OrderItemResultV2, OrderItemCreateV2 } from '../vegerun-2-client';
 
 import { AppState } from '../store';
-import { OrderState, OrderItemState, OrderItemPersistence } from '../store/order';
+import { OrderState, OrderItemState, OrderItemAdditionStatus } from '../store/order';
 import { ORDER_ACTION_NAMES, OrderActions } from '../store/order/order.actions';
 import { CreatePayload, CreateCompletedPayload, AddItemPayload, LoadItemPayload } from '../store/order/order.payloads';
 import { ErrorActions } from '../store/error/error.actions'
@@ -43,7 +43,7 @@ export class OrderEffects {
             .first())
         .mergeMap(o => {
             let actions = o.orderItems
-                .filter(i => i.status === OrderItemPersistence.PreLoading)
+                .filter(i => i.additionStatus === OrderItemAdditionStatus.Added)
                 .map(i => this.orderActions.loadItem(i.data, o.orderId))
             return Observable.from(actions);
         });

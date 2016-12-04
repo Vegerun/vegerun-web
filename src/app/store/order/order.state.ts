@@ -1,15 +1,23 @@
 import { OrderItemResultV2, OrderItemCreateV2, OrderItemUpdateV2 } from '../../vegerun-2-client';
 
-export enum OrderItemPersistence {
-    PreLoading = 0,
+export enum OrderItemAdditionStatus {
+    Added = 0,
 
     Loading = 1,
 
-    Persisted = 2
+    Loaded = 2,
+}
+
+export enum OrderItemDeletionStatus {
+    None = 0,
+
+    MarkedForDeletion = 1
 }
 
 export interface OrderItemState {
-    status: OrderItemPersistence;
+    additionStatus: OrderItemAdditionStatus;
+
+    deletionStatus: OrderItemDeletionStatus;
 
     data: OrderItemCreateV2 | OrderItemResultV2;
 }

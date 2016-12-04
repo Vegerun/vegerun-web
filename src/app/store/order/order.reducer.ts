@@ -2,12 +2,16 @@ import { ActionReducer, Action } from '@ngrx/store';
 
 import { OrderItemResultV2 } from '../../vegerun-2-client';
 
+import { OrderItemComparer } from '../../../helpers/order-item.comparer';
 import '../../../extensions/array.extensions';
 
-import { RestOperation } from '../../rest-operation';
-import { OrderState, OrderItemState, OrderItemPersistence, DEFAULT_ORDER_STATE } from './order.state';
+import { OrderState, OrderItemState, OrderItemAdditionStatus, OrderItemDeletionStatus, DEFAULT_ORDER_STATE } from './order.state';
 import { ORDER_ACTION_NAMES } from './order.actions';
-import { CreatePayload, CreateCompletedPayload, AddItemPayload, LoadItemPayload } from './order.payloads';
+
+import {
+    CreatePayload, CreateCompletedPayload,
+    AddItemPayload, LoadItemPayload, LoadItemCompletedPayload
+} from './order.payloads';
 
 export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFAULT_ORDER_STATE, { type, payload }: Action) => {
     switch (type) {
@@ -40,7 +44,8 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
                 return Object.assign({}, state, {
                     orderItems: [...state.orderItems, <OrderItemState>{
                         data: orderItem,
-                        status: OrderItemPersistence.PreLoading
+                        additionStatus: OrderItemAdditionStatus.Added,
+                        deletionStatus: OrderItemDeletionStatus.None
                     }]
                 });
             }
@@ -52,32 +57,26 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             return Object.assign({}, state, {
                 orderItems: state.orderItems.filterMap(
                     ois => ois.data === orderItem,
-                    ois => (<OrderItemState>{
-                        data: Object.assign({}, ois.data, {
-                            orderId
-                        }),
-                        status: OrderItemPersistence.Loading
+                    ois => Object.assign({}, ois, <OrderItemState>{
+                        data: orderItem,
+                        additionStatus: OrderItemAdditionStatus.Loading
                     })
                 )
             })
         }
             
         case ORDER_ACTION_NAMES.LOAD_ITEM_COMPLETED: {
-            let { item, assignedId } = payload;
-            let existingItem = getItemByObjectReference(state, item);
-            if (existingItem) {
-                return Object.assign({}, state, {
-                    orderItems: state.orderItems.map(existingItem => {
-                        if (item === existingItem) {
-                            return Object.assign({}, existingItem, { id: assignedId })
-                        } else {
-                            return existingItem;
-                        }
+            debugger;
+            let { orderItem } = <LoadItemCompletedPayload>payload;
+            return Object.assign({}, state, {
+                orderItems: state.orderItems.filterMap(
+                    ois => OrderItemComparer.areEqual(ois.data, orderItem),
+                    ois => Object.assign({}, ois, <OrderItemState>{
+                        data: orderItem,
+                        additionStatus: OrderItemAdditionStatus.Loaded
                     })
-                });
-            } else { // Item has been removed
-                return state;
-            }
+                )
+            });
         }
             
         case ORDER_ACTION_NAMES.LOAD_ITEM_FAILED: {
