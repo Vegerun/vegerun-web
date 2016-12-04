@@ -5,10 +5,9 @@ import { OrderItemResultV2 } from '../../vegerun-2-client';
 import { RestOperation } from '../../rest-operation';
 import { OrderState, OrderItemState, OrderItemPersistence, DEFAULT_ORDER_STATE } from './order.state';
 import { ORDER_ACTION_NAMES } from './order.actions';
-import { CreatePayload, CreateCompletedPayload, AddItemPayload } from './order.payloads';
+import { CreatePayload, CreateCompletedPayload, AddItemPayload, LoadItemPayload } from './order.payloads';
 
 export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFAULT_ORDER_STATE, { type, payload }: Action) => {
-    debugger;
     switch (type) {
 
         case ORDER_ACTION_NAMES.CREATE: {
@@ -39,13 +38,33 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
                 return Object.assign({}, state, {
                     orderItems: [...state.orderItems, <OrderItemState>{
                         data: orderItem,
-                        status: state.orderId ? OrderItemPersistence.Loading : OrderItemPersistence.PreLoading
+                        status: OrderItemPersistence.PreLoading
                     }]
                 });
             }
         }
+
+        case ORDER_ACTION_NAMES.LOAD_ITEM: {
+            let { orderItem } = <LoadItemPayload>payload;
+            let { orderId } = state;
+            return Object.assign({}, state, {
+                orderItems: state.orderItems.map(ois => {
+                    if (ois.data === orderItem) {
+                        return <OrderItemState>{
+                            data: Object.assign({}, ois.data, {
+                                orderId
+                            }),
+                            status: OrderItemPersistence.Loading
+                        };
+                    } else {
+                        return ois;
+                    }
+                })
+            })
             
-        case ORDER_ACTION_NAMES.ADD_ITEM_COMPLETED: {
+        }
+            
+        case ORDER_ACTION_NAMES.LOAD_ITEM_COMPLETED: {
             let { item, assignedId } = payload;
             let existingItem = getItemByObjectReference(state, item);
             if (existingItem) {
@@ -63,7 +82,7 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             }
         }
             
-        case ORDER_ACTION_NAMES.ADD_ITEM_FAILED: {
+        case ORDER_ACTION_NAMES.LOAD_ITEM_FAILED: {
             let { item, err } = payload;
             let existingItem = getItemByObjectReference(state, item);
             if (existingItem) {

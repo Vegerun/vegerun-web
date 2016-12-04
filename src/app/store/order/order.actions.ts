@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
 import { OrderResult } from '../../vegerun-client';
-import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 } from '../../vegerun-2-client';
+import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 , OrderItemResultV2} from '../../vegerun-2-client';
 
 import { CreatePayload, CreateCompletedPayload, AddItemPayload } from './order.payloads';
 
@@ -15,8 +15,9 @@ const CREATE = prefix('Create');
 const CREATE_COMPLETED = completed(CREATE);
 const CREATE_FAILED = failed(CREATE);
 const ADD_ITEM = prefix('Add Item');
-const ADD_ITEM_COMPLETED = completed(ADD_ITEM);
-const ADD_ITEM_FAILED = failed(ADD_ITEM);
+const LOAD_ITEM = prefix('Load Item');
+const LOAD_ITEM_COMPLETED = completed(LOAD_ITEM);
+const LOAD_ITEM_FAILED = failed(LOAD_ITEM);
 const REMOVE_ITEM = prefix('Remove Item');
 const UPDATE_ITEM_COUNT = prefix('Update Item Count');
 
@@ -26,8 +27,9 @@ export const ORDER_ACTION_NAMES = {
     CREATE_FAILED,
 
     ADD_ITEM,
-    ADD_ITEM_COMPLETED,
-    ADD_ITEM_FAILED,
+    LOAD_ITEM,
+    LOAD_ITEM_COMPLETED,
+    LOAD_ITEM_FAILED,
     
     REMOVE_ITEM,
     UPDATE_ITEM_COUNT
@@ -78,21 +80,30 @@ export class OrderActions {
         };
     }
 
-    addItemCompleted(item: CustomerMenuItemResultV2, orderItem: any /* OrderItem */): Action {
+    loadItem(orderItem: OrderItemCreateV2, orderId: string) {
         return {
-            type: ADD_ITEM_COMPLETED,
+            type: LOAD_ITEM,
             payload: {
-                item,
-                assignedId: orderItem.id
+                orderItem,
+                orderId
+            }
+        }
+    }
+
+    loadItemCompleted(orderItem: OrderItemResultV2): Action {
+        return {
+            type: LOAD_ITEM_COMPLETED,
+            payload: {
+                orderItem
             }
         };
-    } 
+    }
 
-    addItemFailed(item: CustomerMenuItemResultV2, error: any): Action {
+    loadItemFailed(error: any, orderItem: OrderItemCreateV2): Action {
         return {
-            type: ADD_ITEM_FAILED,
+            type: LOAD_ITEM_FAILED,
             payload: {
-                item,
+                orderItem,
                 error
             }
         };

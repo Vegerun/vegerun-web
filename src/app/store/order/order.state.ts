@@ -9,8 +9,6 @@ export enum OrderItemPersistence {
 }
 
 export interface OrderItemState {
-    loading: boolean;
-
     status: OrderItemPersistence;
 
     data: OrderItemCreateV2 | OrderItemResultV2;

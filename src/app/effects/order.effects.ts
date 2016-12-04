@@ -9,7 +9,7 @@ import { Vegerun2Client, CustomerMenuItemResultV2, OrderItemResultV2, OrderItemC
 import { AppState } from '../store';
 import { OrderState, OrderItemState, OrderItemPersistence } from '../store/order';
 import { ORDER_ACTION_NAMES, OrderActions } from '../store/order/order.actions';
-import { AddItemPayload, CreatePayload, CreateCompletedPayload } from '../store/order/order.payloads';
+import { CreatePayload, CreateCompletedPayload, AddItemPayload, LoadItemPayload } from '../store/order/order.payloads';
 import { ErrorActions } from '../store/error/error.actions'
 
 @Injectable()
@@ -22,12 +22,7 @@ export class OrderEffects {
         private vegerunClient: VegerunClient,
         private vegerun2Client: Vegerun2Client,
         private actions$: Actions
-    )
-    {
-        this.orderCreatedCompletedEffect.subscribe(res => {
-            debugger;
-        });
-    }
+    ) { }
 
     @Effect() orderCreateEffect = this.actions$
         .ofType(ORDER_ACTION_NAMES.CREATE)
@@ -49,12 +44,11 @@ export class OrderEffects {
         .mergeMap(o => {
             let actions = o.orderItems
                 .filter(i => i.status === OrderItemPersistence.PreLoading)
-                .map(i => ({ type: 'HI!!!', payload: {}}))
-                //.map(i => this.persistOrderItem(i.data, o.orderId));
+                .map(i => this.orderActions.loadItem(i.data, o.orderId))
             return Observable.from(actions);
         });
-
-    @Effect() persistItem$ = this.actions$
+    
+    @Effect() addItemEffect = this.actions$
         .ofType(ORDER_ACTION_NAMES.ADD_ITEM)
         .map<AddItemPayload>(toPayload)
         .flatMap(payload => this.store
@@ -68,23 +62,31 @@ export class OrderEffects {
                         return Observable.of(this.orderActions.create(payload.restaurant));
                     }
                 } else {
-                    return this.persistOrderItem(payload.orderItem, orderState.orderId);
+                    return Observable.of(this.orderActions.loadItem(payload.orderItem, orderState.orderId));
                 }
-            })
-        );
+            }));
+    
+    @Effect() loadItemEffect = this.actions$
+        .ofType(ORDER_ACTION_NAMES.LOAD_ITEM)
+        .map<LoadItemPayload>(toPayload)
+        .switchMap(payload => {
+            let data = Object.assign({}, payload.orderItem, {
+                orderId: payload.orderId
+            });
+            debugger;
+
+            return this.vegerun2Client
+                .apiV2OrdersItemsPut(data)
+                .map(orderItem => this.orderActions.loadItemCompleted(orderItem))
+                .catch(err => Observable.of(this.orderActions.loadItemFailed(err, data)))
+        });
 
     @Effect() bubbleErrors = this.actions$
         .ofType(
             ORDER_ACTION_NAMES.CREATE_FAILED,
-            ORDER_ACTION_NAMES.ADD_ITEM_FAILED
+            ORDER_ACTION_NAMES.LOAD_ITEM_FAILED
         )
-        .mapTo(this.errorActions.addError);
-
-    private persistOrderItem(item: OrderItemCreateV2, orderId: string): Observable<Action> {
-        item.orderId = orderId;
-        return this.vegerun2Client
-            .apiV2OrdersItemsPut(item)
-            .map(orderItem => this.orderActions.addItemCompleted(item, orderItem))
-            .catch(err => Observable.of(this.orderActions.addItemFailed(item, err)))
-    }
+        .map(e => {
+            debugger;
+        });
 }
