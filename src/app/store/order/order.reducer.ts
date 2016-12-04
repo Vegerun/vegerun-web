@@ -1,8 +1,8 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { OrderItemResultV2 } from '../../vegerun-2-client';
+import { OrderItemResultV2, OrderItemCreateV2 } from '../../vegerun-2-client';
 
-import { OrderItemComparer } from '../../../helpers/order-item.comparer';
+import { OrderItemComparer, OrderItem } from '../../../helpers/order-item.comparer';
 import '../../../extensions/array.extensions';
 
 import { OrderState, OrderItemState, OrderItemAdditionStatus, OrderItemDeletionStatus, DEFAULT_ORDER_STATE } from './order.state';
@@ -35,19 +35,13 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
         }
 
         case ORDER_ACTION_NAMES.ADD_ITEM: {
+            debugger;
             let { orderItem } = <AddItemPayload>payload;
-            let { itemId } = orderItem;
-            let existingItem = getItemById(state, orderItem.itemId);
-            if (existingItem) {
-                return updateItemCount(state, itemId, existingItem.count + 1);
+            let orderItemStateMatch = findOrderItemState(state, orderItem);
+            if (orderItemStateMatch) {
+                return updateItemCount(state, orderItemStateMatch, orderItemStateMatch.orderItemState.data.count + 1)
             } else {
-                return Object.assign({}, state, {
-                    orderItems: [...state.orderItems, <OrderItemState>{
-                        data: orderItem,
-                        additionStatus: OrderItemAdditionStatus.Added,
-                        deletionStatus: OrderItemDeletionStatus.None
-                    }]
-                });
+                return addItem(state, orderItem);
             }
         }
 
@@ -56,17 +50,16 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             let { orderId } = state;
             return Object.assign({}, state, {
                 orderItems: state.orderItems.filterMap(
-                    ois => ois.data === orderItem,
+                    ois => OrderItemComparer.areEqual(ois.data, orderItem),
                     ois => Object.assign({}, ois, <OrderItemState>{
                         data: orderItem,
                         additionStatus: OrderItemAdditionStatus.Loading
                     })
                 )
-            })
+            });
         }
             
         case ORDER_ACTION_NAMES.LOAD_ITEM_COMPLETED: {
-            debugger;
             let { orderItem } = <LoadItemCompletedPayload>payload;
             return Object.assign({}, state, {
                 orderItems: state.orderItems.filterMap(
@@ -81,17 +74,17 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             
         case ORDER_ACTION_NAMES.LOAD_ITEM_FAILED: {
             let { item, err } = payload;
-            let existingItem = getItemByObjectReference(state, item);
-            if (existingItem) {
-                return {
-                    orderId: state.orderId,
-                    orderIdLoading: false,
-                    restaurantId: state.restaurantId,
-                    orderItems: state.orderItems.filter(i => existingItem !== item)
-                };
-            } else { // Item has been removed
-                return state;
-            }
+            //let existingItem = getItemByObjectReference(state, item);
+            // if (existingItem) {
+            //     return {
+            //         orderId: state.orderId,
+            //         orderIdLoading: false,
+            //         restaurantId: state.restaurantId,
+            //         orderItems: state.orderItems.filter(i => existingItem !== item)
+            //     };
+            // } else { // Item has been removed
+            //     return state;
+            // }
         }
 
         // case ORDER_ACTION_NAMES.REMOVE_ITEM:
@@ -110,25 +103,43 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
     }
 }
 
-function getItemById(state: OrderState, itemId: string): any {
-    return state.orderItems.filter(i => i.data.itemId === itemId)[0];
-}
-
-function getItemByObjectReference(state: OrderState, item: any): any {
-    return state.orderItems.filter(i => i === item)[0];
-}
-
-function updateItemCount(state: OrderState, itemId: string, count: Number): OrderState {
-    return Object.assign({}, state, {
-        orderItems: state.orderItems
-            .filter(item => (<any>item.data).id) // Select only OrderItemResultV2
-            .map(item => {
-                let { data } = item;
-                if ((<OrderItemResultV2>data).id === itemId) {
-                    return Object.assign({}, item, { count });
-                } else {
-                    return item;
-                }
-            })
+function addItem(state: OrderState, orderItemCreate: OrderItemCreateV2): OrderState {
+    return Object.assign({}, state, <OrderState>{
+        orderItems: [...state.orderItems, <OrderItemState>{
+            data: orderItemCreate,
+            additionStatus: OrderItemAdditionStatus.Added,
+            deletionStatus: OrderItemDeletionStatus.None
+        }]
     });
+}
+
+function updateItemCount(state: OrderState, orderItemStateMatch: OrderItemStateMatch, newCount: number): OrderState {
+    return Object.assign({}, state, <OrderState>{
+        orderItems: state.orderItems.filterMap(
+            (orderItemState, index) => index === orderItemStateMatch.index,
+            orderItemState => Object.assign({}, orderItemState, <OrderItemState>{
+                data: Object.assign({}, orderItemState.data, <OrderItem>{
+                    count: newCount
+                })
+            })
+        )
+    });
+}
+
+interface OrderItemStateMatch {
+    index: number;
+
+    orderItemState: OrderItemState;
+}
+
+function findOrderItemState(state: OrderState, orderItem: OrderItemCreateV2 | OrderItemResultV2): OrderItemStateMatch {
+    let index = state.orderItems.findIndex(ois => OrderItemComparer.areEqual(ois.data, orderItem));
+    if (index > 0) {
+        return {
+            index,
+            orderItemState: state.orderItems[index]
+        }
+    } else {
+        return null;
+    }
 }

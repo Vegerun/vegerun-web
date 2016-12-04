@@ -2,13 +2,12 @@ import * as _ from 'lodash';
 
 import { OrderItemCreateV2, OrderItemResultV2, OrderItemOptionCreateV2, OrderItemOptionResultV2 } from '../app/vegerun-2-client';
 
-declare type OrderItem = OrderItemCreateV2 | OrderItemResultV2;
-declare type OrderItemOption = OrderItemOptionCreateV2 | OrderItemOptionResultV2;
+export declare type OrderItem = OrderItemCreateV2 | OrderItemResultV2;
+export declare type OrderItemOption = OrderItemOptionCreateV2 | OrderItemOptionResultV2;
 
 export class OrderItemComparer {
 
     public static areEqual(a: OrderItem, b: OrderItem): boolean {
-        debugger;
         if (a.itemId !== b.itemId) {
             return false;
         }
