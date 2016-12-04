@@ -12,7 +12,7 @@ export class OrderItemFactory {
             itemId: item.id,
             options: [],
             excludedOptions: [],
-            instructions: 'Make it vegan ya?',
+            instructions: null,
             count: 1
         }
     }

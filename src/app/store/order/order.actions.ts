@@ -9,7 +9,7 @@ import { OrderState, OrderItemState } from './order.state';
 
 import {
     CreatePayload, CreateCompletedPayload,
-    AddItemPayload, UpdateItemPayload, LoadItemPayload, LoadItemCompletedPayload
+    AddItemPayload, ItemBlockedOnOrderPayload, UpdateItemPayload, LoadItemPayload, LoadItemCompletedPayload
 } from './order.payloads';
 
 const prefix = action => `[Order] ${action}`;
@@ -21,13 +21,13 @@ const CREATE = prefix('Create');
 const CREATE_COMPLETED = completed(CREATE);
 const CREATE_FAILED = failed(CREATE);
 const ADD_ITEM = prefix('Add Item');
+const BLOCK_ITEM_ON_ORDER = prefix('Item Blocked On Order');
+const UNBLOCK_ITEM = prefix('Item Unblocked');
 const UPDATE_ITEM = prefix('Update Item');
 const LOAD_ITEM = prefix('Load Item');
 const LOAD_ITEM_COMPLETED = completed(LOAD_ITEM);
 const LOAD_ITEM_FAILED = failed(LOAD_ITEM);
 const REMOVE_ITEM = prefix('Remove Item');
-
-
 const UPDATE_ITEM_COUNT = prefix('Update Item Count');
 
 export const ORDER_ACTION_NAMES = {
@@ -36,6 +36,9 @@ export const ORDER_ACTION_NAMES = {
     CREATE_FAILED,
 
     ADD_ITEM,
+    BLOCK_ITEM_ON_ORDER,
+    UNBLOCK_ITEM,
+
     UPDATE_ITEM,
     LOAD_ITEM,
     LOAD_ITEM_COMPLETED,
@@ -82,9 +85,17 @@ export class OrderActions {
         let orderItem = this.orderItemFactory.createOrderItem(item);
         let orderItemStateMatch = this.findOrderItemState(state, orderItem);
         if (orderItemStateMatch) {
-            return this._updateItem(orderItemStateMatch, <OrderItemUpdateV2>{
-                count: orderItemStateMatch.orderItemState.data.count + 1
-            });
+            let { local } = orderItemStateMatch.orderItemState;
+            debugger;
+            return {
+                type: UPDATE_ITEM,
+                payload: <UpdateItemPayload>{
+                    orderItem: Object.assign({}, local, <OrderItemCreateV2>{
+                        count: local.count + 1
+                    }),
+                    index: orderItemStateMatch.index
+                }
+            };
         } else {
             return {
                 type: ORDER_ACTION_NAMES.ADD_ITEM,
@@ -94,6 +105,33 @@ export class OrderActions {
                 }
             };
         }
+    }
+
+    blockItemOnOrder(state: OrderState, orderItem: OrderItemCreateV2): Action {
+        let orderItemStateMatch = this.findOrderItemState(state, orderItem);
+        return {
+            type: BLOCK_ITEM_ON_ORDER,
+            payload: <ItemBlockedOnOrderPayload>{
+                index: orderItemStateMatch.index
+            }
+        };
+    }
+
+    unblockItems(state: OrderState): Action[] {
+        return state.orderItems
+            .map((orderItemState, index) => ({
+                orderItemState,
+                index
+            }))
+            .filter(a => a.orderItemState.blockedOnOrder)
+            .map(a => ({
+                type: UNBLOCK_ITEM,
+                payload: {
+                    orderId: state.orderId,
+                    orderItem: a.orderItemState.local,
+                    index: a.index
+                }
+            }));
     }
 
     loadItem(orderItem: OrderItemCreateV2, orderId: string): Action {
@@ -106,16 +144,19 @@ export class OrderActions {
         }
     }
 
-    loadItemCompleted(orderItem: OrderItemResultV2): Action {
+    loadItemCompleted(state: OrderState, orderItem: OrderItemResultV2): Action {
+        let { index } = this.findOrderItemState(state, orderItem);
         return {
             type: LOAD_ITEM_COMPLETED,
             payload: <LoadItemCompletedPayload>{
-                orderItem
+                orderItem,
+                index
             }
         };
     }
 
     loadItemFailed(error: any, orderItem: OrderItemCreateV2): Action {
+        debugger;
         return {
             type: LOAD_ITEM_FAILED,
             payload: {
@@ -123,6 +164,12 @@ export class OrderActions {
                 error
             }
         };
+    }
+
+    updateItem(orderItemState: OrderItemState): Action {
+        return {
+            type: UPDATE_ITEM
+        }
     }
 
     removeItem(item: any /* OrderItem */): Action {
@@ -145,7 +192,7 @@ export class OrderActions {
     }
 
     private findOrderItemState(state: OrderState, orderItem: OrderItemCreateV2 | OrderItemResultV2): OrderItemStateMatch {
-        let index = state.orderItems.findIndex(ois => this.orderItemComparer.areEqual(ois.data, orderItem));
+        let index = state.orderItems.findIndex(ois => this.orderItemComparer.areContentsEqual(ois.local, orderItem));
         if (index > -1) {
             return {
                 index,
@@ -167,13 +214,7 @@ export class OrderActions {
     }
 
     private _updateItem(orderItemStateMatch: OrderItemStateMatch, update: any): Action {
-        return {
-            type: UPDATE_ITEM,
-            payload: <UpdateItemPayload>{
-                orderItem: Object.assign({}, orderItemStateMatch.orderItemState.data, update),
-                index: orderItemStateMatch.index
-            }
-        };
+        
     }
 }
 

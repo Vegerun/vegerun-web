@@ -14,16 +14,27 @@ export interface AddItemPayload {
     restaurant: RestaurantResultV2;
 }
 
+export interface ItemBlockedOnOrderPayload {
+    index: number
+}
+
+export interface UnblockItemPayload {
+    orderItem: OrderItemCreateV2,
+    index: number
+}
+
+export interface LoadItemPayload {
+    orderId: string;
+    orderItem: OrderItemResultV2;
+    index: number
+}
+
 export interface UpdateItemPayload {
     orderItem: OrderItemUpdateV2;
     index: number;
 }
 
-export interface LoadItemPayload {
-    orderItem: OrderItemCreateV2;
-    orderId: string;
-}
-
 export interface LoadItemCompletedPayload {
     orderItem: OrderItemResultV2;
+    index: number;
 }

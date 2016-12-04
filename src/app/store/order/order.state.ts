@@ -1,25 +1,13 @@
 import { OrderItemResultV2, OrderItemCreateV2, OrderItemUpdateV2 } from '../../_lib/vegerun/_swagger-gen/v2';
 
-export enum OrderItemAdditionStatus {
-    Added = 0,
-
-    Loading = 1,
-
-    Loaded = 2,
-}
-
-export enum OrderItemDeletionStatus {
-    None = 0,
-
-    MarkedForDeletion = 1
-}
-
 export interface OrderItemState {
-    additionStatus: OrderItemAdditionStatus;
+    local: OrderItemCreateV2 | OrderItemResultV2;
 
-    deletionStatus: OrderItemDeletionStatus;
+    server: OrderItemResultV2;
 
-    data: OrderItemCreateV2 | OrderItemResultV2;
+    loading: boolean;
+
+    blockedOnOrder: boolean;
 }
 
 export interface OrderState {

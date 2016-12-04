@@ -8,38 +8,42 @@ Injectable()
 export class OrderItemComparer {
 
     public areEqual(a: OrderItem, b: OrderItem): boolean {
-        return OrderItemComparer.areEqual(a, b);
+        return a.count === b.count && this.areContentsEqual(a, b);
     }
 
-    public static areEqual(a: OrderItem, b: OrderItem): boolean {
+    public areContentsEqual(a: OrderItem, b: OrderItem): boolean {
         if (a.itemId !== b.itemId) {
             return false;
         }
 
-        if (!OrderItemComparer.areOrderItemOptionsArraysEqual(a.options, b.options)) {
+        // if (a.instructions !== b.instructions) {
+        //     return false;
+        // }
+
+        if (!this.areOrderItemOptionsArraysEqual(a.options, b.options)) {
             return false;
         }
 
-        if (!OrderItemComparer.areOrderItemOptionsArraysEqual(a.excludedOptions, b.excludedOptions)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private static areOrderItemOptionsArraysEqual(a: OrderItemOption[], b: OrderItemOption[]): boolean {
-        if (_.differenceWith(a, b, OrderItemComparer.areOrderItemOptionsEqual).length > 0) {
-            return false;
-        }
-
-        if (_.differenceWith(b, a, OrderItemComparer.areOrderItemOptionsEqual).length > 0) {
+        if (!this.areOrderItemOptionsArraysEqual(a.excludedOptions, b.excludedOptions)) {
             return false;
         }
 
         return true;
     }
 
-    private static areOrderItemOptionsEqual(a: OrderItemOption, b: OrderItemOption): boolean {
+    private areOrderItemOptionsArraysEqual(a: OrderItemOption[], b: OrderItemOption[]): boolean {
+        if (_.differenceWith(a, b, this.areOrderItemOptionsEqual).length > 0) {
+            return false;
+        }
+
+        if (_.differenceWith(b, a, this.areOrderItemOptionsEqual).length > 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private areOrderItemOptionsEqual(a: OrderItemOption, b: OrderItemOption): boolean {
         return true;
     }
 }
