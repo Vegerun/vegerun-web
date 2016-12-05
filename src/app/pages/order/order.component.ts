@@ -41,7 +41,7 @@ export class OrderComponent implements OnInit {
             ])
             .first()
             .subscribe(([restaurant, orderState]) => {
-                this.store.dispatch(this.orderActions.addItem(orderState, item, restaurant));
+                this.store.dispatch(this.orderActions.createItem(orderState, item, restaurant));
             });
     }
 }

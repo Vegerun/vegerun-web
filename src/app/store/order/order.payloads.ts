@@ -9,10 +9,38 @@ export interface CreateCompletedPayload {
     orderId: string;
 }
 
-export interface AddItemPayload {
+export interface CreateItemPayload {
+    orderItemStateId: number;
+
     orderItem: OrderItemCreateV2;
+
     restaurant: RestaurantResultV2;
 }
+
+export interface SyncCreateItemPayload {
+    orderItemStateId: number
+
+    orderItem: OrderItemCreateV2;
+}
+
+export interface SyncCreateItemCompletedPayload {
+    orderItemStateId: number;
+
+    orderItem: OrderItemResultV2;
+}
+
+export interface SyncCreateItemFailedPayload {
+    orderItemStateId: number;
+
+    error: any
+}
+
+export interface UpdateItemPayload {
+    orderItemStateId: number;
+
+    orderItem: OrderItemUpdateV2;
+}
+
 
 export interface ItemBlockedOnOrderPayload {
     index: number
@@ -21,20 +49,4 @@ export interface ItemBlockedOnOrderPayload {
 export interface UnblockItemPayload {
     orderItem: OrderItemCreateV2,
     index: number
-}
-
-export interface LoadItemPayload {
-    orderId: string;
-    orderItem: OrderItemResultV2;
-    index: number
-}
-
-export interface UpdateItemPayload {
-    orderItem: OrderItemUpdateV2;
-    index: number;
-}
-
-export interface LoadItemCompletedPayload {
-    orderItem: OrderItemResultV2;
-    index: number;
 }

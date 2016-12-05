@@ -9,21 +9,30 @@ import { OrderState, OrderItemState } from './order.state';
 
 import {
     CreatePayload, CreateCompletedPayload,
-    AddItemPayload, ItemBlockedOnOrderPayload, UpdateItemPayload, LoadItemPayload, LoadItemCompletedPayload
+    CreateItemPayload, ItemBlockedOnOrderPayload, UpdateItemPayload, SyncCreateItemPayload, SyncCreateItemCompletedPayload
 } from './order.payloads';
 
 const prefix = action => `[Order] ${action}`;
 const status = (parentActionName, status) => `${parentActionName} - ${status}`;
 const completed = actionName => status(actionName, 'Completed');
 const failed = actionName => status(actionName, 'Failed');
+const blocked = actionName => status(actionName, 'Blocked');
+const sync = actionName => status(actionName, 'Synchronizing');
 
 const CREATE = prefix('Create');
 const CREATE_COMPLETED = completed(CREATE);
 const CREATE_FAILED = failed(CREATE);
-const ADD_ITEM = prefix('Add Item');
-const BLOCK_ITEM_ON_ORDER = prefix('Item Blocked On Order');
-const UNBLOCK_ITEM = prefix('Item Unblocked');
+
+const CREATE_ITEM = prefix('Create Item');
+const SYNC_CREATE_ITEM = sync(CREATE_ITEM);
+const SYNC_CREATE_ITEM_COMPLETED = completed(SYNC_CREATE_ITEM);
+const SYNC_CREATE_ITEM_FAILED = failed(SYNC_CREATE_ITEM);
+
 const UPDATE_ITEM = prefix('Update Item');
+const SYNC_UPDATE_ITEM = sync(UPDATE_ITEM);
+const SYNC_UPDATE_ITEM_COMPLETED = completed(SYNC_UPDATE_ITEM);
+const SYNC_UPDATE_ITEM_FAILED = failed(SYNC_UPDATE_ITEM);
+
 const LOAD_ITEM = prefix('Load Item');
 const LOAD_ITEM_COMPLETED = completed(LOAD_ITEM);
 const LOAD_ITEM_FAILED = failed(LOAD_ITEM);
@@ -35,18 +44,21 @@ export const ORDER_ACTION_NAMES = {
     CREATE_COMPLETED,
     CREATE_FAILED,
 
-    ADD_ITEM,
-    BLOCK_ITEM_ON_ORDER,
-    UNBLOCK_ITEM,
+    CREATE_ITEM,
+    SYNC_CREATE_ITEM,
+    SYNC_CREATE_ITEM_COMPLETED,
+    SYNC_CREATE_ITEM_FAILED,
 
     UPDATE_ITEM,
-    LOAD_ITEM,
-    LOAD_ITEM_COMPLETED,
-    LOAD_ITEM_FAILED,
+    SYNC_UPDATE_ITEM,
+    SYNC_UPDATE_ITEM_COMPLETED,
+    SYNC_UPDATE_ITEM_FAILED,
     
     REMOVE_ITEM,
     UPDATE_ITEM_COUNT
 };
+
+let currentOrderItemStateId = 0;
 
 @Injectable()
 export class OrderActions {
@@ -81,96 +93,89 @@ export class OrderActions {
         };
     }
 
-    addItem(state: OrderState, item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
+    createItem(state: OrderState, item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
         let orderItem = this.orderItemFactory.createOrderItem(item);
         let orderItemStateMatch = this.findOrderItemState(state, orderItem);
         if (orderItemStateMatch) {
-            let { local } = orderItemStateMatch.orderItemState;
-            debugger;
+            let { id, local } = orderItemStateMatch.orderItemState;
             return {
                 type: UPDATE_ITEM,
                 payload: <UpdateItemPayload>{
-                    orderItem: Object.assign({}, local, <OrderItemCreateV2>{
+                    orderItemStateId: id,
+                    orderItem: <OrderItemUpdateV2>{
                         count: local.count + 1
-                    }),
-                    index: orderItemStateMatch.index
+                    }
                 }
             };
         } else {
+            let orderItemStateId = currentOrderItemStateId++;
             return {
-                type: ORDER_ACTION_NAMES.ADD_ITEM,
-                payload: <AddItemPayload>{
-                    orderItem: orderItem,
+                type: CREATE_ITEM,
+                payload: <CreateItemPayload>{
+                    orderItemStateId,
+                    orderItem,
                     restaurant
                 }
             };
         }
     }
 
-    blockItemOnOrder(state: OrderState, orderItem: OrderItemCreateV2): Action {
-        let orderItemStateMatch = this.findOrderItemState(state, orderItem);
+    syncCreateItem(state: OrderState, orderItemStateId: number): Action {
+        let orderItemState = state.orderItems.find(ois => ois.id === orderItemStateId);
         return {
-            type: BLOCK_ITEM_ON_ORDER,
-            payload: <ItemBlockedOnOrderPayload>{
-                index: orderItemStateMatch.index
+            type: SYNC_CREATE_ITEM,
+            payload: <SyncCreateItemPayload>{
+                orderItemStateId,
+                orderItem: orderItemState.local,
             }
         };
     }
 
-    unblockItems(state: OrderState): Action[] {
-        return state.orderItems
-            .map((orderItemState, index) => ({
-                orderItemState,
-                index
-            }))
-            .filter(a => a.orderItemState.blockedOnOrder)
-            .map(a => ({
-                type: UNBLOCK_ITEM,
-                payload: {
-                    orderId: state.orderId,
-                    orderItem: a.orderItemState.local,
-                    index: a.index
-                }
-            }));
-    }
-
-    loadItem(orderItem: OrderItemCreateV2, orderId: string): Action {
+    syncCreateItemCompleted(state: OrderState, orderItemStateId: number, orderItem: OrderItemResultV2): Action {
         return {
-            type: LOAD_ITEM,
-            payload: <LoadItemPayload>{
-                orderItem,
-                orderId
-            }
-        }
-    }
-
-    loadItemCompleted(state: OrderState, orderItem: OrderItemResultV2): Action {
-        let { index } = this.findOrderItemState(state, orderItem);
-        return {
-            type: LOAD_ITEM_COMPLETED,
-            payload: <LoadItemCompletedPayload>{
-                orderItem,
-                index
+            type: SYNC_CREATE_ITEM_COMPLETED,
+            payload: <SyncCreateItemCompletedPayload>{
+                orderItemStateId,
+                orderItem
             }
         };
     }
 
-    loadItemFailed(error: any, orderItem: OrderItemCreateV2): Action {
-        debugger;
+    syncCreateItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreateV2): Action {
         return {
-            type: LOAD_ITEM_FAILED,
+            type: SYNC_CREATE_ITEM_FAILED,
             payload: {
+                orderItemStateId,
                 orderItem,
                 error
             }
         };
     }
 
-    updateItem(orderItemState: OrderItemState): Action {
+    updateItem(state: OrderState, orderItemStateId: number, orderItem: OrderItemUpdateV2): Action {
+        let orderItemState = state.orderItems.find(ois => ois.id === orderItemStateId);
         return {
-            type: UPDATE_ITEM
-        }
+            type: UPDATE_ITEM,
+            payload: <UpdateItemPayload>{
+                orderItemStateId,
+                orderItem
+            }
+        };
     }
+
+    syncUpdateItem(/*state: OrderState, orderItemStateId: number, orderItem: OrderItemUpdateV2*/): Action {
+        // let orderItemState = state.orderItems.find(ois => ois.id === orderItemStateId);
+        return {
+            type: SYNC_UPDATE_ITEM,
+            payload: {
+                // orderItemStateId,
+                // orderItem
+            }
+        };
+    }
+
+
+    
 
     removeItem(item: any /* OrderItem */): Action {
         return {
@@ -211,10 +216,6 @@ export class OrderActions {
                 count: item.count + magnitude
             }
         }
-    }
-
-    private _updateItem(orderItemStateMatch: OrderItemStateMatch, update: any): Action {
-        
     }
 }
 

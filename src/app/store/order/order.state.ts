@@ -1,13 +1,15 @@
 import { OrderItemResultV2, OrderItemCreateV2, OrderItemUpdateV2 } from '../../_lib/vegerun/_swagger-gen/v2';
 
 export interface OrderItemState {
-    local: OrderItemCreateV2 | OrderItemResultV2;
+    id: number,
+
+    local: OrderItemCreateV2;
 
     server: OrderItemResultV2;
 
     loading: boolean;
 
-    blockedOnOrder: boolean;
+    blocked: boolean;
 }
 
 export interface OrderState {

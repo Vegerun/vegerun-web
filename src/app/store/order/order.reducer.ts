@@ -10,7 +10,8 @@ import { ORDER_ACTION_NAMES } from './order.actions';
 
 import {
     CreatePayload, CreateCompletedPayload,
-    AddItemPayload, ItemBlockedOnOrderPayload, UnblockItemPayload, UpdateItemPayload, LoadItemPayload, LoadItemCompletedPayload
+    CreateItemPayload, SyncCreateItemPayload, SyncCreateItemCompletedPayload, SyncCreateItemFailedPayload,
+    UpdateItemPayload
 } from './order.payloads';
 
 export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFAULT_ORDER_STATE, { type, payload }: Action) => {
@@ -36,56 +37,32 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             return Object.assign({}, DEFAULT_ORDER_STATE);
         }
 
-        case ORDER_ACTION_NAMES.ADD_ITEM: {
-            let { orderItem } = <AddItemPayload>payload;
+        case ORDER_ACTION_NAMES.CREATE_ITEM: {
+            let { orderItem, orderItemStateId } = <CreateItemPayload>payload;
             return Object.assign({}, state, <OrderState>{
                 orderItems: [...state.orderItems, <OrderItemState>{
-                    local: orderItem,
-                    // server: null,
-                    // loading: false,              // TODO: IMPLIED?
-                    // blockedOnOrder: false
+                    id: orderItemStateId,
+                    local: orderItem
                 }]
             });
         }
 
-        case ORDER_ACTION_NAMES.BLOCK_ITEM_ON_ORDER: {
-            let { index } = <ItemBlockedOnOrderPayload>payload;
+        case ORDER_ACTION_NAMES.SYNC_CREATE_ITEM: {
+            let { orderItemStateId } = <SyncCreateItemPayload>payload;
             return Object.assign({}, state, <OrderState>{
                 orderItems: state.orderItems.filterMap(
-                    (v, i) => i === index,
-                    ois => Object.assign({}, ois, <OrderItemState>{
-                        blockedOnOrder: true
-                    })
-                )
-            });
-        }
-
-        case ORDER_ACTION_NAMES.UNBLOCK_ITEM: {
-            let { index } = <UnblockItemPayload>payload;
-            return Object.assign({}, state, <OrderState>{
-                orderItems: state.orderItems.mapAtIndex(
-                    index,
+                    (ois: OrderItemState) => ois.id === orderItemStateId,
                     (ois: OrderItemState) => Object.assign({}, ois, <OrderItemState>{
-                        blockedOnOrder: false
+                        loading: true
                     }))
             });
         }
 
-        case ORDER_ACTION_NAMES.LOAD_ITEM: {
-            let { index, orderItem } = <LoadItemPayload>payload;
+        case ORDER_ACTION_NAMES.SYNC_CREATE_ITEM_COMPLETED: {
+            let { orderItemStateId, orderItem } = <SyncCreateItemCompletedPayload>payload;
             return Object.assign({}, state, <OrderState>{
-                orderItems: state.orderItems.mapMergeAtIndex(index, <OrderItemState>{
-                    loading: true,
-                    server: orderItem
-                })
-            });
-        }
-
-        case ORDER_ACTION_NAMES.LOAD_ITEM_COMPLETED: {
-            let { orderItem, index } = <LoadItemCompletedPayload>payload;
-            return Object.assign({}, state, <OrderState>{
-                orderItems: state.orderItems.mapAtIndex(
-                    index,
+                orderItems: state.orderItems.filterMap(
+                    (ois: OrderItemState) => ois.id === orderItemStateId,
                     (ois: OrderItemState) => Object.assign({}, ois, <OrderItemState>{
                         loading: false,
                         server: orderItem
@@ -93,30 +70,70 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             });
         }
 
+        case ORDER_ACTION_NAMES.SYNC_CREATE_ITEM_FAILED: {
+            let { orderItemStateId } = <SyncCreateItemFailedPayload>payload;
+            return Object.assign({}, state, <OrderState>{
+                orderItems: state.orderItems.filterMap(
+                    (ois: OrderItemState) => ois.id === orderItemStateId,
+                    (ois: OrderItemState) => Object.assign({}, ois, <OrderItemState>{
+                        loading: false
+                    }))
+            });
+        }
+
         case ORDER_ACTION_NAMES.UPDATE_ITEM: {
-            let { orderItem, index } = <UpdateItemPayload>payload;
-
-            debugger;
+            let { orderItemStateId, orderItem } = <UpdateItemPayload>payload;
+            return Object.assign({}, state, <OrderState>{
+                orderItems: state.orderItems.filterMap(
+                    (ois: OrderItemState) => ois.id === orderItemStateId,
+                    (ois: OrderItemState) => Object.assign({}, ois, <OrderItemState>{
+                        local: orderItem
+                    }))
+            });
         }
 
+        // case ORDER_ACTION_NAMES.BLOCK_ITEM_ON_ORDER: {
+        //     let { index } = <ItemBlockedOnOrderPayload>payload;
+        //     return Object.assign({}, state, <OrderState>{
+        //         orderItems: state.orderItems.filterMap(
+        //             (v, i) => i === index,
+        //             ois => Object.assign({}, ois, <OrderItemState>{
+        //                 blocked: true
+        //             })
+        //         )
+        //     });
+        // }
+
+        // case ORDER_ACTION_NAMES.UNBLOCK_ITEM: {
+        //     let { index } = <UnblockItemPayload>payload;
+        //     return Object.assign({}, state, <OrderState>{
+        //         orderItems: state.orderItems.mapAtIndex(
+        //             index,
+        //             (ois: OrderItemState) => Object.assign({}, ois, <OrderItemState>{
+        //                 blocked: false
+        //             }))
+        //     });
+        // }
+
+
+        // case ORDER_ACTION_NAMES.LOAD_ITEM_COMPLETED: {
+        //     let { orderItem, index } = <SyncCreateItemCompletedPayload>payload;
+        //     return Object.assign({}, state, <OrderState>{
+        //         orderItems: state.orderItems.mapAtIndex(
+        //             index,
+        //             (ois: OrderItemState) => Object.assign({}, ois, <OrderItemState>{
+        //                 loading: false,
+        //                 server: orderItem
+        //             }))
+        //     });
+        // }
+
+        // TODO: Handle error specifically (handled generally later) - retry request etc?
+        // case ORDER_ACTION_NAMES.LOAD_ITEM_FAILED: {
+        //     return state;
+        // }
+
         
-            
-        
-            
-        case ORDER_ACTION_NAMES.LOAD_ITEM_FAILED: {
-            let { item, err } = payload;
-            //let existingItem = getItemByObjectReference(state, item);
-            // if (existingItem) {
-            //     return {
-            //         orderId: state.orderId,
-            //         orderIdLoading: false,
-            //         restaurantId: state.restaurantId,
-            //         orderItems: state.orderItems.filter(i => existingItem !== item)
-            //     };
-            // } else { // Item has been removed
-            //     return state;
-            // }
-        }
 
         // case ORDER_ACTION_NAMES.REMOVE_ITEM:
         //     return {
@@ -126,6 +143,7 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
         //         orderItems: state.orderItems.filter(i => i.id !== payload)
         //     };
 
+        // TODO: Just use update reducer
         // case ORDER_ACTION_NAMES.UPDATE_ITEM_COUNT:
         //     return updateItemCount(state, payload.id, payload.count);
 
