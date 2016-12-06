@@ -9,35 +9,31 @@ import { OrderState, OrderItemState } from './order.state';
 
 import {
     CreatePayload, CreateCompletedPayload,
-    CreateItemPayload, ItemBlockedOnOrderPayload, UpdateItemPayload, SyncCreateItemPayload, SyncCreateItemCompletedPayload
+    CreateItemPayload, CreateItemPayloadStarted, CreateItemCompletedPayload, CreateItemFailedPayload,
+    UpdateItemPayload, UpdateItemPayloadStarted, UpdateItemCompletedPayload, UpdateItemFailedPayload 
 } from './order.payloads';
 
 const prefix = action => `[Order] ${action}`;
 const status = (parentActionName, status) => `${parentActionName} - ${status}`;
+const started = actionName => status(actionName, 'Started');
 const completed = actionName => status(actionName, 'Completed');
 const failed = actionName => status(actionName, 'Failed');
-const blocked = actionName => status(actionName, 'Blocked');
-const sync = actionName => status(actionName, 'Synchronizing');
 
 const CREATE = prefix('Create');
 const CREATE_COMPLETED = completed(CREATE);
 const CREATE_FAILED = failed(CREATE);
 
 const CREATE_ITEM = prefix('Create Item');
-const SYNC_CREATE_ITEM = sync(CREATE_ITEM);
-const SYNC_CREATE_ITEM_COMPLETED = completed(SYNC_CREATE_ITEM);
-const SYNC_CREATE_ITEM_FAILED = failed(SYNC_CREATE_ITEM);
+const CREATE_ITEM_STARTED = started(CREATE_ITEM);
+const CREATE_ITEM_COMPLETED = completed(CREATE_ITEM);
+const CREATE_ITEM_FAILED = failed(CREATE_ITEM);
 
 const UPDATE_ITEM = prefix('Update Item');
-const SYNC_UPDATE_ITEM = sync(UPDATE_ITEM);
-const SYNC_UPDATE_ITEM_COMPLETED = completed(SYNC_UPDATE_ITEM);
-const SYNC_UPDATE_ITEM_FAILED = failed(SYNC_UPDATE_ITEM);
+const UPDATE_ITEM_STARTED = started(UPDATE_ITEM);
+const UPDATE_ITEM_COMPLETED = completed(UPDATE_ITEM);
+const UPDATE_ITEM_FAILED = failed(UPDATE_ITEM);
 
-const LOAD_ITEM = prefix('Load Item');
-const LOAD_ITEM_COMPLETED = completed(LOAD_ITEM);
-const LOAD_ITEM_FAILED = failed(LOAD_ITEM);
 const REMOVE_ITEM = prefix('Remove Item');
-const UPDATE_ITEM_COUNT = prefix('Update Item Count');
 
 export const ORDER_ACTION_NAMES = {
     CREATE,
@@ -45,17 +41,16 @@ export const ORDER_ACTION_NAMES = {
     CREATE_FAILED,
 
     CREATE_ITEM,
-    SYNC_CREATE_ITEM,
-    SYNC_CREATE_ITEM_COMPLETED,
-    SYNC_CREATE_ITEM_FAILED,
+    CREATE_ITEM_STARTED,
+    CREATE_ITEM_COMPLETED,
+    CREATE_ITEM_FAILED,
 
     UPDATE_ITEM,
-    SYNC_UPDATE_ITEM,
-    SYNC_UPDATE_ITEM_COMPLETED,
-    SYNC_UPDATE_ITEM_FAILED,
+    UPDATE_ITEM_STARTED,
+    UPDATE_ITEM_COMPLETED,
+    UPDATE_ITEM_FAILED,
     
-    REMOVE_ITEM,
-    UPDATE_ITEM_COUNT
+    REMOVE_ITEM
 };
 
 let currentOrderItemStateId = 0;
@@ -95,9 +90,9 @@ export class OrderActions {
 
     createItem(state: OrderState, item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
         let orderItem = this.orderItemFactory.createOrderItem(item);
-        let orderItemStateMatch = this.findOrderItemState(state, orderItem);
-        if (orderItemStateMatch) {
-            let { id, local } = orderItemStateMatch.orderItemState;
+        let existingOrderItemState = state.orderItems.find(ois => this.orderItemComparer.areContentsEqual(ois.local, orderItem));
+        if (existingOrderItemState) {
+            let { id, local } = existingOrderItemState;
             return {
                 type: UPDATE_ITEM,
                 payload: <UpdateItemPayload>{
@@ -108,7 +103,7 @@ export class OrderActions {
                 }
             };
         } else {
-            let orderItemStateId = currentOrderItemStateId++;
+            let orderItemStateId = ++currentOrderItemStateId;
             return {
                 type: CREATE_ITEM,
                 payload: <CreateItemPayload>{
@@ -120,30 +115,30 @@ export class OrderActions {
         }
     }
 
-    syncCreateItem(state: OrderState, orderItemStateId: number): Action {
+    createItemStarted(state: OrderState, orderItemStateId: number): Action {
         let orderItemState = state.orderItems.find(ois => ois.id === orderItemStateId);
         return {
-            type: SYNC_CREATE_ITEM,
-            payload: <SyncCreateItemPayload>{
+            type: CREATE_ITEM_STARTED,
+            payload: <CreateItemPayloadStarted>{
                 orderItemStateId,
                 orderItem: orderItemState.local,
             }
         };
     }
 
-    syncCreateItemCompleted(state: OrderState, orderItemStateId: number, orderItem: OrderItemResultV2): Action {
+    createItemCompleted(orderItemStateId: number, orderItem: OrderItemResultV2): Action {
         return {
-            type: SYNC_CREATE_ITEM_COMPLETED,
-            payload: <SyncCreateItemCompletedPayload>{
+            type: CREATE_ITEM_COMPLETED,
+            payload: <CreateItemCompletedPayload>{
                 orderItemStateId,
                 orderItem
             }
         };
     }
 
-    syncCreateItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreateV2): Action {
+    createItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreateV2): Action {
         return {
-            type: SYNC_CREATE_ITEM_FAILED,
+            type: CREATE_ITEM_FAILED,
             payload: {
                 orderItemStateId,
                 orderItem,
@@ -163,21 +158,39 @@ export class OrderActions {
         };
     }
 
-    syncUpdateItem(/*state: OrderState, orderItemStateId: number, orderItem: OrderItemUpdateV2*/): Action {
-        // let orderItemState = state.orderItems.find(ois => ois.id === orderItemStateId);
+    updateItemStarted(state: OrderState, orderItemStateId: number): Action {
+        let orderItemState = state.orderItems.find(ois => ois.id === orderItemStateId);
         return {
-            type: SYNC_UPDATE_ITEM,
-            payload: {
-                // orderItemStateId,
-                // orderItem
+            type: UPDATE_ITEM_STARTED,
+            payload: <UpdateItemPayloadStarted>{
+                orderItemStateId,
+                orderItem: <OrderItemUpdateV2>orderItemState.local
             }
         };
     }
 
+    updateItemCompleted(orderItemStateId: number, orderItem: OrderItemResultV2): Action {
+        return {
+            type: CREATE_ITEM_COMPLETED,
+            payload: <UpdateItemCompletedPayload>{
+                orderItemStateId,
+                orderItem
+            }
+        };
+    }
 
-    
+    updateItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreateV2): Action {
+        return {
+            type: CREATE_ITEM_FAILED,
+            payload: {
+                orderItemStateId,
+                orderItem,
+                error
+            }
+        };
+    }
 
-    removeItem(item: any /* OrderItem */): Action {
+    deleteItem(item: any /* OrderItem */): Action {
         return {
             type: ORDER_ACTION_NAMES.REMOVE_ITEM,
             payload: item.id
@@ -190,37 +203,19 @@ export class OrderActions {
 
     decrementItem(item: any /* OrderItem */): Action {
         if (item.count === 1) {
-            return this.removeItem(item);
+            return this.deleteItem(item);
         } else {
             return this.updateItemCount(item, -1);
         }
     }
 
-    private findOrderItemState(state: OrderState, orderItem: OrderItemCreateV2 | OrderItemResultV2): OrderItemStateMatch {
-        let index = state.orderItems.findIndex(ois => this.orderItemComparer.areContentsEqual(ois.local, orderItem));
-        if (index > -1) {
-            return {
-                index,
-                orderItemState: state.orderItems[index]
-            }
-        } else {
-            return null;
-        }
-    }
-
     private updateItemCount(item: any, magnitude: Number): Action {
         return {
-            type: UPDATE_ITEM_COUNT,
+            type: UPDATE_ITEM,
             payload: {
                 id: item.id,
                 count: item.count + magnitude
             }
         }
     }
-}
-
-interface OrderItemStateMatch {
-    index: number;
-
-    orderItemState: OrderItemState;
 }

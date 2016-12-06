@@ -17,36 +17,45 @@ export interface CreateItemPayload {
     restaurant: RestaurantResultV2;
 }
 
-export interface SyncCreateItemPayload {
+export interface CreateItemPayloadStarted {
     orderItemStateId: number
 
     orderItem: OrderItemCreateV2;
 }
 
-export interface SyncCreateItemCompletedPayload {
+export interface CreateItemCompletedPayload {
     orderItemStateId: number;
 
     orderItem: OrderItemResultV2;
 }
 
-export interface SyncCreateItemFailedPayload {
+export interface CreateItemFailedPayload {
     orderItemStateId: number;
 
     error: any
 }
 
+// Just use server orderItemId for state tracking from here 
 export interface UpdateItemPayload {
     orderItemStateId: number;
 
     orderItem: OrderItemUpdateV2;
 }
 
+export interface UpdateItemPayloadStarted {
+    orderItemStateId: number
 
-export interface ItemBlockedOnOrderPayload {
-    index: number
+    orderItem: OrderItemUpdateV2;
 }
 
-export interface UnblockItemPayload {
-    orderItem: OrderItemCreateV2,
-    index: number
+export interface UpdateItemCompletedPayload {
+    orderItemStateId: number;
+
+    orderItem: OrderItemResultV2;
+}
+
+export interface UpdateItemFailedPayload {
+    orderItemStateId: number;
+
+    error: any
 }
