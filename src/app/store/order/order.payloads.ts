@@ -35,7 +35,6 @@ export interface CreateItemFailedPayload {
     error: any
 }
 
-// Just use server orderItemId for state tracking from here 
 export interface UpdateItemPayload {
     orderItemStateId: number;
 
