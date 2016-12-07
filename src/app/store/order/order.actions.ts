@@ -139,7 +139,7 @@ export class OrderActions {
     createItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreateV2): Action {
         return {
             type: CREATE_ITEM_FAILED,
-            payload: {
+            payload: <CreateItemFailedPayload>{
                 orderItemStateId,
                 orderItem,
                 error
@@ -171,7 +171,7 @@ export class OrderActions {
 
     updateItemCompleted(orderItemStateId: number, orderItem: OrderItemResultV2): Action {
         return {
-            type: CREATE_ITEM_COMPLETED,
+            type: UPDATE_ITEM_COMPLETED,
             payload: <UpdateItemCompletedPayload>{
                 orderItemStateId,
                 orderItem
@@ -181,8 +181,8 @@ export class OrderActions {
 
     updateItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreateV2): Action {
         return {
-            type: CREATE_ITEM_FAILED,
-            payload: {
+            type: UPDATE_ITEM_FAILED,
+            payload: <UpdateItemFailedPayload>{
                 orderItemStateId,
                 orderItem,
                 error

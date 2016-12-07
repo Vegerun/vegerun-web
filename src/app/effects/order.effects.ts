@@ -123,10 +123,10 @@ export class OrderEffects {
         .map<CreateItemCompletedPayload | UpdateItemCompletedPayload>(toPayload)
         .flatMap(payload => this.store
             .select(s => s.order)
+            .first()
             .flatMap((orderState: OrderState) => {
                 let { orderItemStateId } = payload;
                 let orderItemState = orderState.orderItems.find(ois => ois.id === orderItemStateId);
-                debugger;
                 if (!orderItemState) {
                     return Observable.of(this.orderActions.deleteItem({}));
                 } else if (!this.orderItemComparer.areEqual(orderItemState.local, orderItemState.server)) {

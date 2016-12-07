@@ -1,15 +1,13 @@
 interface Array<T> {
-    filterMap(predFunc: (T, number?) => boolean | any, mapFunc: (T) => T): Array<T>
+    filterMap<T>(predFunc: (T, number?) => boolean | any, mapFunc: (T) => T): Array<T>
+    
+    mapMergeAtIndex<T>(index: number, mergeFrom: any): Array<T>
 
-    copy(): Array<T>
-
-    mapMergeAtIndex(index: number, mergeFrom: any): Array<T>
-
-    mapAtIndex(index: number, mapFunc: (T) => T): Array<T>
+    mapAtIndex<T>(index: number, mapFunc: (T) => T): Array<T>
 }
 
-Array.prototype.filterMap = function filterMap(predFunc, mapFunc) {
-    return Array.prototype.map.call(this, (value, index) => {
+Array.prototype.filterMap = function filterMap<T>(predFunc, mapFunc) {
+    return (<Array<T>>this).map((value, index) => {
         let match = false;
         if (typeof predFunc === 'function') {
             match = predFunc(value, index);
@@ -20,12 +18,8 @@ Array.prototype.filterMap = function filterMap(predFunc, mapFunc) {
     });
 };
 
-Array.prototype.copy = function copy() {
-    return [...this];
-};
-
 Array.prototype.mapMergeAtIndex = function mergeAtIndex(index, mergeFrom) {
-    let result = Array.prototype.copy.call(this);
+    let result = [...this];
     if (index >= result.length) {
         throw 'Index out of range';
     }
@@ -34,7 +28,7 @@ Array.prototype.mapMergeAtIndex = function mergeAtIndex(index, mergeFrom) {
 };
 
 Array.prototype.mapAtIndex = function mergeAtIndex(index, mapFunc) {
-    let result = Array.prototype.copy.call(this);
+    let result = [...this];
     if (index >= result.length) {
         throw 'Index out of range';
     }
