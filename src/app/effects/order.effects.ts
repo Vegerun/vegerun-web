@@ -34,9 +34,7 @@ export class OrderEffects {
     @Effect() orderCreateEffect = this.actions$
         .ofType(ORDER_ACTION_NAMES.CREATE)
         .map<CreatePayload>(toPayload)
-        .flatMap(payload => this.store
-            .select(s => s.order)
-            .first()
+        .flatMap(payload => toOrderStateSnapshot(this.store)
             .switchMap(orderState => this.vegerunClient
                 .apiV1OrdersCreatePost({ restaurantId: orderState.restaurantId })
                 .map(o => this.orderActions.createCompleted(o))
@@ -44,18 +42,14 @@ export class OrderEffects {
 
     @Effect() orderCreateCompletedEffect = this.actions$
         .ofType(ORDER_ACTION_NAMES.CREATE_COMPLETED)
-        .flatMap(payload => this.store
-            .select(s => s.order)
-            .first())
+        .flatMap(payload => toOrderStateSnapshot(this.store))
         .mergeMap(o => Observable.from(o.orderItems.map(oi =>
             this.orderActions.createItemStarted(o, oi.id))));
     
     @Effect() createItemEffect = this.actions$
         .ofType(ORDER_ACTION_NAMES.CREATE_ITEM)
         .map<CreateItemPayload>(toPayload)
-        .flatMap(payload => this.store
-            .select(s => s.order)
-            .first()
+        .flatMap(payload => toOrderStateSnapshot(this.store)
             .switchMap(orderState => {
                 if (orderState.orderId === null) {
                     if (!orderState.orderIdLoading) {
@@ -71,9 +65,7 @@ export class OrderEffects {
     @Effect() createItemStartedEffect = this.actions$
         .ofType(ORDER_ACTION_NAMES.CREATE_ITEM_STARTED)
         .map<CreateItemPayloadStarted>(toPayload)
-        .flatMap(payload => this.store
-            .select(s => s.order)
-            .first()
+        .flatMap(payload => toOrderStateSnapshot(this.store)
             .switchMap(orderState => {
                 let { orderItem, orderItemStateId } = payload;
                 orderItem.orderId = orderState.orderId;
@@ -86,13 +78,11 @@ export class OrderEffects {
     @Effect() updateItemEffect = this.actions$
         .ofType(ORDER_ACTION_NAMES.UPDATE_ITEM)
         .map<UpdateItemPayload>(toPayload)
-        .flatMap(payload => this.store
-            .select(s => s.order)
-            .first()
+        .flatMap(payload => toOrderStateSnapshot(this.store)
             .switchMap(orderState => {
                 let { orderItemStateId } = payload;
                 let orderItemState = orderState.orderItems.find(ois => ois.id === orderItemStateId);
-                if (orderItemState.loading) {
+                if (orderItemState.loading || !orderItemState.server) {
                     return Observable.empty();
                 } else {
                     return Observable.of(this.orderActions.updateItemStarted(orderState, orderItemStateId));
@@ -102,9 +92,7 @@ export class OrderEffects {
     @Effect() updateItemStartedEffect = this.actions$
         .ofType(ORDER_ACTION_NAMES.UPDATE_ITEM_STARTED)
         .map<UpdateItemPayloadStarted>(toPayload)
-        .flatMap(payload => this.store
-            .select(s => s.order)
-            .first()
+        .flatMap(payload => toOrderStateSnapshot(this.store)
             .switchMap(orderState => {
                 let { orderItem, orderItemStateId } = payload;
                 let orderItemState = orderState.orderItems.find(ois => ois.id === orderItemStateId);
@@ -121,9 +109,7 @@ export class OrderEffects {
             ORDER_ACTION_NAMES.UPDATE_ITEM_COMPLETED
         )
         .map<CreateItemCompletedPayload | UpdateItemCompletedPayload>(toPayload)
-        .flatMap(payload => this.store
-            .select(s => s.order)
-            .first()
+        .flatMap(payload => toOrderStateSnapshot(this.store)
             .flatMap((orderState: OrderState) => {
                 let { orderItemStateId } = payload;
                 let orderItemState = orderState.orderItems.find(ois => ois.id === orderItemStateId);
@@ -143,4 +129,8 @@ export class OrderEffects {
             ORDER_ACTION_NAMES.UPDATE_ITEM_FAILED
         )
         .map(p => Observable.of(this.errorActions.addError(p)));
+}
+
+function toOrderStateSnapshot(store: Store<AppState>): Observable<OrderState> {
+    return store.select(s => s.order).first();
 }
