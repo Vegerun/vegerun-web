@@ -169,6 +169,20 @@ export class OrderActions {
         };
     }
 
+    incrementItem(state: OrderState, orderItemStateId: number): Action {
+        let item = this.getOrderItemState(state, orderItemStateId);
+        return this.updateItemCount(item, 1);
+    }
+
+    decrementItem(state: OrderState, orderItemStateId: number): Action {
+        let item = this.getOrderItemState(state, orderItemStateId);
+        if (item.local.count === 1) {
+            return this.deleteItem(state, orderItemStateId);
+        } else {
+            return this.updateItemCount(item, -1);
+        }
+    }
+
     updateItemCompleted(orderItemStateId: number, orderItem: OrderItemResultV2): Action {
         return {
             type: UPDATE_ITEM_COMPLETED,
@@ -190,23 +204,17 @@ export class OrderActions {
         };
     }
 
-    deleteItem(item: any /* OrderItem */): Action {
+    deleteItem(state: OrderState, orderItemStateId: number): Action {
         return {
             type: ORDER_ACTION_NAMES.REMOVE_ITEM,
-            payload: item.id
+            payload: null
         };
     }
 
-    incrementItem(item: any /* OrderItem */): Action {
-        return this.updateItemCount(item, 1);
-    }
+    
 
-    decrementItem(item: any /* OrderItem */): Action {
-        if (item.count === 1) {
-            return this.deleteItem(item);
-        } else {
-            return this.updateItemCount(item, -1);
-        }
+    private getOrderItemState(state: OrderState, orderItemStateId: number): OrderItemState {
+        return state.orderItems.find(ois => ois.id === orderItemStateId);
     }
 
     private updateItemCount(item: any, magnitude: Number): Action {

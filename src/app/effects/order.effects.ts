@@ -110,13 +110,13 @@ export class OrderEffects {
         )
         .map<CreateItemCompletedPayload | UpdateItemCompletedPayload>(toPayload)
         .flatMap(payload => toOrderStateSnapshot(this.store)
-            .flatMap((orderState: OrderState) => {
+            .flatMap((state: OrderState) => {
                 let { orderItemStateId } = payload;
-                let orderItemState = orderState.orderItems.find(ois => ois.id === orderItemStateId);
+                let orderItemState = state.orderItems.find(ois => ois.id === orderItemStateId);
                 if (!orderItemState) {
-                    return Observable.of(this.orderActions.deleteItem({}));
+                    return Observable.of(this.orderActions.deleteItem(state, orderItemStateId));
                 } else if (!this.orderItemComparer.areEqual(orderItemState.local, orderItemState.server)) {
-                    return Observable.of(this.orderActions.updateItem(orderState, payload.orderItemStateId, orderItemState.local));
+                    return Observable.of(this.orderActions.updateItem(state, payload.orderItemStateId, orderItemState.local));
                 } else {
                     return Observable.empty();
                 }

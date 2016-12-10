@@ -1,0 +1,17 @@
+<div class="order-basket-component">
+    <div class="row" *ngFor="let orderItem of order.items">
+        <div class="col-xs-1">
+            <div class="box">{{ orderItem.count }}x</div>
+        </div>
+        <div class="col-xs-9">
+            <div class="box">
+                <div>{{ orderItem.item.name }}</div>
+            </div>
+        </div>
+        <div class="col-xs-1">
+            <div class="box">
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,7 @@ import { RestaurantResultList } from '../components/restaurant-result-list/resta
 import { RestaurantResult } from '../components/restaurant-result/restaurant-result.component';
 import { MenuComponent } from '../components/menu/menu.component';
 import { MenuItemListComponent } from '../components/menu-item-list/menu-item-list.component';
+import { OrderBasketComponent } from '../components/order-basket/order-basket.component';
 
 export const APP_DECLARATIONS = [
     DashboardComponent,
@@ -23,5 +24,6 @@ export const APP_DECLARATIONS = [
     RestaurantResultList,
     RestaurantResult,
     MenuComponent,
-    MenuItemListComponent
+    MenuItemListComponent,
+    OrderBasketComponent
 ];

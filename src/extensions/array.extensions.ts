@@ -1,37 +1,33 @@
 interface Array<T> {
-    filterMap<T>(predFunc: (T, number?) => boolean | any, mapFunc: (T) => T): Array<T>
-    
-    mapMergeAtIndex<T>(index: number, mergeFrom: any): Array<T>
+    filterMap<T>(this: Array<T>, predFn: (T, number?) => boolean | any, mapFn: (T) => T): Array<T>;
 
-    mapAtIndex<T>(index: number, mapFunc: (T) => T): Array<T>
+    selectMany<T, U>(this: Array<T>, mapFn: (T) => Array<U>): Array<U>;
+
+    keyBy<TKey, TValue>(this: Array<TValue>, selectFn: (TValue) => TKey): Map<TKey, TValue>;
 }
 
-Array.prototype.filterMap = function filterMap<T>(predFunc, mapFunc) {
-    return (<Array<T>>this).map((value, index) => {
+Array.prototype.filterMap = function filterMap<T>(this: Array<T>, predFn, mapFn) {
+    return this.map((value, index) => {
         let match = false;
-        if (typeof predFunc === 'function') {
-            match = predFunc(value, index);
+        if (typeof predFn === 'function') {
+            match = predFn(value, index);
         } else {
-            match = value === predFunc;
+            match = value === predFn;
         }
-        return match ? mapFunc(value) : value;
+        return match ? mapFn(value) : value;
     });
 };
 
-Array.prototype.mapMergeAtIndex = function mergeAtIndex(index, mergeFrom) {
-    let result = [...this];
-    if (index >= result.length) {
-        throw 'Index out of range';
-    }
-    result[index] = Object.assign({}, result[index], mergeFrom);
-    return result;
-};
+Array.prototype.selectMany = function selectMany<T, U>(this: Array<T>, mapFn: (T) => Array<U>): Array<U> {
+    return [].concat(...this.map(mapFn));
+}
 
-Array.prototype.mapAtIndex = function mergeAtIndex(index, mapFunc) {
-    let result = [...this];
-    if (index >= result.length) {
-        throw 'Index out of range';
-    }
-    result[index] = mapFunc(result[index]);
-    return result;
-};
+Array.prototype.keyBy = function keyBy<TKey, TValue>(this: Array<TValue>, selectFn: (TValue) => TKey): Map<TKey, TValue> {
+    return this.reduce(
+        (map, item) => {
+            let key = selectFn(item);
+            map.set(key, item);
+            return map;  
+        },
+        new Map<TKey, TValue>());
+}
