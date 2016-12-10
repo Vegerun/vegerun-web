@@ -16,9 +16,9 @@ export class OrderItemComparer {
             return false;
         }
 
-        // if (a.instructions !== b.instructions) {
-        //     return false;
-        // }
+        if (!this.areInstructionsEqual(a, b)) {
+            return false;
+        }
 
         if (!this.areOrderItemOptionsArraysEqual(a.options, b.options)) {
             return false;
@@ -29,6 +29,14 @@ export class OrderItemComparer {
         }
 
         return true;
+    }
+
+    private areInstructionsEqual(a: OrderItem, b: OrderItem): boolean {
+        if (!a.instructions && !b.instructions) {
+            return true;
+        }
+
+        return a.instructions === b.instructions;
     }
 
     private areOrderItemOptionsArraysEqual(a: OrderItemOption[], b: OrderItemOption[]): boolean {

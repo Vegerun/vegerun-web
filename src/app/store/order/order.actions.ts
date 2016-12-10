@@ -211,8 +211,6 @@ export class OrderActions {
         };
     }
 
-    
-
     private getOrderItemState(state: OrderState, orderItemStateId: number): OrderItemState {
         return state.orderItems.find(ois => ois.id === orderItemStateId);
     }
