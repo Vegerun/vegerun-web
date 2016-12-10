@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Store, Action } from '@ngrx/store';
 
 import { OrderItemResult, OrderItemCreate } from '../../_lib/vegerun/orders';
 import { CustomerMenuResult, CustomerMenuItemResult } from '../../_lib/vegerun/menus';
@@ -34,7 +34,7 @@ export class OrderComponent implements OnInit {
     )
     {
         let orderState$ = this.store.select(s => s.order);
-        this.isOrderLoading$ = orderState$.map(o => o.orderIdLoading || !!o.orderItems.filter(ois => ois.loading)[0]);
+        this.isOrderLoading$ = orderState$.map(o => o.loading || !!o.orderItems.filter(ois => ois.loading)[0]);
         this.localOrder$ = orderState$.map(o => o.orderItems.map(ois => ois.local));
         this.serverOrder$ = orderState$.map(o => o.orderItems.map(ois => ois.server));
     }
@@ -53,15 +53,8 @@ export class OrderComponent implements OnInit {
     }
 
     selectItem(item: CustomerMenuItemResult) {
-        Observable
-            .combineLatest([
-                this.restaurant$,
-                this.store.select(o => o.order)
-            ])
-            .first()
-            .subscribe(([restaurant, orderState]) => {
-                this.store.dispatch(this.orderActions.createItem(orderState, item, restaurant));
-            });
+        this.combineWithState(this.restaurant$).subscribe(([restaurant, orderState]) =>
+            this.store.dispatch(this.orderActions.createItem(orderState, item, restaurant)));
     }
 
     openOrderItem(item: OrderItemModel) {
@@ -69,18 +62,30 @@ export class OrderComponent implements OnInit {
     }
 
     incrementOrderItem(item: OrderItemModel) {
-        this.store
-            .select(o => o.order)
-            .subscribe(orderState => {
-                this.store.dispatch(this.orderActions.incrementItem(orderState, item.stateId));
-            });
+        this.dispatchWithState(state => this.orderActions.incrementItem(state, item.stateId));
     }
 
     decrementOrderItem(item: OrderItemModel) {
-        this.store
-            .select(o => o.order)
-            .subscribe(orderState => {
-                this.store.dispatch(this.orderActions.decrementItem(orderState, item.stateId));
-            });
+        this.dispatchWithState(state => this.orderActions.decrementItem(state, item.stateId));
+    }
+
+    removeOrderItem(item: OrderItemModel) {
+        this.dispatchWithState(state => this.orderActions.removeItem(state, item.stateId));
+    }
+
+    private combineWithState(...array: Observable<{}>[]): Observable<any[]> {
+        return Observable
+            .combineLatest([
+                ...array,
+                this.store.select(o => o.order)
+            ])
+            .first();
+    }
+
+    private dispatchWithState(action: (OrderState) => Action) {
+        return this.store
+            .select(s => s.order)
+            .first()
+            .subscribe(state => this.store.dispatch(action(state)));
     }
 }

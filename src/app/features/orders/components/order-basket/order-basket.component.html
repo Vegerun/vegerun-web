@@ -6,6 +6,11 @@
         <div class="col-xs-9">
             <div class="box">
                 <div>{{ orderItem.item.name }}</div>
+                <div class="actions">
+                    <a class="action" href="javascript:void(0)" (click)="onOrderItemIncremented.emit(orderItem)">Plus</a>
+                    <a class="action" href="javascript:void(0)" (click)="onOrderItemDecremented.emit(orderItem)">Minus</a>
+                    <a class="action" href="javascript:void(0)" (click)="onOrderItemRemoved.emit(orderItem)">Remove</a>
+                </div>
             </div>
         </div>
         <div class="col-xs-1">

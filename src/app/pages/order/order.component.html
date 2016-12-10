@@ -1,5 +1,5 @@
 <div class="order-component">
-    <h2>Ordering from {{ restaurant$ | async }}</h2>
+    <h2>Ordering from {{ (restaurant$ | async).name }}</h2>
     <div class="row">
         <div class="col-xs-8">
             <div class="box">
@@ -14,7 +14,7 @@
                     (onOrderItemSelected)="openOrderItem($event)"
                     (onOrderItemIncremented)="incrementOrderItem($event)"
                     (onOrderItemDecremented)="decrementOrderItem($event)"
-                    (onOrderItemRemoved)="incrementOrderItem($event)"></app-order-basket>
+                    (onOrderItemRemoved)="removeOrderItem($event)"></app-order-basket>
 
                 <div>
                     <div *ngIf="isOrderLoading$ | async">Order is updating</div>

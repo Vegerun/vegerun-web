@@ -8,26 +8,28 @@ export interface OrderItemState {
     server: OrderItemResult;
 
     loading: boolean;
-
-    blocked: boolean;
 }
 
 export interface OrderState {
     orderId: string;
 
-    orderIdLoading: boolean;
+    loading: boolean;
 
     restaurantId: string;
 
     orderItems: OrderItemState[];
+
+    removedOrderItems: OrderItemState[];
 }
 
 export const DEFAULT_ORDER_STATE: OrderState = {
     orderId: null,
 
-    orderIdLoading: false,
+    loading: false,
 
     restaurantId: null,
 
-    orderItems: []
+    orderItems: [],
+
+    removedOrderItems: []
 }

@@ -18,7 +18,7 @@ export interface CreateItemPayload {
     restaurant: RestaurantResult;
 }
 
-export interface CreateItemPayloadStarted {
+export interface CreateItemStartedPayload {
     orderItemStateId: number
 
     orderItem: OrderItemCreate;
@@ -36,13 +36,17 @@ export interface CreateItemFailedPayload {
     error: any
 }
 
+export interface CreateItemFromRemovedPayload {
+    orderItemStateId: number;
+}
+
 export interface UpdateItemPayload {
     orderItemStateId: number;
 
     orderItem: OrderItemUpdate;
 }
 
-export interface UpdateItemPayloadStarted {
+export interface UpdateItemStartedPayload {
     orderItemStateId: number
 
     orderItem: OrderItemUpdate;
@@ -57,5 +61,21 @@ export interface UpdateItemCompletedPayload {
 export interface UpdateItemFailedPayload {
     orderItemStateId: number;
 
+    error: any
+}
+
+export interface RemoveItemPayload {
+    orderItemStateId: number;
+}
+
+export interface RemoveItemStartedPayload {
+    orderItemStateId: number;
+}
+
+export interface RemoveItemCompletedPayload {
+    orderItemStateId: number;
+}
+
+export interface RemoveItemFailedPayload {
     error: any
 }
