@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
-import { OrderItemFactory, OrderItemComparer } from '../../_lib/vegerun/orders';
-import { OrderResult } from '../../_lib/vegerun/_swagger-gen/v1';
-import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2 , OrderItemResultV2, OrderItemUpdateV2 } from '../../_lib/vegerun/_swagger-gen/v2';
+import { OrderItemFactory, OrderItemComparer, OrderResult, OrderItemResult, OrderItemCreate, OrderItemUpdate } from '../../../_lib/vegerun/orders';
+import { CustomerMenuItemResult } from '../../../_lib/vegerun/menus';
+import { RestaurantResult } from '../../../_lib/vegerun/restaurants';
 
 import { OrderState, OrderItemState } from './order.state';
-
 import {
     CreatePayload, CreateCompletedPayload,
     CreateItemPayload, CreateItemPayloadStarted, CreateItemCompletedPayload, CreateItemFailedPayload,
@@ -63,7 +62,7 @@ export class OrderActions {
         private orderItemComparer: OrderItemComparer
     ) { }
 
-    create(restaurant: RestaurantResultV2): Action {
+    create(restaurant: RestaurantResult): Action {
         return {
             type: CREATE,
             payload: <CreatePayload>{
@@ -88,7 +87,7 @@ export class OrderActions {
         };
     }
 
-    createItem(state: OrderState, item: CustomerMenuItemResultV2, restaurant: RestaurantResultV2): Action {
+    createItem(state: OrderState, item: CustomerMenuItemResult, restaurant: RestaurantResult): Action {
         let orderItem = this.orderItemFactory.createOrderItem(item);
         let existingOrderItemState = state.orderItems.find(ois => this.orderItemComparer.areContentsEqual(ois.local, orderItem));
         if (existingOrderItemState) {
@@ -97,7 +96,7 @@ export class OrderActions {
                 type: UPDATE_ITEM,
                 payload: <UpdateItemPayload>{
                     orderItemStateId: id,
-                    orderItem: <OrderItemUpdateV2>{
+                    orderItem: <OrderItemUpdate>{
                         count: local.count + 1
                     }
                 }
@@ -126,7 +125,7 @@ export class OrderActions {
         };
     }
 
-    createItemCompleted(orderItemStateId: number, orderItem: OrderItemResultV2): Action {
+    createItemCompleted(orderItemStateId: number, orderItem: OrderItemResult): Action {
         return {
             type: CREATE_ITEM_COMPLETED,
             payload: <CreateItemCompletedPayload>{
@@ -136,7 +135,7 @@ export class OrderActions {
         };
     }
 
-    createItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreateV2): Action {
+    createItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreate): Action {
         return {
             type: CREATE_ITEM_FAILED,
             payload: <CreateItemFailedPayload>{
@@ -147,7 +146,7 @@ export class OrderActions {
         };
     }
 
-    updateItem(state: OrderState, orderItemStateId: number, orderItem: OrderItemUpdateV2): Action {
+    updateItem(state: OrderState, orderItemStateId: number, orderItem: OrderItemUpdate): Action {
         let orderItemState = state.orderItems.find(ois => ois.id === orderItemStateId);
         return {
             type: UPDATE_ITEM,
@@ -164,7 +163,7 @@ export class OrderActions {
             type: UPDATE_ITEM_STARTED,
             payload: <UpdateItemPayloadStarted>{
                 orderItemStateId,
-                orderItem: <OrderItemUpdateV2>orderItemState.local
+                orderItem: <OrderItemUpdate>orderItemState.local
             }
         };
     }
@@ -183,7 +182,7 @@ export class OrderActions {
         }
     }
 
-    updateItemCompleted(orderItemStateId: number, orderItem: OrderItemResultV2): Action {
+    updateItemCompleted(orderItemStateId: number, orderItem: OrderItemResult): Action {
         return {
             type: UPDATE_ITEM_COMPLETED,
             payload: <UpdateItemCompletedPayload>{
@@ -193,7 +192,7 @@ export class OrderActions {
         };
     }
 
-    updateItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreateV2): Action {
+    updateItemFailed(orderItemStateId: number, error: any, orderItem: OrderItemCreate): Action {
         return {
             type: UPDATE_ITEM_FAILED,
             payload: <UpdateItemFailedPayload>{

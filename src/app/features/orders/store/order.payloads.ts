@@ -1,5 +1,6 @@
-import { OrderResult } from '../../_lib/vegerun/_swagger-gen/v1';
-import { CustomerMenuItemResultV2, RestaurantResultV2, OrderItemCreateV2, OrderItemResultV2, OrderItemUpdateV2 } from '../../_lib/vegerun/_swagger-gen/v2';
+import { OrderResult } from '../../../_lib/vegerun/_swagger-gen/v1';
+import { OrderItemResult, OrderItemCreate, OrderItemUpdate } from '../../../_lib/vegerun/orders';
+import { RestaurantResult } from '../../../_lib/vegerun/restaurants';
 
 export interface CreatePayload {
     restaurantId: string;
@@ -12,21 +13,21 @@ export interface CreateCompletedPayload {
 export interface CreateItemPayload {
     orderItemStateId: number;
 
-    orderItem: OrderItemCreateV2;
+    orderItem: OrderItemCreate;
 
-    restaurant: RestaurantResultV2;
+    restaurant: RestaurantResult;
 }
 
 export interface CreateItemPayloadStarted {
     orderItemStateId: number
 
-    orderItem: OrderItemCreateV2;
+    orderItem: OrderItemCreate;
 }
 
 export interface CreateItemCompletedPayload {
     orderItemStateId: number;
 
-    orderItem: OrderItemResultV2;
+    orderItem: OrderItemResult;
 }
 
 export interface CreateItemFailedPayload {
@@ -38,19 +39,19 @@ export interface CreateItemFailedPayload {
 export interface UpdateItemPayload {
     orderItemStateId: number;
 
-    orderItem: OrderItemUpdateV2;
+    orderItem: OrderItemUpdate;
 }
 
 export interface UpdateItemPayloadStarted {
     orderItemStateId: number
 
-    orderItem: OrderItemUpdateV2;
+    orderItem: OrderItemUpdate;
 }
 
 export interface UpdateItemCompletedPayload {
     orderItemStateId: number;
 
-    orderItem: OrderItemResultV2;
+    orderItem: OrderItemResult;
 }
 
 export interface UpdateItemFailedPayload {

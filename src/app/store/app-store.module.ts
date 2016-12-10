@@ -4,7 +4,7 @@ import { compose } from '@ngrx/core';
 import { Store, StoreModule, combineReducers } from '@ngrx/store';
 import { routerReducer, RouterState } from '@ngrx/router-store';
 
-import { orderReducer, OrderState, OrderActions } from './order';
+import { orderReducer, OrderState, OrderActions } from '../features/orders/store';
 import { errorReducer, ErrorState, ErrorActions } from './error';
 
 export interface AppState {

@@ -1,9 +1,8 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { OrderItemResultV2, OrderItemCreateV2 } from '../../_lib/vegerun/_swagger-gen/v2';
-import { OrderItemComparer, OrderItem } from '../../_lib/vegerun/orders';
+import { OrderItemResult, OrderItemCreate } from '../../../_lib/vegerun/orders';
 
-import '../../../extensions/array.extensions';
+import '../../../../extensions/array.extensions';
 
 import { OrderState, OrderItemState, DEFAULT_ORDER_STATE } from './order.state';
 import { ORDER_ACTION_NAMES } from './order.actions';
@@ -95,7 +94,7 @@ function startItemServerOperation(state: OrderState, orderItemStateId: number): 
     });
 }
 
-function completeItemServerOperation(state: OrderState, orderItemStateId: number, orderItem: OrderItemResultV2): OrderState {
+function completeItemServerOperation(state: OrderState, orderItemStateId: number, orderItem: OrderItemResult): OrderState {
     return mergeIntoItemState(state, orderItemStateId, <OrderItemState>{
         loading: false,
         server: orderItem

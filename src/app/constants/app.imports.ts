@@ -7,6 +7,7 @@ import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { VegerunModule } from '../_lib/vegerun';
 
+import { OrderModule } from '../features/orders';
 import { AppStoreModule } from '../store/app-store.module';
 
 import { APP_ROUTES } from './app.routes';
@@ -32,5 +33,6 @@ export const APP_IMPORTS = [
     VegerunModule.forRoot('http://localhost:5000'),
     AppStoreModule,
     APP_EFFECTS.map(effect => EffectsModule.run(effect)),
+    OrderModule,
     ...DEV_APP_IMPORTS
 ];

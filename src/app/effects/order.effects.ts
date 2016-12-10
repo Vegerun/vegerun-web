@@ -3,20 +3,16 @@ import { Store, Action } from '@ngrx/store';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 
-import { VegerunClient, OrderResultV2 } from '../_lib/vegerun/_swagger-gen/v1';
-import { Vegerun2Client, CustomerMenuItemResultV2, OrderItemResultV2, OrderItemCreateV2, OrderItemUpdateV2 } from '../_lib/vegerun/_swagger-gen/v2';
-import { OrderItemComparer } from '../_lib/vegerun/orders';
+import { VegerunClient, Vegerun2Client, OrderItemComparer } from '../_lib/vegerun';
 
 import { AppState } from '../store';
-import { OrderState, OrderItemState } from '../store/order';
-import { ORDER_ACTION_NAMES, OrderActions } from '../store/order/order.actions';
 import { ErrorActions } from '../store/error/error.actions'
-
+import { OrderState, OrderItemState, OrderActions, ORDER_ACTION_NAMES } from '../features/orders';
 import {
     CreatePayload, CreateCompletedPayload,
     CreateItemPayload, CreateItemPayloadStarted, CreateItemCompletedPayload,
     UpdateItemPayload, UpdateItemPayloadStarted, UpdateItemCompletedPayload,
-} from '../store/order/order.payloads';
+} from '../features/orders/store/order.payloads';
 
 @Injectable()
 export class OrderEffects {
