@@ -12,7 +12,7 @@ export class SearchComponentResolve implements Resolve<SearchComponentData> {
         private vegerunClient: VegerunClient
     ) { }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<SearchComponentData>|boolean {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<SearchComponentData> | boolean {
         let { postcode } = route.params;
         if (!postcode) {
             return false;

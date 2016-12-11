@@ -11,7 +11,7 @@ export class OrderComponentResolve implements Resolve<OrderComponentData> {
         private vegerunClient: Vegerun2Client
     ) { }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<OrderComponentData>|boolean {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<OrderComponentData> | boolean {
         let { townSlug, restaurantSlug } = route.params;
         if (!townSlug || !restaurantSlug) {
             return false;

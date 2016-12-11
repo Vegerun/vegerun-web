@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
+import { ActionNamesHelper } from '../../../../helpers/action-names.helper';
+
 import { OrderItemFactory, OrderItemComparer, OrderResult, OrderItemResult, OrderItemCreate, OrderItemUpdate } from '../../../_lib/vegerun/orders';
 import { CustomerMenuItemResult } from '../../../_lib/vegerun/menus';
 import { RestaurantResult } from '../../../_lib/vegerun/restaurants';
@@ -13,33 +15,29 @@ import {
     RemoveItemPayload, RemoveItemStartedPayload, RemoveItemCompletedPayload, RemoveItemFailedPayload
 } from './order.payloads';
 
-const prefix = action => `[Order] ${action}`;
-const status = (parentActionName, statusName) => `${parentActionName} - ${statusName}`;
-const started = actionName => status(actionName, 'Started');
-const completed = actionName => status(actionName, 'Completed');
-const failed = actionName => status(actionName, 'Failed');
+const actionNamesHelper = new ActionNamesHelper('Order');
 
-const CREATE = prefix('Create');
-const CREATE_COMPLETED = completed(CREATE);
-const CREATE_FAILED = failed(CREATE);
+const CREATE = actionNamesHelper.getName('Create');
+const CREATE_COMPLETED = actionNamesHelper.getCompletedName(CREATE);
+const CREATE_FAILED = actionNamesHelper.getFailedName(CREATE);
 
-const CREATE_ITEM = prefix('Create Item');
-const CREATE_ITEM_STARTED = started(CREATE_ITEM);
-const CREATE_ITEM_COMPLETED = completed(CREATE_ITEM);
-const CREATE_ITEM_FAILED = failed(CREATE_ITEM);
-const CREATE_ITEM_FROM_REMOVED = status(CREATE_ITEM, 'From Removed');
+const CREATE_ITEM = actionNamesHelper.getName('Create Item');
+const CREATE_ITEM_STARTED = actionNamesHelper.getStartedName(CREATE_ITEM);
+const CREATE_ITEM_COMPLETED = actionNamesHelper.getCompletedName(CREATE_ITEM);
+const CREATE_ITEM_FAILED = actionNamesHelper.getFailedName(CREATE_ITEM);
+const CREATE_ITEM_FROM_REMOVED = actionNamesHelper.getChildName(CREATE_ITEM, 'From Removed');
 
-const CLEAR = prefix('Clear');
+const CLEAR = actionNamesHelper.getName('Clear');
 
-const UPDATE_ITEM = prefix('Update Item');
-const UPDATE_ITEM_STARTED = started(UPDATE_ITEM);
-const UPDATE_ITEM_COMPLETED = completed(UPDATE_ITEM);
-const UPDATE_ITEM_FAILED = failed(UPDATE_ITEM);
+const UPDATE_ITEM = actionNamesHelper.getName('Update Item');
+const UPDATE_ITEM_STARTED = actionNamesHelper.getStartedName(UPDATE_ITEM);
+const UPDATE_ITEM_COMPLETED = actionNamesHelper.getCompletedName(UPDATE_ITEM);
+const UPDATE_ITEM_FAILED = actionNamesHelper.getFailedName(UPDATE_ITEM);
 
-const REMOVE_ITEM = prefix('Remove Item');
-const REMOVE_ITEM_STARTED = started(REMOVE_ITEM);
-const REMOVE_ITEM_COMPLETED = completed(REMOVE_ITEM);
-const REMOVE_ITEM_FAILED = failed(REMOVE_ITEM);
+const REMOVE_ITEM = actionNamesHelper.getName('Remove Item');
+const REMOVE_ITEM_STARTED = actionNamesHelper.getStartedName(REMOVE_ITEM);
+const REMOVE_ITEM_COMPLETED = actionNamesHelper.getCompletedName(REMOVE_ITEM);
+const REMOVE_ITEM_FAILED = actionNamesHelper.getFailedName(REMOVE_ITEM);
 
 export const ORDER_ACTION_NAMES = {
     CREATE,
