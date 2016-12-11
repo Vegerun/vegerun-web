@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store, Action } from '@ngrx/store';
 
-import { OrderItemResult, OrderItemCreate } from '../../_lib/vegerun/orders';
 import { CustomerMenuResult, CustomerMenuItemResult } from '../../_lib/vegerun/menus';
 import { RestaurantResult } from '../../_lib/vegerun/restaurants';
 
@@ -18,10 +17,6 @@ import { OrderComponentData } from './order.component.data';
 })
 export class OrderComponent implements OnInit {
 
-    private isOrderLoading$: Observable<boolean>;
-    private localOrder$: Observable<OrderItemCreate[]>;
-    private serverOrder$: Observable<OrderItemResult[]>;
-
     private restaurant$: Observable<RestaurantResult>;
     private menu$: Observable<CustomerMenuResult>;
     private order$: Observable<OrderModel>;
@@ -31,34 +26,30 @@ export class OrderComponent implements OnInit {
         private store: Store<AppState>,
         private orderActions: OrderActions,
         private orderFactory: OrderFactory
-    )
-    {
-        let orderState$ = this.store.select(s => s.order);
-        this.isOrderLoading$ = orderState$.map(o => o.loading || !!o.orderItems.filter(ois => ois.loading)[0]);
-        this.localOrder$ = orderState$.map(o => o.orderItems.map(ois => ois.local));
-        this.serverOrder$ = orderState$.map(o => o.orderItems.map(ois => ois.server));
-    }
+    ) { }
 
     ngOnInit() {
         let orderData = this.route.data.map((data: { order: OrderComponentData}) => data.order);
         this.restaurant$ = orderData.map(o => o.restaurant);
         this.menu$ = orderData.map(o => o.menu);
-
-        this.order$ = Observable
-            .combineLatest([
-                this.store.select(o => o.order),
-                this.menu$
-            ])
-            .map(([orderState, menu]) => this.orderFactory.createOrder(orderState, menu));
+        
+        this.order$ = this.combineWithState(this.menu$).map(([menu, orderState]) => {
+            // debugger;
+            let order = this.orderFactory.createOrder(orderState, menu);
+            return order;
+        });
+            
     }
 
     selectItem(item: CustomerMenuItemResult) {
-        this.combineWithState(this.restaurant$).subscribe(([restaurant, orderState]) =>
-            this.store.dispatch(this.orderActions.createItem(orderState, item, restaurant)));
+        this.combineWithState(this.restaurant$)
+            .first()
+            .subscribe(([restaurant, orderState]) =>
+                this.store.dispatch(this.orderActions.createItem(orderState, item, restaurant)));
     }
 
     openOrderItem(item: OrderItemModel) {
-        // Open modal for configuring order item?
+        // TODO: Open modal for configuring order item?
     }
 
     incrementOrderItem(item: OrderItemModel) {
@@ -78,8 +69,7 @@ export class OrderComponent implements OnInit {
             .combineLatest([
                 ...array,
                 this.store.select(o => o.order)
-            ])
-            .first();
+            ]);
     }
 
     private dispatchWithState(action: (OrderState) => Action) {

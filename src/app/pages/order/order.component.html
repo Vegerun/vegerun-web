@@ -15,25 +15,6 @@
                     (onOrderItemIncremented)="incrementOrderItem($event)"
                     (onOrderItemDecremented)="decrementOrderItem($event)"
                     (onOrderItemRemoved)="removeOrderItem($event)"></app-order-basket>
-
-                <div>
-                    <div *ngIf="isOrderLoading$ | async">Order is updating</div>
-                    <div *ngIf="!(isOrderLoading$ | async)">Order is up-to-date</div>
-                    <div class="row" style="margin-top: 50px;">
-                        <div class="col-xs-6">
-                            <div class="box">
-                                <div>Local Copy:</div>
-                                <pre>{{ localOrder$ | async | json}}</pre>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="box">
-                                <div>Server Copy:</div>
-                                <pre>{{ serverOrder$ | async | json}}</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
