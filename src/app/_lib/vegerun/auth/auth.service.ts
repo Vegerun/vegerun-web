@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { API_BASE_URL } from '../';
+import { API_BASE_URL } from '../_swagger-gen/v1';
 
 import { AuthModel } from './models/auth.model';
 
@@ -23,11 +23,11 @@ export class AuthService {
                 firebaseAccessToken: data.firebase_access_token,
                 restaurantId: data.restaurant_id
             }))
-            .cache()
+            .cache();
     }
 
     logout(): Observable<{}> {
-        // TODO: Implement me
+        // TODO: Implement me!!
         return Observable.empty();
     }
 }

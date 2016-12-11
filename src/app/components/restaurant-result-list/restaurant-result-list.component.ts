@@ -8,7 +8,7 @@ import { RestaurantSearchResult } from '../../_lib/vegerun/_swagger-gen/v1';
     styleUrls: ['./restaurant-result-list.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RestaurantResultList {
+export class RestaurantResultListComponent {
     @Input() results: RestaurantSearchResult[];
     @Output() onResultSelected = new EventEmitter<RestaurantSearchResult>();
 }

@@ -7,6 +7,7 @@ import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { SharedModule } from '../features/shared';
 import { OrderModule } from '../features/orders';
+import { AuthModule } from '../features/auth';
 import { AppStoreModule } from '../store/app-store.module';
 
 import { APP_ROUTES } from './app.routes';
@@ -32,6 +33,7 @@ export const APP_IMPORTS = [
     SharedModule,
     AppStoreModule,
     OrderModule,
+    AuthModule,
     APP_EFFECTS.map(effect => EffectsModule.run(effect)),
     ...DEV_APP_IMPORTS
 ];

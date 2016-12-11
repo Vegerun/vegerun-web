@@ -1,0 +1,13 @@
+<div class="login-component">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <md-input formControlName="email" placeholder="Email"></md-input>
+        </div>
+        <div class="form-group">
+            <md-input type="password" formControlName="password" placeholder="Password"></md-input>
+        </div>
+        <div class="form-group">
+            <button md-raised-button color="primary" (click)="login()">Login</button>
+        </div>
+    </form>
+</div>

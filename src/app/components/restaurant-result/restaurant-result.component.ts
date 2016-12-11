@@ -8,7 +8,7 @@ import { API_BASE_URL, RestaurantSearchItemResult } from '../../_lib/vegerun/_sw
     styleUrls: ['./restaurant-result.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RestaurantResult {
+export class RestaurantResultComponent {
     @Input() result: RestaurantSearchItemResult;
 
     constructor(@Inject(API_BASE_URL) private baseUrl?: string) { }

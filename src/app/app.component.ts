@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { AppState } from './store'
+import { AppState } from './store';
 import { LoggingService } from './features/shared';
+import { AuthDialogComponent, AuthDialogMode } from './components/auth-dialog';
 
 import { MOBILE } from './services/constants';
 
@@ -46,7 +49,11 @@ export class AppComponent implements OnInit {
     sideNavMode = MOBILE ? 'over' : 'side';
     views = views;
 
+    private hasAuth$: Observable<boolean>;
+    private authEmail$: Observable<string>;
+
     constructor(
+        private mdDialog: MdDialog,
         private route: ActivatedRoute,
         private router: Router,
         private logger: LoggingService,
@@ -61,6 +68,10 @@ export class AppComponent implements OnInit {
                 this.logger.error(error);
                 alert(error);
             });
+
+        let auth$ = this.store.select(s => s.auth)
+        this.hasAuth$ = auth$.map(state => !!state.accessToken);
+        this.authEmail$ = auth$.map(state => state.email);
     }
 
     activateEvent(event) {
@@ -69,5 +80,15 @@ export class AppComponent implements OnInit {
 
     deactivateEvent(event) {
         this.logger.debug('Deactivate Event:', event);
+    }
+
+    login() {
+        let dialogRef = this.mdDialog.open(AuthDialogComponent);
+        dialogRef.componentInstance.mode = AuthDialogMode.Login;
+    }
+
+    register() {
+        let dialogRef = this.mdDialog.open(AuthDialogComponent);
+        dialogRef.componentInstance.mode = AuthDialogMode.Register;
     }
 }

@@ -4,25 +4,27 @@ import { compose } from '@ngrx/core';
 import { Store, StoreModule, combineReducers } from '@ngrx/store';
 import { routerReducer, RouterState } from '@ngrx/router-store';
 
-import { orderReducer, OrderState, OrderActions } from '../features/orders/store';
 import { errorReducer, ErrorState, ErrorActions } from './error';
+import { orderReducer, OrderState } from '../features/orders/store';
+import { authReducer, AuthState } from '../features/auth';
 
 export interface AppState {
     router: RouterState,
+    error: ErrorState,
     order: OrderState,
-    error: ErrorState
+    auth: AuthState
 }
 
 @NgModule({
     imports: [
         StoreModule.provideStore(compose(combineReducers)({
             router: routerReducer,
+            error: errorReducer,
             order: orderReducer,
-            error: errorReducer
+            auth: authReducer
         }))
     ],
     providers: [
-        OrderActions,
         ErrorActions
     ]
 })

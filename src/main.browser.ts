@@ -8,14 +8,14 @@ import { AppModule } from './app/app.module';
 import { decorateModuleRef } from './environment';
 
 if ('production' === ENV) {
-  enableProdMode();
+    enableProdMode();
 }
 
 export function main(): Promise<any> {
-  return platformBrowserDynamic()
-    .bootstrapModule(AppModule)
-    .then(decorateModuleRef)
-    .catch(err => console.error(err));
+    return platformBrowserDynamic()
+        .bootstrapModule(AppModule)
+        .then(decorateModuleRef)
+        .catch(err => console.error(err));
 }
 
 // needed for hmr

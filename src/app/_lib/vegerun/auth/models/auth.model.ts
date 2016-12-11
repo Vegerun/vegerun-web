@@ -3,7 +3,7 @@ export interface AuthModel {
 
     expiresIn: number;
 
-    restaurantId: string;
-
     firebaseAccessToken: string;
+
+    restaurantId?: string;
 }

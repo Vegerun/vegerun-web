@@ -1,4 +1,5 @@
 import { NgModule, Provider, ValueProvider } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared';
@@ -15,6 +16,7 @@ const CHECKOUT_ROUTES = [
 
 @NgModule({
     imports: [
+        BrowserModule,
         RouterModule.forChild(CHECKOUT_ROUTES)
     ],
     declarations: [

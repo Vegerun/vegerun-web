@@ -3,11 +3,14 @@ import { ErrorNotFoundComponent } from '../pages/error-not-found/error-not-found
 import { SearchComponent } from '../pages/search/search.component';
 import { OrderComponent } from '../pages/order/order.component';
 
-import { LocationSearchComponent } from '../components/location-search/location-search.component';
-import { RestaurantResultList } from '../components/restaurant-result-list/restaurant-result-list.component';
-import { RestaurantResult } from '../components/restaurant-result/restaurant-result.component';
-import { MenuComponent } from '../components/menu/menu.component';
-import { MenuItemListComponent } from '../components/menu-item-list/menu-item-list.component';
+import {
+    AuthDialogComponent,
+    LocationSearchComponent,
+    MenuComponent,
+    MenuItemListComponent,
+    RestaurantResultComponent,
+    RestaurantResultListComponent
+} from '../components';
 
 export const APP_DECLARATIONS = [
     HomeComponent,
@@ -16,8 +19,9 @@ export const APP_DECLARATIONS = [
     OrderComponent,
 
     LocationSearchComponent,
-    RestaurantResultList,
-    RestaurantResult,
+    RestaurantResultListComponent,
+    RestaurantResultComponent,
     MenuComponent,
-    MenuItemListComponent
+    MenuItemListComponent,
+    AuthDialogComponent
 ];
