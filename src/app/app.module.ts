@@ -25,8 +25,8 @@ import { AppState } from './store';
 
 @NgModule({
     declarations: [
-      AppComponent,
-      APP_DECLARATIONS
+        AppComponent,
+        APP_DECLARATIONS
     ],
     entryComponents: [APP_ENTRY_COMPONENTS],
     imports: [

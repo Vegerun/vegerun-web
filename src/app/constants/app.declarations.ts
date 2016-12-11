@@ -1,5 +1,3 @@
-import { DashboardComponent } from '../features/dashboard.component';
-
 import { HomeComponent } from '../pages/home/home.component';
 import { ErrorNotFoundComponent } from '../pages/error-not-found/error-not-found.component';
 import { SearchComponent } from '../pages/search/search.component';
@@ -12,8 +10,6 @@ import { MenuComponent } from '../components/menu/menu.component';
 import { MenuItemListComponent } from '../components/menu-item-list/menu-item-list.component';
 
 export const APP_DECLARATIONS = [
-    DashboardComponent,
-    
     HomeComponent,
     ErrorNotFoundComponent,
     SearchComponent,

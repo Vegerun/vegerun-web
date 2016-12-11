@@ -1,8 +1,6 @@
 /* tslint:disable: max-line-length */
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../features/dashboard.component';
-
 import { HomeComponent } from '../pages/home/home.component';
 import { ErrorNotFoundComponent } from '../pages/error-not-found/error-not-found.component';
 import { SearchComponent, SearchComponentResolve } from '../pages/search';
@@ -29,19 +27,16 @@ export const APP_ROUTES: Routes = [
         }
     },
     {
-        path: 'dashboard',
-        component: DashboardComponent
-    },
-    {
-        path: 'lazy',
-        loadChildren: '../features/lazy/index#LazyModule'
-    },
-    {
-        path: 'sync',
-        loadChildren: '../features/sync/index#SyncModule?sync=true'
-    },
-    {
         path: '**',
         component: ErrorNotFoundComponent
     }
+
+    // {
+    //     path: 'lazy',
+    //     loadChildren: '../features/lazy/index#LazyModule'
+    // },
+    // {
+    //     path: 'sync',
+    //     loadChildren: '../features/sync/index#SyncModule?sync=true'
+    // }
 ];

@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { HostingEnvironment } from './hosting-environment';
+import { EnvironmentHelper } from '../../helpers/environment.helper';
 
 @Injectable()
 export class Logger {
 
-    constructor(
-        private hostingEnv: HostingEnvironment
-    ) { }
-
     debug(message, ...optionalParams) {
-        if (this.hostingEnv.isDevelopment()) {
+        if (EnvironmentHelper.isDevelopment()) {
             console.log(message, ...optionalParams);
         }
     }

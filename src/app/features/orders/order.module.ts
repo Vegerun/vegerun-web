@@ -1,16 +1,18 @@
-import { NgModule, ModuleWithProviders, Provider, ValueProvider } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
-import { OrderBasketComponent } from './components';
+import { SharedModule } from '../shared';
 
+import { OrderBasketComponent } from './components';
 import { OrderFactory } from './services';
 import { OrderActions } from './store'; 
 
 @NgModule({
     imports: [
         BrowserModule,
-        HttpModule
+        HttpModule,
+        SharedModule
     ],
     declarations: [
         OrderBasketComponent

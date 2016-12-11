@@ -5,8 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
-import { VegerunModule } from '../_lib/vegerun';
-
+import { SharedModule } from '../features/shared';
 import { OrderModule } from '../features/orders';
 import { AppStoreModule } from '../store/app-store.module';
 
@@ -30,9 +29,9 @@ export const APP_IMPORTS = [
     ReactiveFormsModule,
     MaterialModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES, { preloadingStrategy: PreloadAllModules }),
-    VegerunModule.forRoot('http://localhost:5000'),
+    SharedModule,
     AppStoreModule,
-    APP_EFFECTS.map(effect => EffectsModule.run(effect)),
     OrderModule,
+    APP_EFFECTS.map(effect => EffectsModule.run(effect)),
     ...DEV_APP_IMPORTS
 ];
