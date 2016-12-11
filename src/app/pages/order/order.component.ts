@@ -33,12 +33,17 @@ export class OrderComponent implements OnInit {
         this.restaurant$ = orderData.map(o => o.restaurant);
         this.menu$ = orderData.map(o => o.menu);
         
-        this.order$ = this.combineWithState(this.menu$).map(([menu, orderState]) => {
-            // debugger;
-            let order = this.orderFactory.createOrder(orderState, menu);
-            return order;
+        this.order$ = this.combineWithState(this.menu$, this.restaurant$).map(([m, r, s]) => {
+            let menu = <CustomerMenuResult>m, restaurant = <RestaurantResult>r, state = <OrderState>s;
+            if (state.orderId || state.loading) {
+                if (state.restaurantId === restaurant.id) {
+                    return this.orderFactory.createOrder(state, menu);
+                } else {
+                    this.store.dispatch(this.orderActions.clear())
+                }
+            }
+            return null;
         });
-            
     }
 
     selectItem(item: CustomerMenuItemResult) {

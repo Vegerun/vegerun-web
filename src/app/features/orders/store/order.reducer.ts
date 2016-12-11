@@ -37,6 +37,10 @@ export const orderReducer: ActionReducer<OrderState> = (state: OrderState = DEFA
             return Object.assign({}, DEFAULT_ORDER_STATE);
         }
 
+        case ORDER_ACTION_NAMES.CLEAR: {
+            return DEFAULT_ORDER_STATE;
+        }
+
         case ORDER_ACTION_NAMES.CREATE_ITEM: {
             let { orderItem, orderItemStateId } = <CreateItemPayload>payload;
             return Object.assign({}, state, <OrderState>{

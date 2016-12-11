@@ -29,6 +29,8 @@ const CREATE_ITEM_COMPLETED = completed(CREATE_ITEM);
 const CREATE_ITEM_FAILED = failed(CREATE_ITEM);
 const CREATE_ITEM_FROM_REMOVED = status(CREATE_ITEM, 'From Removed');
 
+const CLEAR = prefix('Clear');
+
 const UPDATE_ITEM = prefix('Update Item');
 const UPDATE_ITEM_STARTED = started(UPDATE_ITEM);
 const UPDATE_ITEM_COMPLETED = completed(UPDATE_ITEM);
@@ -43,6 +45,8 @@ export const ORDER_ACTION_NAMES = {
     CREATE,
     CREATE_COMPLETED,
     CREATE_FAILED,
+
+    CLEAR,
 
     CREATE_ITEM,
     CREATE_ITEM_STARTED,
@@ -93,6 +97,12 @@ export class OrderActions {
         return {
             type: CREATE_FAILED,
             payload: error
+        };
+    }
+
+    clear(): Action {
+        return {
+            type: CLEAR
         };
     }
 
