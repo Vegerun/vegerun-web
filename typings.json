@@ -1,5 +1,9 @@
 {
   "dependencies": {
     "lodash": "registry:npm/lodash#4.0.0+20161015015725"
+  },
+  "globalDependencies": {
+    "scriptjs": "registry:dt/scriptjs#0.0.0+20160819193624",
+    "stripe": "registry:dt/stripe#0.0.0+20160811213059"
   }
 }

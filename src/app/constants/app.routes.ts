@@ -27,6 +27,10 @@ export const APP_ROUTES: Routes = [
         }
     },
     {
+        path: 'checkout',
+        loadChildren: '../features/checkout/index#CheckoutModule'
+    },
+    {
         path: '**',
         component: ErrorNotFoundComponent
     }

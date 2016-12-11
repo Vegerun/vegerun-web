@@ -16,6 +16,11 @@
                     (onOrderItemIncremented)="incrementOrderItem($event)"
                     (onOrderItemDecremented)="decrementOrderItem($event)"
                     (onOrderItemRemoved)="removeOrderItem($event)"></app-order-basket>
+                <div class="checkout-button-container">
+                    <a class="checkout-button" md-raised-button color="primary" [routerLink]="'/checkout'">
+                        <span>Checkout</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

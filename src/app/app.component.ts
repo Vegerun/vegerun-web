@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './store'
-import { Logger } from './services/logger';
+import { LoggingService } from './features/shared';
 
 import { MOBILE } from './services/constants';
 
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private logger: Logger,
+        private logger: LoggingService,
         private store: Store<AppState>
     ) { }
 
