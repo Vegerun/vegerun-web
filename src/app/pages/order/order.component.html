@@ -11,6 +11,7 @@
                 <h5>Current Order</h5>
                 <app-order-basket
                     [order]="order$ | async"
+                    [menu]="menu$ | async"
                     (onOrderItemSelected)="openOrderItem($event)"
                     (onOrderItemIncremented)="incrementOrderItem($event)"
                     (onOrderItemDecremented)="decrementOrderItem($event)"
