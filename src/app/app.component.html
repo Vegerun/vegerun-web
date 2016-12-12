@@ -18,13 +18,15 @@
       </button>
       <a class="brand" routerLink="/">Vegerun</a>
       <span class="fill-space"></span>
-      <span *ngIf="!(hasAuth$ | async)">
-        <a href="javascript:void()" class="auth" (click)="login()">Login</a>
-        <span class="separator">/</span>
-        <a href="javascript:void()" class="auth" (click)="register()">Register</a>
-      </span>
-      <span *ngIf="hasAuth$ | async">
-        {{ authEmail$ | async }}
+      <span class="auth">
+        <span *ngIf="!(hasAuth$ | async)">
+          <a href="javascript:void()" class="auth" (click)="login()">Login</a>
+          <span class="separator">/</span>
+          <a href="javascript:void()" class="auth" (click)="register()">Register</a>
+        </span>
+        <span *ngIf="hasAuth$ | async">
+          {{ authEmail$ | async }}
+        </span>
       </span>
     </md-toolbar>
     <md-card id="my-page-card">

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 
 import { SharedModule } from '../shared';
@@ -11,7 +11,7 @@ import { OrderActions } from './store';
 @NgModule({
     imports: [
         HttpModule,
-        BrowserModule,
+        CommonModule,
         SharedModule
     ],
     declarations: [

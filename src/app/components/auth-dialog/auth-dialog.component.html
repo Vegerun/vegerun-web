@@ -1,4 +1,4 @@
-<div class="auth-dialog-component" ngClass="{ 'login': mode === AuthDialogMode.Login }">
+<div class="auth-dialog-component" [ngClass]="{ 'login': mode === AuthDialogMode.Login }">
     <div class="login-container" *ngIf="mode === AuthDialogMode.Login">
         <h3>Login to Vegerun!</h3>
         <app-login (onLogin)="dialogRef.close()"></app-login>

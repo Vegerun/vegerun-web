@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             this.store.dispatch(this.authActions.login(
                 this.form.value['email'],
                 this.form.value['password']
-            ))
+            ));
         }
     }
 }
