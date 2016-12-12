@@ -34,4 +34,10 @@ export class AuthEffects {
             .login(payload.email, payload.password)
             .map(res => this.authActions.loginCompleted(res, payload.email))
             .catch(err => Observable.of(this.authActions.loginFailed(err, payload.email))));
+
+    @Effect({ dispatch: false }) logoutEffect = this.actions$
+        .ofType(AUTH_ACTION_NAMES.LOGOUT)
+        .do(() => {
+            window.location.href = '';
+        });
 }

@@ -50,4 +50,10 @@ export class AuthActions {
             }
         }
     }
+
+    logout(): Action {
+        return {
+            type: AUTH_ACTION_NAMES.LOGOUT
+        }
+    }
 }

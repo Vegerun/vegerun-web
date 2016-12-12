@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './store';
+import { AuthActions } from './features/auth';
 import { LoggingService } from './features/shared';
 import { AuthDialogComponent, AuthDialogMode } from './components/auth-dialog';
 
@@ -57,7 +58,8 @@ export class AppComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private logger: LoggingService,
-        private store: Store<AppState>
+        private store: Store<AppState>,
+        private authActions: AuthActions
     ) { }
 
     ngOnInit() {
@@ -90,5 +92,9 @@ export class AppComponent implements OnInit {
     register() {
         let dialogRef = this.mdDialog.open(AuthDialogComponent);
         dialogRef.componentInstance.mode = AuthDialogMode.Register;
+    }
+
+    logout() {
+        this.store.dispatch(this.authActions.logout());
     }
 }

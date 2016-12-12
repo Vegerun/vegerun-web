@@ -33,6 +33,10 @@ export const authReducer: ActionReducer<AuthState> = (state: AuthState = DEFAULT
             return Object.assign({}, state, { loading: false });
         }
 
+        case AUTH_ACTION_NAMES.LOGOUT: {
+            return DEFAULT_AUTH_STATE;
+        }
+
         default:
             return state;
     }

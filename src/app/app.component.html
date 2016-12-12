@@ -25,7 +25,15 @@
           <a href="javascript:void()" class="auth" (click)="register()">Register</a>
         </span>
         <span *ngIf="hasAuth$ | async">
-          {{ authEmail$ | async }}
+          <span>{{ authEmail$ | async }}</span>
+          <button md-icon-button [md-menu-trigger-for]="menu">
+            <md-icon>more_vert</md-icon>
+          </button>
+          <md-menu #menu="mdMenu">
+            <button md-menu-item>My Orders</button>
+            <button md-menu-item>Account</button>
+            <button md-menu-item (click)="logout()">Sign out</button>
+          </md-menu>
         </span>
       </span>
     </md-toolbar>

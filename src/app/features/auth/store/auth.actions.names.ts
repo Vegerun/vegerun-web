@@ -7,9 +7,12 @@ const LOGIN_STARTED = actionNamesHelper.getStartedName(LOGIN);
 const LOGIN_COMPLETED = actionNamesHelper.getCompletedName(LOGIN);
 const LOGIN_FAILED = actionNamesHelper.getFailedName(LOGIN);
 
+const LOGOUT = actionNamesHelper.getName('Logout');
+
 export const AUTH_ACTION_NAMES = {
     LOGIN,
     LOGIN_STARTED,
     LOGIN_COMPLETED,
-    LOGIN_FAILED
+    LOGIN_FAILED,
+    LOGOUT
 };
